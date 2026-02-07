@@ -1,7 +1,5 @@
 # 🍪 Vian Cookies - Galletas Artesanales Premium
 
-![Vian Cookies](https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=1600&q=80)
-
 ## 🌟 Descripción
 
 Vian Cookies es una landing page premium para una marca de galletas artesanales de alta calidad. Este proyecto combina diseño moderno, animaciones fluidas y una experiencia de usuario excepcional para mostrar productos gourmet de repostería artesanal.
@@ -67,14 +65,6 @@ Para aprender más sobre Next.js, mira los siguientes recursos:
 
 ---
 
-## Despliegue en Vercel
-
-La forma más fácil de desplegar tu aplicación Next.js es usar la plataforma **Vercel**, de los creadores de Next.js. [web:25]
-
-Revisa la **documentación de despliegue de Next.js** para más detalles. [web:20]
-
----
-
 ## 🏗️ Estructura del Proyecto
 
 ````text
@@ -125,13 +115,14 @@ vian-cookies/
 --color-bg-dark: #2C1810;         /* Fondo marrón elegante */
 --color-vanilla: #F5E9D9;         /* Vainilla suave */
 --color-caramel: #A67C52;         /* Caramelo natural */
-````
+
 
 --color-cookie-dark: #B8945C;
 --color-chocolate-deep: #5D2906;
 --color-bg-black: #1A0F0A;
 --color-vanilla-cream: #E8DBC5;
 --color-caramel-dark: #8B5A2B;
+````
 
 ````[web:24]
 
