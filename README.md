@@ -1,36 +1,197 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Vian Cookies - Galletas Artesanales Premium
+https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=1600&q=80
 
-## Getting Started
+🌟 Descripción
+Vian Cookies es una landing page premium para una marca de galletas artesanales de alta calidad. Este proyecto combina diseño moderno, animaciones fluidas y una experiencia de usuario excepcional para mostrar productos gourmet de repostería artesanal.
 
-First, run the development server:
+✨ Características Principales
+🎨 Diseño Premium
+Neumorfismo Galleta: Efectos visuales 3D inspirados en galletas
 
-```bash
+Paleta de Colores Única: Tonos cálidos de galleta horneada, chocolate y fondos marrones elegantes
+
+Responsividad Total: Diseño adaptado para todos los dispositivos
+
+Tipografía Elegante: Combinación de Playfair Display (elegante) e Inter (moderna)
+
+🚀 Tecnologías Modernas
+Next.js 14: Framework React de última generación
+
+TypeScript: Tipado estático para mayor robustez
+
+Tailwind CSS: Estilización utilitaria y personalizada
+
+Framer Motion: Animaciones fluidas y avanzadas
+
+Shadcn/ui: Componentes UI accesibles y personalizables
+
+🎭 Animaciones y Efectos
+Efecto Partículas: Chispas de chocolate animadas en el fondo
+
+Hover Effects: Interacciones sofisticadas en tarjetas y botones
+
+Scroll Animations: Revelado suave al hacer scroll
+
+Transiciones Fluidas: Movimientos naturales entre secciones
+
+Gradientes Animados: Efectos visuales dinámicos
+
+🚀 Empezando
+Este proyecto usa Next.js creado con create-next-app.
+
+Primeros Pasos
+Primero, ejecuta el servidor de desarrollo:
+
+bash
 npm run dev
-# or
+
+# o
+
 yarn dev
-# or
+
+# o
+
 pnpm dev
-# or
+
+# o
+
 bun dev
-```
+Abre http://localhost:3000 en tu navegador para ver el resultado.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Puedes empezar a editar la página modificando app/page.tsx. La página se actualiza automáticamente mientras editas el archivo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Este proyecto usa next/font para optimizar y cargar automáticamente Geist, una nueva familia de fuentes para Vercel.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Aprende Más
+Para aprender más sobre Next.js, mira los siguientes recursos:
 
-## Learn More
+Documentación de Next.js - aprende sobre las características y API de Next.js
 
-To learn more about Next.js, take a look at the following resources:
+Aprende Next.js - un tutorial interactivo de Next.js
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Puedes revisar el repositorio de Next.js en GitHub - ¡tus comentarios y contribuciones son bienvenidos!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Despliegue en Vercel
+La forma más fácil de desplegar tu aplicación Next.js es usar la plataforma Vercel de los creadores de Next.js.
 
-## Deploy on Vercel
+Revisa nuestra documentación de despliegue de Next.js para más detalles.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🏗️ Estructura del Proyecto
+text
+vian-cookies/
+├── src/
+│ ├── app/
+│ │ ├── layout.tsx # Layout principal
+│ │ ├── page.tsx # Homepage
+│ │ └── globals.css # Estilos globales
+│ ├── components/
+│ │ ├── ui/ # Componentes Shadcn/ui
+│ │ ├── layout/ # Componentes de layout
+│ │ ├── sections/ # Secciones de la página
+│ │ │ ├── hero-section.tsx
+│ │ │ ├── features-section.tsx
+│ │ │ ├── testimonials-section.tsx
+│ │ │ └── cta-section.tsx
+│ │ ├── shared/ # Componentes compartidos
+│ │ └── providers/ # Providers de contexto
+│ ├── lib/
+│ │ ├── utils.ts # Utilidades
+│ │ ├── constants.ts # Constantes
+│ │ └── animations.ts # Configuración de animaciones
+│ └── types/
+│ └── index.ts # Tipos TypeScript
+├── public/
+│ ├── images/
+│ │ ├── products/ # Imágenes de productos
+│ │ ├── testimonials/ # Fotos de testimonios
+│ │ └── hero/ # Imágenes hero
+│ └── favicon.ico
+├── package.json
+├── next.config.js # Configuración Next.js
+├── tailwind.config.js # Configuración Tailwind
+├── tsconfig.json # Configuración TypeScript
+└── README.md
+🎨 Paleta de Colores
+Modo Claro
+css
+--color-cookie-light: #D4A574 /_ Galleta horneada _/
+--color-chocolate-dark: #8B4513 /_ Chocolate premium _/
+--color-bg-dark: #2C1810 /_ Fondo marrón elegante _/
+--color-vanilla: #F5E9D9 /_ Vainilla suave _/
+--color-caramel: #A67C52 /_ Caramelo natural _/
+Modo Oscuro
+css
+--color-cookie-dark: #B8945C
+--color-chocolate-deep: #5D2906
+--color-bg-black: #1A0F0A
+--color-vanilla-cream: #E8DBC5
+--color-caramel-dark: #8B5A2B
+📦 Scripts Disponibles
+json
+{
+"dev": "next dev", // Modo desarrollo
+"build": "next build", // Build para producción
+"start": "next start", // Iniciar servidor producción
+"lint": "next lint", // Linting del código
+"type-check": "tsc --noEmit", // Verificar tipos TypeScript
+"format": "prettier --write ." // Formatear código
+}
+🔧 Configuración Personalizada
+Tailwind CSS
+El proyecto incluye una configuración personalizada de Tailwind con:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Colores personalizados para galletas
+
+Animaciones CSS personalizadas
+
+Sombras y efectos de neumorfismo
+
+Breakpoints optimizados
+
+Framer Motion
+Configuración de animaciones optimizadas:
+
+Transiciones suaves
+
+Efectos de entrada escalonados
+
+Animaciones de scroll
+
+Optimizaciones de performance
+
+🎯 Características de la Landing Page
+Sección Hero
+Carrusel automático de productos
+
+Efecto de partículas de chocolate
+
+Animaciones de galleta giratoria
+
+CTA principal con efectos hover
+
+Características
+Grid responsivo de características
+
+Efectos de neumorfismo en tarjetas
+
+Iconos animados al hacer hover
+
+Diseño de gradientes personalizados
+
+Testimonios
+Grid estático de testimonios
+
+Calificación con estrellas animadas
+
+Estadísticas interactivas
+
+Efectos visuales de confianza
+
+CTA Final
+Formulario de suscripción
+
+Efectos de confetti
+
+Diseño de gradiente premium
+
+Animaciones de entrada
