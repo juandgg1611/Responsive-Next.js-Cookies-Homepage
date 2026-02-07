@@ -1,4 +1,4 @@
-// app/layout.tsx - Versión corregida (Server Component)
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, Dancing_Script } from "next/font/google";
 import "./globals.css";

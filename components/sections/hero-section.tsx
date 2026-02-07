@@ -68,7 +68,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12 md:pt-32 md:pb-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-24 md:-mt-32 pb-12 md:pb-20"
     >
       {/* Fondo OSCURO con textura */}
       <div className="absolute inset-0 bg-background-dark -z-20" />
