@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ShoppingCart, Star, Heart, Eye, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useCart } from "@/components/providers/cart-provider";
 
 const PRODUCTS = [
   {
@@ -69,6 +70,7 @@ const CATEGORIES = [
 ];
 
 export default function ProductsSection() {
+  const { addItem, openCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [favorites, setFavorites] = useState<string[]>([]);
 
@@ -78,10 +80,15 @@ export default function ProductsSection() {
       : PRODUCTS.filter((product) => product.category === selectedCategory);
 
   const handleAddToCart = (product: (typeof PRODUCTS)[0]) => {
-    toast.success("¡Añadido al carrito!", {
-      description: `${product.name} se ha añadido a tu pedido`,
-      icon: "🍪",
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      badge: product.badge,
+      maxQuantity: 10,
     });
+    openCart();
   };
 
   const toggleFavorite = (id: string) => {

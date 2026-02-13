@@ -14,6 +14,7 @@ import {
   User,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/components/providers/cart-provider"; // ← IMPORTAR useCart
 
 const navItems = [
   { label: "Inicio", href: "#home" },
@@ -28,7 +29,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [cartItems] = useState(3); // En una app real, esto vendría de un context
+  const { totalItems, toggleCart } = useCart(); // ← USAR EL CARRITO REAL
   const pathname = usePathname();
 
   useEffect(() => {
@@ -98,22 +99,22 @@ export default function Header() {
               </button>
 
               {/* User Account */}
-              <button
-                className="hidden sm:flex p-2 rounded-full hover:bg-background-surface/50 transition-colors group"
-                aria-label="Mi cuenta"
-              >
-                <User className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
-              </button>
+              <Link href="/auth/login">
+                <button className="hidden sm:flex p-2 rounded-full hover:bg-background-surface/50 transition-colors group">
+                  <User className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
+                </button>
+              </Link>
 
-              {/* Cart */}
+              {/* Cart - AHORA USA EL CARRITO REAL */}
               <button
+                onClick={toggleCart}
                 className="relative p-2 rounded-full hover:bg-background-surface/50 transition-colors group"
                 aria-label="Carrito"
               >
                 <ShoppingCart className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
-                {cartItems > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-chocolate rounded-full text-xs flex items-center justify-center text-white font-bold shadow-glow-chocolate animate-pulse-soft">
-                    {cartItems}
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1.5 bg-gradient-chocolate rounded-full text-xs flex items-center justify-center text-white font-bold shadow-glow-chocolate animate-pulse-soft">
+                    {totalItems > 9 ? "9+" : totalItems}
                   </span>
                 )}
               </button>
@@ -228,9 +229,11 @@ export default function Header() {
               {/* Acciones móviles */}
               <div className="space-y-4 pt-8 border-t border-border-light">
                 <div className="grid grid-cols-2 gap-3">
-                  <button className="px-4 py-3 rounded-cookie border border-border-light text-vanilla hover:bg-background-surface hover:border-cookie-500 transition-all">
-                    Mi Cuenta
-                  </button>
+                  <Link href="/auth/login" onClick={() => setIsMenuOpen(false)}>
+                    <button className="w-full px-4 py-3 rounded-cookie border border-border-light text-vanilla hover:bg-background-surface hover:border-cookie-500 transition-all">
+                      Mi Cuenta
+                    </button>
+                  </Link>
                   <button className="px-4 py-3 rounded-cookie border border-border-light text-vanilla hover:bg-background-surface hover:border-cookie-500 transition-all">
                     Contacto
                   </button>
@@ -239,6 +242,18 @@ export default function Header() {
                 <button className="w-full py-3 rounded-full bg-gradient-cookie text-white font-semibold flex items-center justify-center gap-2 shadow-cookie hover:shadow-cookie-lg hover:scale-105 transition-all">
                   <Cookie className="w-5 h-5" />
                   Ordenar Ahora
+                </button>
+
+                {/* Botón del carrito en móvil */}
+                <button
+                  onClick={() => {
+                    toggleCart();
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full py-3 rounded-full bg-[#4A2F20]/40 backdrop-blur-sm border-2 border-cookie-500/30 text-cookie-400 hover:text-cookie-300 font-semibold hover:border-cookie-400 hover:bg-cookie-500/10 transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  Ver Carrito {totalItems > 0 && `(${totalItems})`}
                 </button>
 
                 {/* Promoción */}

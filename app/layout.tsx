@@ -1,8 +1,13 @@
-// app/layout.tsx
+// app/layout.tsx - VERSIÓN CORREGIDA CON CHATBOT
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import ClientProviders from "@/components/providers/client-providers";
+import { ChatbotProvider } from "@/components/providers/chatbot-provider";
+import ChatButton from "@/components/chatbot/ChatButton";
+import ChatWindow from "@/components/chatbot/ChatWindow";
+import CartSidebar from "@/components/cart/CartSidebar";
+import { CartProvider } from "@/components/providers/cart-provider";
 
 // Configuración de fuentes
 const inter = Inter({
@@ -33,13 +38,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="es"
-      className={`${inter.variable} ${playfair.variable} ${dancingScript.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="font-sans bg-gray-950 text-white min-h-screen">
-        <ClientProviders>{children}</ClientProviders>
+    <html lang="es">
+      <body>
+        <CartProvider>
+          <ClientProviders>{children}</ClientProviders>
+
+          <CartSidebar />
+          <ChatbotProvider>
+            <ChatWindow />
+            <ChatButton />
+          </ChatbotProvider>
+        </CartProvider>
       </body>
     </html>
   );
