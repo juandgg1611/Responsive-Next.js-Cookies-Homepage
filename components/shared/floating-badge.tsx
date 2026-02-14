@@ -27,7 +27,7 @@ export function FloatingBadge() {
   ]);
   const [currentOffer, setCurrentOffer] = useState(0);
 
-  const { itemCount } = useCart?.() || { itemCount: 0 };
+  const { totalItems } = useCart?.() || { totalItems: 0 };
 
   useEffect(() => {
     setIsClient(true);
@@ -65,7 +65,7 @@ export function FloatingBadge() {
       icon: ShoppingCart,
       label: "Carrito",
       color: "bg-cookie-brown hover:bg-cookie-chocolate",
-      badge: itemCount > 0 ? itemCount : undefined,
+      badge: totalItems > 0 ? totalItems : undefined,
       action: () => (window.location.href = "/cart"),
     },
     {
