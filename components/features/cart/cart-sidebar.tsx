@@ -7,12 +7,10 @@ import { useCart } from "@/components/providers/cart-provider";
 
 export function CartSidebar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { items, total, itemCount } = useCart();
+  const { items, totalPrice, totalItems } = useCart();
 
   return (
     <>
-      {/* El carrito se abre desde CartButton, este es solo un placeholder */}
-      {/* Mostrar solo si hay items en el carrito */}
       <AnimatePresence>
         {items.length > 0 && (
           <motion.div
@@ -29,21 +27,21 @@ export function CartSidebar() {
               <div className="flex items-center space-x-3">
                 <div className="relative">
                   <ShoppingBag className="w-5 h-5 text-cookie-gold" />
-                  {itemCount > 0 && (
+                  {totalItems > 0 && (
                     <span
                       className="absolute -top-2 -right-2 w-5 h-5 rounded-full 
                                    bg-cookie-berry text-white text-xs 
                                    flex items-center justify-center"
                     >
-                      {itemCount}
+                      {totalItems}
                     </span>
                   )}
                 </div>
                 <div>
                   <p className="text-sm font-semibold">Carrito activo</p>
                   <p className="text-xs text-cookie-text-light">
-                    {itemCount} {itemCount === 1 ? "producto" : "productos"} -{" "}
-                    {total.toFixed(2)}€
+                    {totalItems} {totalItems === 1 ? "producto" : "productos"} -{" "}
+                    {totalPrice.toFixed(2)}€
                   </p>
                 </div>
               </div>
@@ -102,7 +100,7 @@ export function CartSidebar() {
                 ) : (
                   <div>
                     <p className="text-cookie-text-light mb-4">
-                      {itemCount} {itemCount === 1 ? "producto" : "productos"}{" "}
+                      {totalItems} {totalItems === 1 ? "producto" : "productos"}{" "}
                       en el carrito
                     </p>
                     <div className="space-y-4">
@@ -129,7 +127,7 @@ export function CartSidebar() {
                       <div className="flex justify-between items-center">
                         <span className="text-lg font-bold">Total</span>
                         <span className="text-2xl font-bold text-cookie-gold">
-                          {total.toFixed(2)}€
+                          {totalPrice.toFixed(2)}€
                         </span>
                       </div>
                     </div>
