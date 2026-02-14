@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { itemCount } = useCart();
+  const { totalItems } = useCart();
 
   const navItems = [
     { label: "Inicio", href: "#home" },
@@ -94,13 +94,13 @@ export default function Navigation() {
               aria-label="Shopping cart"
             >
               <ShoppingCart className="w-5 h-5" />
-              {itemCount > 0 && (
+              {totalItems > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-cookie rounded-full text-xs flex items-center justify-center text-white"
                 >
-                  {itemCount}
+                  {totalItems}
                 </motion.span>
               )}
             </motion.button>
