@@ -54,7 +54,7 @@ export default function ClientProviders({
       {!isAuthRoute && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 left-8 z-40 w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-0"
+          className="fixed bottom-8 left-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-0"
           id="scroll-to-top"
           aria-label="Volver arriba"
         >
