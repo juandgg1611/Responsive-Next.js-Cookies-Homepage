@@ -135,7 +135,7 @@ export default function TestimonialsSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-cookie-400/5 to-chocolate-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-cookie-lg sm:rounded-cookie-xl" />
 
                 {/* Icono de comillas decorativo */}
-                <div className="absolute top-6 right-6 opacity-20">
+                <div className="absolute top-6 right-6 opacity-5">
                   <Quote className="w-16 h-16 text-cookie-400" />
                 </div>
 
@@ -179,7 +179,7 @@ export default function TestimonialsSection() {
                   <div className="flex items-center">
                     <div className="relative">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cookie-400 to-chocolate-500 flex items-center justify-center shadow-glow">
-                        <span className="text-chocolate-900 dark:text-white font-bold text-lg">
+                        <span className="text-white font-bold text-lg">
                           {testimonial.name.charAt(0)}
                         </span>
                       </div>
@@ -266,7 +266,7 @@ export default function TestimonialsSection() {
                   <div
                     className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-cookie-lg bg-gradient-to-br ${stat.color} flex items-center justify-center mb-4 shadow-glow group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 text-chocolate-900 dark:text-white" />
+                    <stat.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                   </div>
                   <div
                     className={`text-3xl sm:text-4xl font-bold bg-gradient-to-br ${stat.color} bg-clip-text text-transparent mb-2`}
