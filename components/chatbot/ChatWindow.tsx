@@ -40,7 +40,7 @@ export default function ChatWindow() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.95 }}
         transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
-        className={`fixed bottom-24 right-8 z-47 flex flex-col
+        className={`fixed bottom-24 right-8 z-49 flex flex-col
           ${isFullscreen ? "inset-8 w-auto h-auto" : "w-[380px] h-[600px]"}
           bg-gradient-to-br from-[#3A2318]/95 to-[#2C1810]/95 
           backdrop-blur-xl rounded-3xl 
