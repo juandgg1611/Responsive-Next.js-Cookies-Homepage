@@ -6,97 +6,90 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{ts,tsx}",
   ],
-  darkMode: "class",
+  darkMode: "class", 
   theme: {
     extend: {
-      // ===== PALETA DE COLORES COMPLETA =====
+      // ===== PALETA DE COLORES =====
       colors: {
-        // Color principal: Galleta horneada
+        // Fondos y Textos (Conectados a variables CSS)
+        background: {
+          DEFAULT: "rgb(var(--background) / <alpha-value>)",
+          light: "rgb(var(--background-light) / <alpha-value>)",
+          surface: "rgb(var(--background-surface) / <alpha-value>)",
+          dark: "#1A0F0A", // Reserva fija por si acaso
+        },
+        foreground: "rgb(var(--foreground) / <alpha-value>)",
+
+        text: {
+          primary: "rgb(var(--foreground) / <alpha-value>)",
+          secondary: "rgb(var(--cookie-primary) / <alpha-value>)", // Dorado de marca
+          muted: "rgb(var(--text-muted) / <alpha-value>)",
+          inverted: "rgb(var(--background) / <alpha-value>)",
+        },
+
+        border: {
+          light: "rgba(var(--border-color), 0.3)",
+          DEFAULT: "rgb(var(--border-color) / <alpha-value>)",
+          dark: "rgba(var(--border-color), 0.8)",
+          glow: "rgba(var(--cookie-primary), 0.5)",
+        },
+
+        // --- COLORES DE MARCA DINÁMICOS ---
+        // Aquí está el cambio clave: Usan RGB variables en lugar de HEX fijos
         cookie: {
-          50: "#FDF6E9",
-          100: "#FAEDD3",
-          200: "#F5DBA7",
-          300: "#F0C97B",
-          400: "#EBB74F",
-          500: "#D4A574", // Color principal - Galleta horneada
-          600: "#A8835C",
-          700: "#7C6245",
+          50: "rgb(var(--cookie-primary) / 0.1)",
+          100: "rgb(var(--cookie-primary) / 0.2)",
+          200: "rgb(var(--cookie-primary) / 0.4)",
+          300: "rgb(var(--cookie-primary) / 0.6)",
+          400: "rgb(var(--cookie-primary) / 0.8)",
+          500: "rgb(var(--cookie-primary) / 1)",    // Color Principal
+          600: "rgb(var(--caramel) / 1)",           // Hover
+          700: "#854e00", // Fijo para contrastes fuertes si se requiere
           800: "#50412D",
           900: "#242016",
+          DEFAULT: "rgb(var(--cookie-primary) / <alpha-value>)",
         },
-        // Color de acento: Chocolate oscuro
+
         chocolate: {
-          50: "#F5EFE6",
-          100: "#EBDFCD",
-          200: "#D7BF9B",
-          300: "#C39F69",
-          400: "#AF7F37",
-          500: "#8B4513", // Chocolate oscuro - Chispas
+          50: "rgb(var(--chocolate-primary) / 0.1)",
+          100: "rgb(var(--chocolate-primary) / 0.2)",
+          200: "rgb(var(--chocolate-primary) / 0.4)",
+          300: "rgb(var(--chocolate-primary) / 0.6)",
+          400: "rgb(var(--chocolate-primary) / 0.8)",
+          500: "rgb(var(--chocolate-primary) / 1)", // Color Secundario
           600: "#6F3710",
           700: "#53290C",
           800: "#371C08",
           900: "#1B0E04",
+          DEFAULT: "rgb(var(--chocolate-primary) / <alpha-value>)",
         },
-        // Fondo principal
-        background: {
-          DEFAULT: "#2C1810",
-          light: "#3A2318",
-          dark: "#1A0F0A",
-          surface: "#4A2F20",
-        },
-        // Colores secundarios
+
+        // Mapeos adicionales para compatibilidad
         vanilla: {
-          DEFAULT: "#F5E9D9",
-          light: "#FFF8F0",
-          dark: "#E5D9C9",
+          DEFAULT: "rgb(var(--background-light) / <alpha-value>)",
         },
         caramel: {
-          DEFAULT: "#A67C52",
-          light: "#C9A37D",
-          dark: "#8A6840",
+          DEFAULT: "rgb(var(--caramel) / <alpha-value>)",
         },
-        butter: {
-          DEFAULT: "#FFD8A6",
-          light: "#FFE8CC",
-          dark: "#EFC896",
-        },
-        honey: {
-          DEFAULT: "#D9A565",
-          light: "#E8BD84",
-          dark: "#C99555",
-        },
-        // Colores de texto
-        text: {
-          primary: "#F5E9D9",
-          secondary: "#D4A574",
-          muted: "#A67C52",
-          inverted: "#2C1810",
-        },
+        
         // Estados
         state: {
-          hover: "rgba(212, 165, 116, 0.15)",
-          active: "rgba(139, 69, 19, 0.25)",
+          hover: "rgb(var(--cookie-primary) / 0.15)",
+          active: "rgb(var(--chocolate-primary) / 0.25)",
           disabled: "rgba(166, 124, 82, 0.3)",
           success: "#10B981",
           error: "#EF4444",
           warning: "#F59E0B",
         },
-        // Bordes
-        border: {
-          light: "rgba(212, 165, 116, 0.3)",
-          dark: "rgba(139, 69, 19, 0.5)",
-          glow: "rgba(212, 165, 116, 0.5)",
-        },
       },
 
-      // ===== TIPOGRAFÍA =====
+      // ... Resto de la configuración (Fuentes, Animaciones, Tamaños) se queda igual ...
       fontFamily: {
         display: ["var(--font-playfair)", "Georgia", "serif"],
         body: ["var(--font-inter)", "system-ui", "sans-serif"],
         handwritten: ['"Dancing Script"', "cursive"],
       },
       fontSize: {
-        // Tamaños personalizados para galletas
         "cookie-xs": "0.75rem",
         "cookie-sm": "0.875rem",
         "cookie-base": "1rem",
@@ -119,46 +112,25 @@ module.exports = {
         "cookie-extrabold": "800",
         "cookie-black": "900",
       },
-
-      // ===== ANIMACIONES PERSONALIZADAS =====
       animation: {
-        // Flotación suave
         float: "float 6s ease-in-out infinite",
         "float-delayed": "float-delayed 7s ease-in-out infinite",
         "float-slow": "float 8s ease-in-out infinite",
-
-        // Animaciones específicas de galletas
         "cookie-spin": "cookie-spin 20s linear infinite",
         "cookie-spin-slow": "cookie-spin 30s linear infinite",
         "cookie-bake": "bake-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-
-        // Efectos de chispas
         "chocolate-fall": "chocolate-chip-fall 3s linear infinite",
         "chocolate-fall-slow": "chocolate-chip-fall 5s linear infinite",
-
-        // Efectos de precio
-        "price-drop":
-          "price-drop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
-
-        // Efectos visuales
+        "price-drop": "price-drop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
         "pulse-soft": "pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "pulse-glow": "pulse-soft 2s ease-in-out infinite",
         shimmer: "shimmer 2s infinite linear",
         "gradient-shift": "gradient-shift 8s ease infinite",
-
-        // Entradas animadas
         "slide-in-up": "slide-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-        "slide-in-right":
-          "slide-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-        "slide-in-left":
-          "slide-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-
-        // Efectos especiales
+        "slide-in-right": "slide-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+        "slide-in-left": "slide-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
         "confetti-fall": "confetti-fall 5s linear forwards",
-        "coupon-unfold":
-          "coupon-unfold 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
-
-        // Estados de hover
+        "coupon-unfold": "coupon-unfold 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
         "hover-lift": "hover-lift 0.3s ease forwards",
         "hover-sink": "hover-sink 0.3s ease forwards",
       },
@@ -187,70 +159,54 @@ module.exports = {
         slow: "cubic-bezier(0.77, 0, 0.175, 1)",
       },
 
-      // ===== FONDOS =====
+      // ===== FONDOS (ACTUALIZADO) =====
       backgroundImage: {
-        // Texturas de galleta
         "cookie-texture": "url('/images/textures/cookie-bg.png')",
-        "cookie-texture-light": "url('/images/textures/cookie-bg-light.png')",
-        "chocolate-chip": "url('/images/textures/chocolate-chip.png')",
-
-        // Gradientes personalizados
-        "gradient-cookie": "linear-gradient(135deg, #D4A574 0%, #A67C52 100%)",
-        "gradient-chocolate":
-          "linear-gradient(135deg, #8B4513 0%, #5D2906 100%)",
-        "gradient-caramel": "linear-gradient(135deg, #A67C52 0%, #C9A37D 100%)",
-        "gradient-vanilla": "linear-gradient(135deg, #F5E9D9 0%, #E5D9C9 100%)",
+        // Gradientes conectados a variables
+        "gradient-cookie": "linear-gradient(135deg, rgb(var(--cookie-primary)) 0%, rgb(var(--caramel)) 100%)",
+        "gradient-chocolate": "linear-gradient(135deg, rgb(var(--chocolate-primary)) 0%, #5D2906 100%)",
+        "gradient-caramel": "linear-gradient(135deg, rgb(var(--caramel)) 0%, rgb(var(--cookie-primary)) 100%)",
+        "gradient-vanilla": "linear-gradient(135deg, rgb(var(--background-light)) 0%, rgb(var(--background-surface)) 100%)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-baked": "linear-gradient(145deg, #3A2318 0%, #2C1A12 100%)",
-
-        // Efectos especiales
-        "gradient-glow":
-          "linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.1), transparent)",
-        "gradient-shimmer":
-          "linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.1) 50%, transparent 100%)",
+        "gradient-glow": "linear-gradient(90deg, transparent, rgb(var(--cookie-primary) / 0.1), transparent)",
+        "gradient-shimmer": "linear-gradient(90deg, transparent 0%, rgb(var(--cookie-primary) / 0.1) 50%, transparent 100%)",
       },
       backgroundSize: {
         "200%": "200%",
         "300%": "300%",
       },
 
-      // ===== SOMBRAS =====
+      // ===== SOMBRAS (ACTUALIZADO) =====
       boxShadow: {
-        // Neumorfismo galleta
-        neumorphic: "20px 20px 60px #25150d, -20px -20px 60px #331b13",
-        "neumorphic-sm": "10px 10px 30px #25150d, -10px -10px 30px #331b13",
-        "neumorphic-lg": "30px 30px 90px #25150d, -30px -30px 90px #331b13",
-        "neumorphic-inset":
-          "inset 20px 20px 60px #25150d, inset -20px -20px 60px #331b13",
-        "neumorphic-inset-sm":
-          "inset 10px 10px 30px #25150d, inset -10px -10px 30px #331b13",
+        // Neumorfismo dinámico
+        neumorphic: "20px 20px 60px rgb(var(--chocolate-primary) / 0.15), -20px -20px 60px rgb(var(--background-light) / 0.5)",
+        "neumorphic-sm": "10px 10px 30px rgb(var(--chocolate-primary) / 0.1), -10px -10px 30px rgb(var(--background-light) / 0.5)",
+        "neumorphic-lg": "30px 30px 90px rgb(var(--chocolate-primary) / 0.2), -30px -30px 90px rgb(var(--background-light) / 0.5)",
+        "neumorphic-inset": "inset 20px 20px 60px rgb(var(--chocolate-primary) / 0.1), inset -20px -20px 60px rgb(var(--background-light) / 0.5)",
+        "neumorphic-inset-sm": "inset 10px 10px 30px rgb(var(--chocolate-primary) / 0.1), inset -10px -10px 30px rgb(var(--background-light) / 0.5)",
 
-        // Sombras flotantes
-        cookie: "0 10px 40px -10px rgba(139, 69, 19, 0.3)",
-        "cookie-lg": "0 20px 60px -15px rgba(139, 69, 19, 0.4)",
-        "cookie-xl": "0 25px 80px -20px rgba(139, 69, 19, 0.5)",
-        floating: "0 25px 50px -12px rgba(139, 69, 19, 0.25)",
-        "floating-lg": "0 35px 70px -15px rgba(139, 69, 19, 0.35)",
+        // Sombras con color de marca
+        cookie: "0 10px 40px -10px rgb(var(--chocolate-primary) / 0.3)",
+        "cookie-lg": "0 20px 60px -15px rgb(var(--chocolate-primary) / 0.4)",
+        "cookie-xl": "0 25px 80px -20px rgb(var(--chocolate-primary) / 0.5)",
+        
+        floating: "0 25px 50px -12px rgb(var(--chocolate-primary) / 0.15)",
+        "floating-lg": "0 35px 70px -15px rgb(var(--chocolate-primary) / 0.2)",
 
-        // Efectos de brillo
-        glow: "0 0 30px rgba(212, 165, 116, 0.4)",
-        "glow-lg": "0 0 50px rgba(212, 165, 116, 0.6)",
-        "glow-chocolate": "0 0 30px rgba(139, 69, 19, 0.4)",
+        glow: "0 0 30px rgb(var(--cookie-primary) / 0.4)",
+        "glow-lg": "0 0 50px rgb(var(--cookie-primary) / 0.6)",
+        "glow-chocolate": "0 0 30px rgb(var(--chocolate-primary) / 0.4)",
 
-        // Sombras para textos
-        "text-glow": "0 0 10px rgba(212, 165, 116, 0.5)",
+        "text-glow": "0 0 10px rgb(var(--cookie-primary) / 0.5)",
 
-        // Sombras interactivas
-        hover: "0 20px 40px rgba(139, 69, 19, 0.2)",
-        active: "0 10px 20px rgba(139, 69, 19, 0.3)",
-
-        // Sombras para modales
+        hover: "0 20px 40px rgb(var(--chocolate-primary) / 0.15)",
+        active: "0 10px 20px rgb(var(--chocolate-primary) / 0.2)",
+        
         modal: "0 50px 100px -20px rgba(0, 0, 0, 0.5)",
       },
 
-      // ===== BORDES Y RADIOS =====
       borderRadius: {
         "cookie-sm": "12px",
         cookie: "20px",
@@ -263,8 +219,6 @@ module.exports = {
         5: "5px",
         6: "6px",
       },
-
-      // ===== ESPACIADO Y TAMAÑOS =====
       spacing: {
         18: "4.5rem",
         88: "22rem",
@@ -304,8 +258,6 @@ module.exports = {
         "cookie-lg": "500px",
         "cookie-xl": "600px",
       },
-
-      // ===== EFECTOS VISUALES =====
       backdropBlur: {
         cookie: "20px",
         "cookie-lg": "40px",
@@ -321,8 +273,6 @@ module.exports = {
         65: "0.65",
         85: "0.85",
       },
-
-      // ===== TRANSFORMACIONES =====
       scale: {
         102: "1.02",
         105: "1.05",
@@ -344,8 +294,6 @@ module.exports = {
         "5/7": "71.4285714%",
         "6/7": "85.7142857%",
       },
-
-      // ===== GRID Y FLEXBOX =====
       gridTemplateColumns: {
         cookie: "repeat(auto-fit, minmax(280px, 1fr))",
         "cookie-lg": "repeat(auto-fit, minmax(320px, 1fr))",
@@ -357,8 +305,6 @@ module.exports = {
         cookie: "minmax(200px, auto)",
         "cookie-lg": "minmax(300px, auto)",
       },
-
-      // ===== Z-INDEX =====
       zIndex: {
         "cookie-under": "-1",
         "cookie-base": "1",
@@ -373,15 +319,12 @@ module.exports = {
         "cookie-overlay": "500",
         "cookie-max": "999",
       },
-
-      // ===== TRANSICIONES =====
       transitionProperty: {
         height: "height",
         spacing: "margin, padding",
         transform: "transform",
         shadow: "box-shadow",
-        colors:
-          "color, background-color, border-color, text-decoration-color, fill, stroke",
+        colors: "color, background-color, border-color, text-decoration-color, fill, stroke",
         "all-custom": "all",
       },
       transitionDuration: {
@@ -406,41 +349,36 @@ module.exports = {
     },
   },
 
-  // ===== PLUGINS =====
+  // ===== PLUGINS (ACTUALIZADOS A VARIABLES) =====
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/aspect-ratio"),
     function ({ addUtilities, theme }) {
       const newUtilities = {
-        // Utilidades de textura
         ".texture-cookie": {
-          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(212, 165, 116, 0.05) 2%, transparent 2.5%),
-                          radial-gradient(circle at 75% 75%, rgba(212, 165, 116, 0.05) 2%, transparent 2.5%)`,
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(var(--texture-dot), 0.05) 2%, transparent 2.5%),
+                          radial-gradient(circle at 75% 75%, rgba(var(--texture-dot), 0.05) 2%, transparent 2.5%)`,
           backgroundSize: "60px 60px",
         },
-        // Efecto vidrio esmerilado
         ".glass-cookie": {
-          background: "rgba(58, 35, 24, 0.7)",
+          background: "rgb(var(--background-surface) / 0.7)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid rgba(212, 165, 116, 0.1)",
+          border: "1px solid rgb(var(--border-color) / 0.3)",
         },
-        // Gradiente de texto animado
         ".text-gradient-cookie": {
-          background: "linear-gradient(135deg, #D4A574 0%, #A67C52 100%)",
+          background: "linear-gradient(135deg, rgb(var(--cookie-primary)) 0%, rgb(var(--caramel)) 100%)",
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           color: "transparent",
         },
-        // Efecto de neumorfismo completo
         ".cookie-card-3d": {
-          background: "linear-gradient(145deg, #3a2318, #2c1a12)",
+          background: "linear-gradient(145deg, rgb(var(--background-light)), rgb(var(--background-surface)))",
           borderRadius: "30px",
           boxShadow:
-            "20px 20px 60px #25150d, -20px -20px 60px #331b13, inset 0 0 0 1px rgba(212, 165, 116, 0.1)",
+            "20px 20px 60px rgb(var(--chocolate-primary) / 0.1), -20px -20px 60px rgb(var(--background-light) / 0.8), inset 0 0 0 1px rgb(var(--cookie-primary) / 0.1)",
         },
-        // Efecto flip 3D
         ".perspective-1000": {
           perspective: "1000px",
         },
@@ -450,7 +388,6 @@ module.exports = {
         ".backface-hidden": {
           backfaceVisibility: "hidden",
         },
-        // Animación de loader de horneado
         ".loading-bake": {
           position: "relative",
           overflow: "hidden",
@@ -463,7 +400,7 @@ module.exports = {
           width: "100%",
           height: "100%",
           background:
-            "linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.2), transparent)",
+            "linear-gradient(90deg, transparent, rgb(var(--cookie-primary) / 0.2), transparent)",
           animation: "shimmer 2s infinite",
         },
       };
@@ -471,7 +408,6 @@ module.exports = {
     },
     function ({ addComponents, theme }) {
       const components = {
-        // Componentes específicos de galletas
         ".cookie-btn": {
           display: "inline-flex",
           alignItems: "center",
@@ -493,7 +429,7 @@ module.exports = {
             left: "0",
             width: "100%",
             height: "100%",
-            background: "linear-gradient(135deg, #D4A574 0%, #8B4513 100%)",
+            background: "linear-gradient(135deg, rgb(var(--cookie-primary)) 0%, rgb(var(--caramel)) 100%)",
             zIndex: "-1",
             transition: "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           },
@@ -505,7 +441,7 @@ module.exports = {
             width: "0",
             height: "0",
             borderRadius: "50%",
-            background: "rgba(255, 255, 255, 0.1)",
+            background: "rgba(255, 255, 255, 0.2)",
             transform: "translate(-50%, -50%)",
             transition:
               "width 0.6s cubic-bezier(0.4, 0, 0.2, 1), height 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -533,7 +469,7 @@ module.exports = {
           animation: "pulse-soft 2s ease-in-out infinite",
         },
         ".cookie-input": {
-          backgroundColor: "rgba(255, 255, 255, 0.05)",
+          backgroundColor: "rgb(var(--background-surface) / 0.5)",
           border: `2px solid ${theme("colors.border.light")}`,
           borderRadius: theme("borderRadius.cookie"),
           padding: `${theme("spacing.4")} ${theme("spacing.6")}`,
@@ -543,8 +479,8 @@ module.exports = {
           width: "100%",
           "&:focus": {
             outline: "none",
-            borderColor: theme("colors.cookie.500"),
-            boxShadow: `0 0 0 3px rgba(212, 165, 116, 0.1)`,
+            borderColor: "rgb(var(--cookie-primary))",
+            boxShadow: `0 0 0 3px rgb(var(--cookie-primary) / 0.2)`,
           },
           "&::placeholder": {
             color: theme("colors.text.muted"),

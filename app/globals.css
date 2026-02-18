@@ -1,19 +1,75 @@
-/* globals.css - VERSIÓN CON COLORES MARRONES */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Colores base del tema marrón */
-  --background: 44, 24, 16; /* #2C1810 */
-  --background-light: 58, 35, 24; /* #3A2318 */
-  --background-surface: 74, 47, 32; /* #4A2F20 */
-  --foreground: 245, 233, 217; /* #F5E9D9 */
+/* ===== DEFINICIÓN DE VARIABLES DE TEMA ===== */
+@layer base {
+  :root {
+/* =========================================
+       MODO DÍA (Ajustado a tus requerimientos)
+       ========================================= */
+    
+    /* Fondo Header/Body: rgb(254, 252, 240) */
+    --background: 254, 252, 240; 
+    --background-light: 254, 252, 240; 
+    
+    /* Superficie un poco más oscura para diferenciar tarjetas */
+    --background-surface: 248, 245, 230; 
+    
+    /* Texto Principal: Gris oscuro / Chocolate muy oscuro */
+    --foreground: 60, 40, 30; 
+    
+    /* Texto Secundario: Marrón rojizo */
+    --text-muted: 139, 107, 97;
 
-  /* Colores de acento */
-  --cookie-primary: 212, 165, 116; /* #D4A574 */
-  --chocolate-primary: 139, 69, 19; /* #8B4513 */
-  --caramel: 166, 124, 82; /* #A67C52 */
+    /* Bordes */
+    --border-color: 150, 75, 35;
+    
+    /* --- ACENTOS --- */
+    /* Botón Dorado: rgb(242, 170, 0) */
+    --cookie-primary: 242, 170, 0;
+    
+    /* Chocolate para contrastes */
+    --chocolate-primary: 100, 50, 20; 
+    
+    /* Caramelo */
+    --caramel: 180, 120, 50;
+    
+    /* Textura (Puntos oscuros en modo día) */
+    --texture-dot: 100, 50, 20;
+  }
+
+  .dark {
+    /* =========================================
+       MODO NOCHE (Tus colores originales)
+       ========================================= */
+    
+    /* Fondo: Marrón profundo (#2C1810) */
+    --background: 44, 24, 16;
+    
+    /* Fondo Claro (#3A2318) */
+    --background-light: 58, 35, 24;
+    
+    /* Superficie (#4A2F20) */
+    --background-surface: 74, 47, 32;
+    
+    /* Texto (#F5E9D9) */
+    --foreground: 245, 233, 217;
+    
+    /* Acentos (#D4A574) */
+    --text-muted: 212, 165, 116; 
+
+    /* Bordes (#8B4513) */
+    --border-color: 139, 69, 19;
+
+    /* Marca en modo oscuro */
+    --cookie-primary: 212, 165, 116;    /* Galleta original clara */
+    --chocolate-primary: 139, 69, 19;   /* Chocolate oscuro */
+    --caramel: 166, 124, 82;
+
+    /* Textura clara */
+    --texture-dot: 212, 165, 116;
+  }
 }
 
 body {
@@ -23,172 +79,91 @@ body {
   padding: 0;
   overflow-x: hidden;
   font-family: var(--font-inter, system-ui, sans-serif);
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* Componentes reutilizables con tema marrón */
+/* ===== COMPONENTES REUTILIZABLES (ADAPTADOS A VARIABLES) ===== */
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-cookie text-white 
+    @apply px-6 py-3 text-white 
            font-semibold rounded-full hover:scale-105 
-           transition-all shadow-cookie hover:shadow-cookie-lg;
+           transition-all shadow-md hover:shadow-lg;
+    /* Usamos gradiente dinámico con las variables */
+    background: linear-gradient(135deg, rgb(var(--cookie-primary)), rgb(var(--caramel)));
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-background-surface text-vanilla 
-           font-semibold rounded-full border border-border-light
-           hover:border-cookie-500 hover:bg-background-light
+    @apply px-6 py-3 bg-transparent
+           text-[rgb(var(--text-muted))] /* Texto dinámico */
+           font-semibold rounded-full border-2 border-[rgb(var(--border-color))]
+           hover:bg-[rgb(var(--text-muted))] hover:text-white
            transition-all;
   }
 
+  /* Tarjetas */
   .cookie-card {
-    @apply bg-background-surface/50 backdrop-blur-sm rounded-cookie 
-           border border-border-light p-6 shadow-cookie
-           hover:shadow-cookie-lg hover:border-cookie-500/30
-           transition-all;
+    @apply bg-[rgb(var(--background-light))] rounded-cookie 
+           border border-[rgba(var(--border-color),0.3)] p-6 shadow-sm
+           hover:shadow-md hover:translate-y-[-5px]
+           transition-all duration-300;
   }
 
   .cookie-card-elevated {
-    @apply bg-gradient-to-br from-background-light to-background-surface
-           rounded-cookie-lg border border-border-light p-8 
-           shadow-cookie-xl hover:shadow-floating-lg
+    @apply bg-gradient-to-br from-[rgb(var(--background-light))] to-[rgb(var(--background-surface))]
+           rounded-cookie-lg border border-[rgba(var(--border-color),0.3)] p-8 
+           shadow-xl hover:shadow-2xl
            transition-all duration-300;
   }
 
   .glass-cookie-custom {
-    @apply bg-background-light/70 backdrop-blur-cookie 
-           border border-border-light rounded-cookie
-           shadow-cookie;
+    @apply bg-[rgb(var(--background-light)/0.7)] backdrop-blur-md
+           border border-[rgba(var(--border-color),0.2)] rounded-cookie
+           shadow-sm;
   }
 
+  /* Inputs */
   .input-cookie {
     @apply w-full px-4 py-3 rounded-cookie 
-           bg-background-surface border border-border-light
-           text-vanilla placeholder-caramel
-           focus:outline-none focus:ring-2 focus:ring-cookie-500 
-           focus:border-cookie-500 transition-all;
+           bg-[rgb(var(--background-light))] border border-[rgba(var(--border-color),0.5)]
+           text-[rgb(var(--foreground))] placeholder-[rgba(var(--text-muted),0.6)]
+           focus:outline-none focus:ring-2 focus:ring-[rgb(var(--cookie-primary))] 
+           focus:border-[rgb(var(--cookie-primary))] transition-all;
   }
 
   .badge-cookie {
     @apply inline-flex items-center px-3 py-1 rounded-full
-           bg-gradient-cookie text-white text-sm font-semibold
-           shadow-glow animate-pulse-soft;
+           bg-[rgb(var(--cookie-primary))] text-white text-sm font-semibold
+           shadow-sm animate-pulse-soft;
   }
 
   .badge-outline {
     @apply inline-flex items-center px-3 py-1 rounded-full
-           border border-cookie-500/50 text-cookie-400 text-sm font-semibold
-           hover:bg-cookie-500/10 transition-all;
+           border border-[rgb(var(--cookie-primary))] text-[rgb(var(--cookie-primary))] text-sm font-semibold
+           hover:bg-[rgb(var(--cookie-primary)/0.1)] transition-all;
   }
 }
 
-/* Scrollbar personalizada con tema marrón */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  background-color: rgb(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-cookie rounded-full;
-  border: 2px solid rgb(var(--background));
+  background: linear-gradient(to bottom, rgb(var(--cookie-primary)), rgb(var(--chocolate-primary)));
+  border-radius: 99px;
+  border: 3px solid rgb(var(--background));
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gradient-chocolate;
+  background: rgb(var(--chocolate-primary));
 }
 
-/* Firefox scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(var(--cookie-primary)) rgb(var(--background));
-}
-
-/* Animaciones suaves para transiciones */
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
-  }
-
-  .animate-slide-down {
-    animation: slideDown 0.6s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-/* Efecto de selección de texto */
-::selection {
-  background-color: rgba(var(--cookie-primary), 0.3);
-  color: rgb(var(--foreground));
-}
-
-::-moz-selection {
-  background-color: rgba(var(--cookie-primary), 0.3);
-  color: rgb(var(--foreground));
-}
-
-/* Ajustes para modo oscuro si lo necesitas */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 44, 24, 16;
-    --foreground: 245, 233, 217;
-  }
-}
-
-/* Mejoras de accesibilidad */
-.focus-visible:focus {
-  @apply outline-none ring-2 ring-cookie-500 ring-offset-2 ring-offset-background;
-}
-
-/* Efectos de hover suaves */
-.hover-lift {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(var(--chocolate-primary), 0.2);
-}
-
-/* Textura sutil de fondo */
+/* Textura de fondo (Puntos) */
 body::before {
   content: "";
   position: fixed;
@@ -196,24 +171,11 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image:
-    radial-gradient(
-      circle at 25% 25%,
-      rgba(212, 165, 116, 0.03) 2%,
-      transparent 2.5%
-    ),
-    radial-gradient(
-      circle at 75% 75%,
-      rgba(212, 165, 116, 0.03) 2%,
-      transparent 2.5%
-    );
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(var(--texture-dot), 0.05) 2%, transparent 2.5%),
+    radial-gradient(circle at 75% 75%, rgba(var(--texture-dot), 0.05) 2%, transparent 2.5%);
   background-size: 60px 60px;
   pointer-events: none;
-  z-index: 0;
-}
-
-/* Asegura que el contenido esté por encima de la textura */
-body > * {
-  position: relative;
-  z-index: 1;
+  z-index: -1;
+  transition: opacity 0.5s ease;
 }
