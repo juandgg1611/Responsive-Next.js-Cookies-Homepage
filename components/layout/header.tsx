@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/components/providers/cart-provider"; // ← IMPORTAR useCart
-import { ModeToggle } from "@/components/shared/mode-toggle"; // ← IMPORTAR ModeToggle
 
 const navItems = [
   { label: "Inicio", href: "#home" },
@@ -90,10 +89,6 @@ export default function Header() {
 
             {/* Action Buttons */}
             <div className="flex items-center gap-4">
-              
-              {/* Modo Oscuro/Claro */}
-              <ModeToggle />
-              
               {/* Search Button */}
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -102,9 +97,7 @@ export default function Header() {
               >
                 <Search className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
               </button>
-              
 
-              
               {/* User Account */}
               <Link href="/auth/login">
                 <button className="hidden sm:flex p-2 rounded-full hover:bg-background-surface/50 transition-colors group">

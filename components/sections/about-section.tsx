@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Users, Award, Clock, Target, Heart, Star } from "lucide-react";
 import CookieBadge from "@/components/ui/cookie-badge";
 
-
 const TIMELINE = [
   {
     year: "2018",
@@ -296,7 +295,7 @@ export default function AboutSection() {
               transition={{ delay: 0.5 }}
               className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-gradient-to-br from-background-light to-background-surface p-4 sm:p-6 rounded-cookie-lg border border-border-light shadow-cookie-lg"
             >
-              <div className="text-2xl sm:text-3xl font-bold text-chocolate-900 dark:text-vanilla">
+              <div className="text-2xl sm:text-3xl font-bold text-gradient-cookie">
                 98%
               </div>
               <div className="text-xs sm:text-sm text-caramel font-medium">
@@ -324,13 +323,17 @@ export default function AboutSection() {
           </motion.div>
         </div>
 
-        {/* TIMELINE */}
+        {/* ========== TIMELINE ========== */}
         <div className="mb-16 sm:mb-20 lg:mb-24">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-center mb-8 sm:mb-12 text-foreground">
-            Nuestro <span className="text-transparent bg-clip-text bg-gradient-cookie">Camino</span>
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-center mb-8 sm:mb-12 text-vanilla">
+            Nuestro{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-cookie">
+              Camino
+            </span>
           </h3>
 
           <div className="relative max-w-5xl mx-auto">
+            {/* Línea de tiempo central (solo visible en desktop) */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-cookie-400 via-chocolate-500 to-cookie-400 hidden lg:block" />
 
             <div className="space-y-8 sm:space-y-12">
@@ -345,20 +348,47 @@ export default function AboutSection() {
                     index % 2 === 0 ? "lg:flex-row-reverse" : ""
                   }`}
                 >
-                  {/* Tarjeta de Timeline */}
-                  <div className={`flex-1 w-full lg:w-auto ${index % 2 === 0 ? "lg:pr-8 lg:text-right" : "lg:pl-8"}`}>
-                    {/* CAMBIO: Restaurado 'border-border-light' para el borde suave original */}
-                    <div className="bg-background-surface/80 p-6 rounded-cookie-lg border border-border-light shadow-sm hover:shadow-md transition-all">
-                      <div className={`flex items-center gap-4 mb-3 ${index % 2 === 0 ? "lg:justify-end" : ""}`}>
-                        <div className="w-12 h-12 rounded-cookie-lg bg-gradient-cookie flex items-center justify-center text-white shadow-md">
-                          <item.icon className="w-6 h-6" />
+                  {/* Punto en la línea de tiempo */}
+                  <div className="relative z-10 flex-shrink-0 hidden lg:block">
+                    <div className="w-6 h-6 rounded-full bg-gradient-cookie shadow-glow" />
+                    <div className="absolute inset-0 rounded-full bg-cookie-400 animate-ping opacity-20" />
+                  </div>
+
+                  {/* Contenido de timeline */}
+                  <div
+                    className={`flex-1 w-full lg:w-auto ${index % 2 === 0 ? "lg:pr-8 lg:text-right" : "lg:pl-8"}`}
+                  >
+                    <div className="bg-gradient-to-br from-background-light to-background-surface p-4 sm:p-6 rounded-cookie-lg border border-border-light shadow-cookie hover:shadow-cookie-lg transition-all duration-300 group">
+                      <div
+                        className={`flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 ${index % 2 === 0 ? "lg:justify-end" : ""}`}
+                      >
+                        <div
+                          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-cookie-lg bg-gradient-to-br ${
+                            index % 4 === 0
+                              ? "from-cookie-400 to-cookie-600"
+                              : index % 4 === 1
+                                ? "from-chocolate-500 to-chocolate-700"
+                                : index % 4 === 2
+                                  ? "from-caramel to-caramel-dark"
+                                  : "from-honey to-honey-dark"
+                          } flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-300`}
+                        >
+                          <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
+
                         <div>
-                          <div className="text-2xl font-bold text-cookie-600 dark:text-cookie-400">{item.year}</div>
-                          <h4 className="text-base font-semibold text-foreground">{item.title}</h4>
+                          <div className="text-xl sm:text-2xl font-bold text-gradient-cookie">
+                            {item.year}
+                          </div>
+                          <h4 className="text-sm sm:text-base font-semibold text-vanilla">
+                            {item.title}
+                          </h4>
                         </div>
                       </div>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
+
+                      <p className="text-xs sm:text-sm lg:text-base text-caramel leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -381,7 +411,7 @@ export default function AboutSection() {
               <div
                 className={`h-24 sm:h-28 md:h-32 rounded-cookie-lg bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 sm:mb-4 md:mb-6 relative overflow-hidden shadow-cookie group-hover:shadow-cookie-lg transition-all duration-300`}
               >
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-chocolate-900 dark:text-foreground">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
                   {stat.value}
                 </div>
 
@@ -397,11 +427,7 @@ export default function AboutSection() {
                 />
               </div>
 
-              {/* CORRECCIÓN APLICADA AQUÍ: 
-                  - text-chocolate-900: Marrón oscuro para el Modo Día (visible sobre beige)
-                  - dark:text-foreground: Color claro automático para Modo Noche
-              */}
-              <div className="text-sm sm:text-base lg:text-lg font-semibold text-chocolate-900 dark:text-foreground group-hover:text-cookie-500 transition-colors">
+              <div className="text-sm sm:text-base lg:text-lg font-semibold text-vanilla group-hover:text-cookie-400 transition-colors">
                 {stat.label}
               </div>
             </motion.div>
