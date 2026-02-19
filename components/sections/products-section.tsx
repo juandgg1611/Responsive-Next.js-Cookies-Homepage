@@ -10,9 +10,9 @@ import { useCart } from "@/components/providers/cart-provider";
 const PRODUCTS = [
   {
     id: "chocolate-deluxe",
-    name: "New York Chocochip Deluxe",
+    name: "NewYork Chocochip Deluxe",
     description:
-      "Galletas con chispas de chocolate belga 70% cacao y nueces tostadas",
+      "Galletas con chocolate belga, 70% cacao y crema de avellanas",
     price: 5.99,
     originalPrice: 9.99,
     image: "/images/products/slider1.png",
@@ -24,9 +24,9 @@ const PRODUCTS = [
   },
   {
     id: "red-velvet",
-    name: "New York Lemon Pie",
+    name: "NewYork Lemon Pie",
     description:
-      "Galletas de terciopelo rojo con crema de queso y chispas de chocolate blanco",
+      "Galletas de relleno de crema de limòn y chocolate blanco",
     price: 7.99,
     image: "/images/products/slider2.png",
     category: "premium",
@@ -37,9 +37,9 @@ const PRODUCTS = [
   },
   {
     id: "matcha-green",
-    name: "New York Chococolor",
+    name: "NewYork Chococolor",
     description:
-      "Galletas de matcha japonés premium con chips de chocolate blanco",
+      "Galletas de crema de chocolate y avellanas",
     price: 7.99,
     image: "/images/products/slider3.png",
     category: "especiales",
@@ -49,9 +49,9 @@ const PRODUCTS = [
   },
   {
     id: "vanilla-dream",
-    name: "New York Choconuez",
+    name: "NewYork Choconuez",
     description:
-      "Galletas de vainilla de Madagascar con glaseado real y flor de sal",
+      "Galletas de chocolate con leche y nueces importadas",
     price: 9.99,
     originalPrice: 12.99,
     image: "/images/products/slider4.png",
