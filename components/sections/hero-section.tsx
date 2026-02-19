@@ -10,26 +10,26 @@ const HERO_IMAGES = [
   {
     src: "/images/products/slider1.png",
     alt: "Chocolate Chip Deluxe",
-    title: "Chocolate Chip Deluxe",
+    title: "NewYork ChocoChips",
     description: "Con chispas de chocolate belga 70% cacao",
   },
   {
     src: "/images/products/slider2.png",
     alt: "Red Velvet Premium",
-    title: "Red Velvet Premium",
-    description: "Terciopelo rojo con crema de queso",
+    title: "NewYork Pie de Limòn",
+    description: "Limòn y chocolate blanco artesanal",
   },
   {
     src: "/images/products/slider3.png",
     alt: "Matcha Green Tea",
-    title: "Matcha Green Tea",
-    description: "Matcha japonés premium con chocolate blanco",
+    title: "NewYork ChocoColor",
+    description: "Chocolate negro con lluvia de colores",
   },
   {
     src: "/images/products/slider4.png",
     alt: "Vanilla Dream",
-    title: "Vanilla Dream",
-    description: "Vainilla de Madagascar con flor de sal",
+    title: "NewYork ChocoNuez",
+    description: "Vainilla de Madagascar con nueces importadas",
   },
 ];
 
