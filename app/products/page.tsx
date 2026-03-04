@@ -793,7 +793,7 @@ function Carousel3D({
                       fill
                       className="object-cover object-center"
                       sizes="(max-width:768px) 280px, 460px"
-                      style={{ filter: "brightness(1.2) contrast(1)" }}
+                      style={{ filter: "brightness(1.1) contrast(1)" }}
                     />
                   </motion.div>
 
