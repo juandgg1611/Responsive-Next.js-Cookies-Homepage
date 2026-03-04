@@ -19,13 +19,8 @@ import {
 import L, { DivIcon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useCallback, useRef, useState } from "react";
-import {
-  CoverageZone,
-  LatLng,
-  MARACAIBO_CENTER,
-  COVERAGE_ZONES,
-} from "@/app/delivery/page";
-
+import type { CoverageZone, LatLng } from "@/app/delivery/data";
+import { MARACAIBO_CENTER, COVERAGE_ZONES } from "@/app/delivery/data";
 // ─── Fix default icon paths broken by webpack ─────────────────────────────────
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
