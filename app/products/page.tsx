@@ -531,7 +531,8 @@ function Particles() {
   );
 }
 
-// ─── Carrusel 3D Infinito Grande ──────────────────────────────────────────────
+// ─── Carrusel 3D Compacto & Responsive ────────────────────────────────────────
+// ─── Carrusel 3D Compacto & Responsive ────────────────────────────────────────
 function Carousel3D({
   onAddToCart,
 }: {
@@ -539,115 +540,120 @@ function Carousel3D({
 }) {
   const total = CAROUSEL_ITEMS.length;
   const [active, setActive] = useState(0);
+  const [prev2, setPrev2] = useState<number | null>(null);
+  const [direction, setDirection] = useState<1 | -1>(1);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [dragDelta, setDragDelta] = useState(0);
   const [addedId, setAddedId] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlay) return;
-    const id = setInterval(() => setActive((p) => (p + 1) % total), 4800);
+    const id = setInterval(() => goNext(), 5000);
     return () => clearInterval(id);
-  }, [isAutoPlay, total]);
+  }, [isAutoPlay, active]);
 
-  const pauseAutoplay = (ms = 8000) => {
+  const pauseAutoplay = (ms = 7000) => {
     setIsAutoPlay(false);
     setTimeout(() => setIsAutoPlay(true), ms);
   };
 
-  const prev = () => {
+  const goTo = (next: number, dir: 1 | -1) => {
+    setPrev2(active);
+    setDirection(dir);
+    setActive(next);
     pauseAutoplay();
-    setActive((p) => (p - 1 + total) % total);
-  };
-  const next = () => {
-    pauseAutoplay();
-    setActive((p) => (p + 1) % total);
   };
 
-  const onMouseDown = (e: React.MouseEvent) => {
+  const goPrev = () => goTo((active - 1 + total) % total, -1);
+  const goNext = () => goTo((active + 1) % total, 1);
+
+  // Touch / drag
+  const onPointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
     setStartX(e.clientX);
     pauseAutoplay();
   };
-  const onMouseMove = (e: React.MouseEvent) => {
+  const onPointerMove = (e: React.PointerEvent) => {
     if (isDragging) setDragDelta(e.clientX - startX);
   };
-  const onMouseUp = () => {
-    if (Math.abs(dragDelta) > 60) dragDelta < 0 ? next() : prev();
-    setIsDragging(false);
-    setDragDelta(0);
-  };
-  const onTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].clientX);
-    pauseAutoplay();
-  };
-  const onTouchMove = (e: React.TouchEvent) => {
-    if (isDragging) setDragDelta(e.touches[0].clientX - startX);
-  };
-  const onTouchEnd = () => {
-    if (Math.abs(dragDelta) > 45) dragDelta < 0 ? next() : prev();
+  const onPointerUp = () => {
+    if (Math.abs(dragDelta) > 50) dragDelta < 0 ? goNext() : goPrev();
     setIsDragging(false);
     setDragDelta(0);
   };
 
-  const CARD_W = 460;
-  const CARD_H = 580;
-  const GAP = 490;
-  const Z_MID = 340;
-  const Z_FAR = 600;
-  const ROT = 45;
+  // Responsive card dimensions
+  const CARD_W = isMobile ? 280 : 460;
+  const CARD_H = isMobile ? 420 : 620;
+  const GAP = isMobile ? 240 : 480;
+  const Z_SIDE = isMobile ? 180 : 320;
+  const ROT_DEG = isMobile ? 38 : 42;
 
-  const getCardStyle = (index: number): CSSProperties => {
+  type CardPos = "center" | "left1" | "right1" | "left2" | "right2" | "hidden";
+
+  const getPos = (index: number): CardPos => {
     const diff = circularDiff(index, active, total);
-    switch (diff) {
-      case 0:
-        return {
-          opacity: 1,
-          transform: `translateX(0px) translateZ(0px) rotateY(0deg)`,
-          zIndex: 10,
-          pointerEvents: "auto",
-        };
-      case -1:
-        return {
-          opacity: 0.85,
-          transform: `translateX(${-GAP}px) translateZ(${-Z_MID}px) rotateY(${ROT}deg)`,
-          zIndex: 9,
-          pointerEvents: "auto",
-        };
-      case 1:
-        return {
-          opacity: 0.85,
-          transform: `translateX(${GAP}px) translateZ(${-Z_MID}px) rotateY(${-ROT}deg)`,
-          zIndex: 9,
-          pointerEvents: "auto",
-        };
-      case -2:
-        return {
-          opacity: 0.3,
-          transform: `translateX(${-GAP * 2.05}px) translateZ(${-Z_FAR}px) rotateY(${ROT * 0.6}deg)`,
-          zIndex: 8,
-          pointerEvents: "none",
-        };
-      case 2:
-        return {
-          opacity: 0.3,
-          transform: `translateX(${GAP * 2.05}px) translateZ(${-Z_FAR}px) rotateY(${-ROT * 0.6}deg)`,
-          zIndex: 8,
-          pointerEvents: "none",
-        };
-      default:
-        return {
-          opacity: 0,
-          transform:
-            diff < 0
-              ? `translateX(${-GAP * 2.7}px) translateZ(${-Z_FAR * 1.2}px) rotateY(${ROT * 0.45}deg)`
-              : `translateX(${GAP * 2.7}px) translateZ(${-Z_FAR * 1.2}px) rotateY(${-ROT * 0.45}deg)`,
-          zIndex: 7,
-          pointerEvents: "none",
-        };
-    }
+    if (diff === 0) return "center";
+    if (diff === -1) return "left1";
+    if (diff === 1) return "right1";
+    if (diff === -2) return "left2";
+    if (diff === 2) return "right2";
+    return "hidden";
+  };
+
+  const posStyles: Record<CardPos, React.CSSProperties> = {
+    center: {
+      opacity: 1,
+      transform: `translateX(0) translateZ(0) rotateY(0deg) scale(1)`,
+      zIndex: 10,
+      pointerEvents: "auto",
+      filter: "brightness(1)",
+    },
+    left1: {
+      opacity: 0.82,
+      transform: `translateX(${-GAP}px) translateZ(${-Z_SIDE}px) rotateY(${ROT_DEG}deg) scale(0.92)`,
+      zIndex: 9,
+      pointerEvents: "auto",
+      filter: "brightness(0.7)",
+    },
+    right1: {
+      opacity: 0.82,
+      transform: `translateX(${GAP}px) translateZ(${-Z_SIDE}px) rotateY(${-ROT_DEG}deg) scale(0.92)`,
+      zIndex: 9,
+      pointerEvents: "auto",
+      filter: "brightness(0.7)",
+    },
+    left2: {
+      opacity: 0.22,
+      transform: `translateX(${-GAP * 2}px) translateZ(${-Z_SIDE * 1.8}px) rotateY(${ROT_DEG * 0.55}deg) scale(0.82)`,
+      zIndex: 8,
+      pointerEvents: "none",
+      filter: "brightness(0.4)",
+    },
+    right2: {
+      opacity: 0.22,
+      transform: `translateX(${GAP * 2}px) translateZ(${-Z_SIDE * 1.8}px) rotateY(${-ROT_DEG * 0.55}deg) scale(0.82)`,
+      zIndex: 8,
+      pointerEvents: "none",
+      filter: "brightness(0.4)",
+    },
+    hidden: {
+      opacity: 0,
+      transform: `translateX(0) translateZ(${-Z_SIDE * 2.5}px) scale(0.7)`,
+      zIndex: 7,
+      pointerEvents: "none",
+      filter: "brightness(0.2)",
+    },
   };
 
   const handleAddToCart = (product: (typeof PRODUCTS)[0]) => {
@@ -659,188 +665,173 @@ function Carousel3D({
   const current = CAROUSEL_ITEMS[active];
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
+      {/* ── Ambient background per card ── */}
       <AnimatePresence mode="wait">
         <motion.div
           key={active}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1.8, ease: "easeInOut" }}
           className="absolute inset-0 pointer-events-none"
         >
           <div
             className={cn(
               "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-              "w-[1100px] h-[700px] rounded-full blur-[200px] opacity-[0.12]",
+              "w-[900px] h-[600px] rounded-full blur-[180px] opacity-[0.10]",
               `bg-gradient-to-r ${current.accentClass}`,
             )}
           />
-          <div className="absolute top-1/3 right-1/3 w-[500px] h-[500px] rounded-full blur-[150px] opacity-[0.07] bg-cookie-400" />
         </motion.div>
       </AnimatePresence>
 
+      {/* Grain overlay */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
+        className="absolute inset-0 pointer-events-none opacity-[0.025] mix-blend-overlay"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundSize: "160px 160px",
         }}
       />
 
-      <div className="relative z-10 text-center mb-20 px-4">
+      {/* ── Heading ── */}
+      <div className="relative z-10 text-center mb-12 md:mb-16 px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-cookie-900/60 border border-cookie-500/30 backdrop-blur-sm mb-6"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cookie-900/60 border border-cookie-500/30 backdrop-blur-sm mb-5"
         >
-          <Sparkles className="w-4 h-4 text-cookie-400 animate-pulse" />
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-cookie-400">
+          <Sparkles className="w-3.5 h-3.5 text-cookie-400 animate-pulse" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-cookie-400">
             Colección Destacada
           </span>
         </motion.div>
+
         <motion.h2
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-vanilla mb-4 leading-none"
+          className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-vanilla mb-3 leading-none"
         >
           Nuestras{" "}
           <span className="bg-gradient-to-r from-cookie-400 to-caramel bg-clip-text text-transparent">
-            mejores{" "}
-          </span>
+            mejores
+          </span>{" "}
           galletas
         </motion.h2>
+
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.35, duration: 0.9 }}
-          className="mx-auto w-32 h-0.5 bg-gradient-to-r from-transparent via-cookie-500 to-transparent"
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="mx-auto w-24 h-px bg-gradient-to-r from-transparent via-cookie-500 to-transparent"
         />
       </div>
 
+      {/* ── Carousel stage ── */}
       <div
-        className="relative mx-auto select-none"
-        style={{ width: "100%", height: CARD_H + 120, perspective: "1600px" }}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
+        className="relative mx-auto select-none touch-pan-y"
+        style={{ width: "100%", height: CARD_H + 60, perspective: "1400px" }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
       >
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{ transformStyle: "preserve-3d" }}
         >
           {CAROUSEL_ITEMS.map((product, i) => {
-            const cardStyle = getCardStyle(i);
-            const isActive = i === active;
+            const pos = getPos(i);
+            const isActive = pos === "center";
             const isAdded = addedId === product.id;
+
             return (
               <div
                 key={product.id}
                 className="absolute"
-                style={{ transformStyle: "preserve-3d", width: CARD_W }}
+                style={{
+                  width: CARD_W,
+                  transformStyle: "preserve-3d",
+                  transition: isDragging
+                    ? "none"
+                    : "transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, filter 0.5s ease",
+                  ...posStyles[pos],
+                }}
               >
+                {/* ── Card ── */}
                 <div
-                  className="relative rounded-3xl overflow-hidden cursor-pointer"
+                  className="relative rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer"
                   style={{
                     width: CARD_W,
                     height: CARD_H,
-                    transition: isDragging
-                      ? "none"
-                      : "transform 0.72s cubic-bezier(0.34, 1.12, 0.64, 1), opacity 0.55s ease",
                     boxShadow: isActive
-                      ? `0 0 0 1.5px rgba(212,165,116,0.4), 0 60px 140px rgba(139,69,19,0.55), 0 0 100px rgba(212,165,116,0.06)`
-                      : `0 25px 70px rgba(0,0,0,0.75)`,
-                    ...cardStyle,
+                      ? `0 0 0 1px rgba(212,165,116,0.35), 0 40px 100px rgba(139,69,19,0.5)`
+                      : `0 20px 50px rgba(0,0,0,0.6)`,
                   }}
                   onClick={() => {
-                    if (!isDragging && !isActive) {
-                      setActive(i);
-                      pauseAutoplay();
-                    }
+                    if (!isDragging && !isActive) goTo(i, i > active ? 1 : -1);
                   }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-cookie-950 via-background-dark to-chocolate-950" />
-                  <div
-                    className="absolute inset-0 opacity-[0.035]"
-                    style={{
-                      backgroundImage:
-                        "radial-gradient(circle at 16px 16px, rgba(212,165,116,0.9) 1.5px, transparent 1.5px)",
-                      backgroundSize: "32px 32px",
+                  {/* ── Imagen full-card ── */}
+                  <motion.div
+                    className="absolute inset-0"
+                    animate={isActive ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+                    transition={{
+                      duration: 9,
+                      repeat: Infinity,
+                      ease: "easeInOut",
                     }}
-                  />
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cookie-500/40 to-transparent" />
-                  <div
-                    className={cn(
-                      "absolute -top-28 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none",
-                      `bg-gradient-to-br ${product.accentClass}`,
-                    )}
-                  />
-
-                  <div
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{ paddingBottom: "14rem" }}
                   >
-                    <motion.div
-                      animate={
-                        isActive
-                          ? {
-                              scale: [1, 1.07, 1],
-                              rotate: [0, 2, -2, 0],
-                              y: [0, -14, 0],
-                            }
-                          : { scale: 0.75 }
-                      }
-                      transition={{
-                        duration: 9,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="relative w-72 h-72"
-                    >
-                      {isActive && (
-                        <motion.div
-                          animate={{
-                            scale: [0.65, 1.2, 0.65],
-                            opacity: [0.15, 0.45, 0.15],
-                          }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                          className={cn(
-                            "absolute -bottom-8 left-1/2 -translate-x-1/2 w-56 h-12 rounded-full blur-3xl",
-                            `bg-gradient-to-r ${product.accentClass}`,
-                          )}
-                        />
-                      )}
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-contain drop-shadow-2xl"
-                        sizes="288px"
-                      />
-                    </motion.div>
-                  </div>
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width:768px) 280px, 460px"
+                      style={{ filter: "brightness(1.2) contrast(1)" }}
+                    />
+                  </motion.div>
 
+                  {/* Degradado inferior para contraste del texto */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#060301] from-[15%] via-[#060301]/30 via-[45%] to-transparent z-10 pointer-events-none" />
+
+                  {/* Degradado superior sutil */}
+                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#060301]/25 to-transparent z-10 pointer-events-none" />
+
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cookie-400/40 to-transparent z-20" />
+
+                  {/* Glow de acento sobre la imagen (solo en activa) */}
+                  {isActive && (
+                    <motion.div
+                      animate={{ opacity: [0.08, 0.18, 0.08] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                      className={cn(
+                        "absolute inset-0 z-10 pointer-events-none",
+                        `bg-gradient-to-t ${product.accentClass} opacity-10`,
+                      )}
+                    />
+                  )}
+
+                  {/* Bottom info panel */}
                   <div
-                    className="absolute inset-x-0 bottom-0 p-7"
+                    className="absolute inset-x-0 bottom-0 p-5 md:p-6 z-20"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(8,4,1,0.99) 0%, rgba(8,4,1,0.9) 45%, transparent 100%)",
+                        "linear-gradient(to top, rgba(6,3,1,0.99) 0%, rgba(6,3,1,0.88) 50%, transparent 100%)",
                     }}
                   >
-                    <div className="flex items-center justify-between mb-3">
+                    {/* Tag + rating */}
+                    <div className="flex items-center justify-between mb-2.5">
                       {product.tag ? (
                         <span
                           className={cn(
-                            "px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider",
+                            "px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider",
                             TAG_STYLES[product.tag] ??
                               "bg-amber-500 text-black",
                           )}
@@ -851,84 +842,89 @@ function Carousel3D({
                         <span />
                       )}
                       <div className="flex items-center gap-1">
-                        <Star className="w-3.5 h-3.5 fill-cookie-400 text-cookie-400" />
-                        <span className="text-sm font-bold text-cookie-400">
+                        <Star className="w-3 h-3 fill-cookie-400 text-cookie-400" />
+                        <span className="text-xs font-bold text-cookie-400">
                           {product.rating}
                         </span>
-                        <span className="text-xs text-caramel/50 ml-0.5">
+                        <span className="text-[10px] text-caramel/40">
                           ({product.reviews})
                         </span>
                       </div>
                     </div>
-                    <h3 className="font-display text-xl font-bold text-vanilla uppercase tracking-tight leading-tight mb-2">
+
+                    <h3 className="font-display text-base md:text-lg font-bold text-vanilla uppercase tracking-tight leading-tight mb-2">
                       {product.name}
                     </h3>
 
                     <AnimatePresence mode="wait">
                       {isActive ? (
                         <motion.div
-                          key="active-content"
-                          initial={{ opacity: 0, y: 12 }}
+                          key="active"
+                          initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.35 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          transition={{ duration: 0.3 }}
                         >
-                          <p className="text-sm text-caramel/75 leading-relaxed mb-5 line-clamp-2">
+                          <p className="text-xs text-caramel/65 leading-relaxed mb-3 line-clamp-2">
                             {product.description}
                           </p>
-                          <div className="flex flex-wrap gap-1.5 mb-5">
-                            {product.ingredients.map((ing) => (
+
+                          {/* Ingredients - hidden on very small screens */}
+                          <div className="hidden sm:flex flex-wrap gap-1 mb-4">
+                            {product.ingredients.slice(0, 3).map((ing) => (
                               <span
                                 key={ing}
-                                className="px-2.5 py-0.5 rounded-full text-[10px] text-cookie-400 bg-cookie-900/70 border border-cookie-700/50"
+                                className="px-2 py-0.5 rounded-full text-[9px] text-cookie-400 bg-cookie-900/70 border border-cookie-700/40"
                               >
                                 {ing}
                               </span>
                             ))}
                           </div>
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <span className="font-display text-3xl font-bold text-cookie-400">
+
+                          {/* Price + CTA */}
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="shrink-0">
+                              <span className="font-display text-2xl md:text-3xl font-bold text-cookie-400">
                                 ${product.price}
                               </span>
                               {product.originalPrice && (
-                                <span className="text-sm text-caramel/40 line-through ml-2">
+                                <span className="text-xs text-caramel/35 line-through ml-1.5">
                                   ${product.originalPrice}
                                 </span>
                               )}
                             </div>
                             <motion.button
-                              whileHover={{ scale: 1.07 }}
-                              whileTap={{ scale: 0.9 }}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.92 }}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleAddToCart(product);
                               }}
                               className={cn(
-                                "relative flex items-center gap-2 px-6 py-3 rounded-xl",
-                                "font-black text-sm uppercase tracking-wide overflow-hidden transition-all duration-300",
+                                "relative flex items-center gap-1.5 px-4 py-2.5 rounded-xl",
+                                "font-black text-xs uppercase tracking-wide overflow-hidden transition-colors duration-300 shrink-0",
                                 isAdded
                                   ? "bg-emerald-600 text-white"
-                                  : `bg-gradient-to-r ${product.accentClass} text-vanilla shadow-lg`,
+                                  : `bg-gradient-to-r ${product.accentClass} text-vanilla shadow-md`,
                               )}
                             >
                               <motion.div
                                 animate={{ x: ["-120%", "220%"] }}
                                 transition={{
-                                  duration: 2.5,
+                                  duration: 2.2,
                                   repeat: Infinity,
-                                  repeatDelay: 3.5,
+                                  repeatDelay: 4,
                                 }}
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none"
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
                               />
                               <AnimatePresence mode="wait">
                                 {isAdded ? (
                                   <motion.span
                                     key="ok"
-                                    initial={{ opacity: 0, scale: 0.5 }}
+                                    initial={{ opacity: 0, scale: 0.6 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="relative flex items-center gap-1.5"
+                                    className="relative flex items-center gap-1"
                                   >
                                     ✓ Añadido
                                   </motion.span>
@@ -937,9 +933,10 @@ function Carousel3D({
                                     key="add"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="relative flex items-center gap-2"
+                                    className="relative flex items-center gap-1.5"
                                   >
-                                    <ShoppingCart className="w-4 h-4" /> Añadir
+                                    <ShoppingCart className="w-3.5 h-3.5" />{" "}
+                                    Añadir
                                   </motion.span>
                                 )}
                               </AnimatePresence>
@@ -948,162 +945,137 @@ function Carousel3D({
                         </motion.div>
                       ) : (
                         <motion.div
-                          key="inactive-content"
+                          key="inactive"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           className="flex items-center justify-between pt-1"
                         >
-                          <span className="font-display text-2xl font-bold text-cookie-400">
+                          <span className="font-display text-xl font-bold text-cookie-400">
                             ${product.price}
                           </span>
-                          <span className="text-xs text-caramel/40 uppercase tracking-widest">
-                            Toca para ver
+                          <span className="text-[10px] text-caramel/35 uppercase tracking-widest">
+                            Ver más
                           </span>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
+                  {/* Active border pulse */}
                   {isActive && (
                     <motion.div
-                      className="absolute inset-0 rounded-3xl pointer-events-none"
+                      className="absolute inset-0 rounded-2xl md:rounded-3xl pointer-events-none"
                       style={{
-                        boxShadow: "inset 0 0 0 1.5px rgba(212,165,116,0.3)",
+                        boxShadow: "inset 0 0 0 1px rgba(212,165,116,0.25)",
                       }}
-                      animate={{ opacity: [0.3, 1, 0.3] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    />
-                  )}
-                  {isActive && (
-                    <motion.div
-                      animate={{ x: ["-130%", "230%"] }}
-                      transition={{
-                        duration: 3.2,
-                        repeat: Infinity,
-                        repeatDelay: 4.5,
-                      }}
-                      className="absolute inset-0 pointer-events-none"
-                      style={{
-                        background:
-                          "linear-gradient(105deg, transparent 18%, rgba(212,165,116,0.07) 50%, transparent 82%)",
-                      }}
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 2.5, repeat: Infinity }}
                     />
                   )}
 
-                  <div className="absolute top-5 left-5 z-20">
+                  {/* Vegan badge */}
+                  {product.isVegan && (
+                    <div className="absolute top-4 right-4 z-30">
+                      <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-700/90 text-white">
+                        <Leaf className="w-2.5 h-2.5" /> Vegan
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Number badge */}
+                  <div className="absolute top-4 left-4 z-30">
                     <div
                       className={cn(
-                        "w-9 h-9 rounded-full flex items-center justify-center text-sm font-black",
-                        i === 0
+                        "w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black",
+                        isActive
                           ? `bg-gradient-to-br ${product.accentClass} text-vanilla`
-                          : "bg-cookie-950/80 text-cookie-400 border border-cookie-800",
+                          : "bg-[#1a0d07]/80 text-cookie-700 border border-cookie-900",
                       )}
                     >
                       {i + 1}
                     </div>
                   </div>
-                  {product.isVegan && (
-                    <div className="absolute top-5 right-5 z-20">
-                      <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-700/90 text-white">
-                        <Leaf className="w-3 h-3" />
-                        Vegan
-                      </span>
-                    </div>
-                  )}
                 </div>
-
-                <div
-                  className="absolute pointer-events-none rounded-3xl overflow-hidden"
-                  style={{
-                    width: CARD_W,
-                    height: 140,
-                    top: CARD_H + 4,
-                    transform:
-                      "scaleY(-0.28) perspective(400px) rotateX(10deg)",
-                    transformOrigin: "top",
-                    filter: "blur(8px)",
-                    opacity: isActive ? 0.45 : 0.1,
-                    transition: "opacity 0.6s ease",
-                    background:
-                      "linear-gradient(to bottom, rgba(212,165,116,0.1), transparent)",
-                  }}
-                />
               </div>
             );
           })}
         </div>
       </div>
 
-      <div className="relative z-10 flex items-center justify-center gap-10 mt-28">
+      {/* ── Controls: dots + arrows inline ── */}
+      <div className="relative z-10 flex items-center justify-center gap-5 mt-8 px-4">
+        {/* Prev */}
         <motion.button
-          whileHover={{ scale: 1.2, x: -4 }}
+          whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.85 }}
-          onClick={prev}
-          className="w-14 h-14 rounded-full bg-cookie-950 border-2 border-cookie-800 hover:border-cookie-500 text-cookie-400 flex items-center justify-center transition-all shadow-lg"
+          onClick={goPrev}
+          className="w-11 h-11 rounded-full bg-[#1a0d07] border border-cookie-800/60 hover:border-cookie-500 text-cookie-400 flex items-center justify-center transition-all shadow-md"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5" />
         </motion.button>
-        <div className="flex items-center gap-3">
+
+        {/* Dots */}
+        <div className="flex items-center gap-2">
           {CAROUSEL_ITEMS.map((_, i) => (
             <motion.button
               key={i}
-              onClick={() => {
-                setActive(i);
-                pauseAutoplay();
-              }}
+              onClick={() => goTo(i, i > active ? 1 : -1)}
               animate={{
-                width: i === active ? 44 : 11,
-                opacity: i === active ? 1 : 0.28,
+                width: i === active ? 32 : 8,
+                opacity: i === active ? 1 : 0.3,
               }}
-              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+              transition={{ type: "spring", stiffness: 600, damping: 40 }}
               className={cn(
-                "h-3 rounded-full",
+                "h-2 rounded-full",
                 i === active
-                  ? "bg-gradient-to-r from-cookie-400 to-cookie-600"
+                  ? `bg-gradient-to-r ${current.accentClass}`
                   : "bg-cookie-800 hover:bg-cookie-600",
               )}
             />
           ))}
         </div>
+
+        {/* Next */}
         <motion.button
-          whileHover={{ scale: 1.2, x: 4 }}
+          whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.85 }}
-          onClick={next}
-          className="w-14 h-14 rounded-full bg-cookie-950 border-2 border-cookie-800 hover:border-cookie-500 text-cookie-400 flex items-center justify-center transition-all shadow-lg"
+          onClick={goNext}
+          className="w-11 h-11 rounded-full bg-[#1a0d07] border border-cookie-800/60 hover:border-cookie-500 text-cookie-400 flex items-center justify-center transition-all shadow-md"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-5 h-5" />
         </motion.button>
       </div>
 
+      {/* ── Ingredient tags ── */}
       <AnimatePresence mode="wait">
         <motion.div
           key={active}
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.45 }}
-          className="relative z-10 flex flex-wrap items-center justify-center gap-3 mt-10 px-4"
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.4 }}
+          className="relative z-10 flex flex-wrap items-center justify-center gap-2 mt-6 px-6"
         >
           {current.ingredients.map((ing, idx) => (
             <motion.span
               key={ing}
-              initial={{ opacity: 0, scale: 0.7 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.08 }}
-              className="px-4 py-1.5 rounded-full bg-cookie-900/60 border border-cookie-700 text-sm text-cookie-400 backdrop-blur-sm"
+              transition={{ delay: idx * 0.06 }}
+              className="px-3 py-1 rounded-full bg-cookie-900/50 border border-cookie-800/60 text-xs text-cookie-400 backdrop-blur-sm"
             >
               {ing}
             </motion.span>
           ))}
-          <span className="px-4 py-1.5 rounded-full bg-background-surface/60 border border-cookie-900 text-sm text-caramel/50">
-            {current.weight} · {current.calories} cal · {current.texture}
+          <span className="px-3 py-1 rounded-full bg-[#1a0d07]/60 border border-cookie-900 text-xs text-caramel/40">
+            {current.weight} · {current.calories} cal
           </span>
         </motion.div>
       </AnimatePresence>
 
-      <p className="relative z-10 text-center text-xs text-cookie-900 mt-6 font-medium tracking-widest uppercase">
-        ← arrastra · carrusel infinito →
+      <p className="relative z-10 text-center text-[10px] text-cookie-900/60 mt-5 font-medium tracking-widest uppercase">
+        ← desliza o arrastra →
       </p>
     </section>
   );
@@ -1763,25 +1735,6 @@ export default function ProductsPage() {
             </button>
 
             <div className="flex-1 hidden sm:block" />
-
-            <div className="relative">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-cookie-900" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar..."
-                className="w-28 sm:w-44 pl-8 pr-7 py-1.5 bg-cookie-950 border border-cookie-900 rounded-full text-xs text-vanilla placeholder-cookie-800 focus:outline-none focus:border-cookie-600/50 focus:ring-1 focus:ring-cookie-600/15 transition-all"
-              />
-              {search && (
-                <button
-                  onClick={() => setSearch("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2"
-                >
-                  <X className="w-3 h-3 text-cookie-900 hover:text-cookie-500" />
-                </button>
-              )}
-            </div>
 
             <div className="relative" ref={sortRef}>
               <button
