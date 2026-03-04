@@ -1,4 +1,4 @@
-// components/providers/client-providers.tsx - VERSIÓN CON ESPACIADO CORRECTO
+// components/providers/client-providers.tsx
 "use client";
 
 import { ThemeProvider } from "next-themes";
@@ -6,6 +6,9 @@ import { Toaster } from "sonner";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { usePathname } from "next/navigation";
+import { ChatbotProvider } from "./chatbot-provider";
+import ChatButton from "../chatbot/ChatButton";
+import ChatWindow from "../chatbot/ChatWindow";
 
 export default function ClientProviders({
   children,
@@ -14,6 +17,15 @@ export default function ClientProviders({
 }) {
   const pathname = usePathname();
   const isAuthRoute = pathname?.startsWith("/auth/");
+  const isBotRoute = pathname?.startsWith("/chatbot/");
+
+  // Páginas que manejan su propio fondo y espaciado
+  // (no necesitan pt-32 en main ni mt en footer)
+  const isSelfContainedPage =
+    pathname === "/products" ||
+    pathname === "/delivery" ||
+    pathname === "/about" ||
+    pathname === "/contact";
 
   return (
     <ThemeProvider
@@ -25,13 +37,21 @@ export default function ClientProviders({
       {/* Header condicional */}
       {!isAuthRoute && <Header />}
 
-      {/*
-       */}
-      <main className={!isAuthRoute ? "pt-32" : "pt-0"}>{children}</main>
+      <main
+        className={
+          isAuthRoute
+            ? "pt-0" // auth: sin padding
+            : isSelfContainedPage
+              ? "pt-0 bg-transparent" // productos: el header ya tiene su propio spacer
+              : "pt-32" // resto: padding normal
+        }
+      >
+        {children}
+      </main>
 
-      {/* Footer condicional con espaciado superior */}
+      {/* Footer: sin margen extra en páginas autocontenidas */}
       {!isAuthRoute && (
-        <div className="mt-12 md:mt-16 lg:mt-20">
+        <div className={!isSelfContainedPage ? "mt-12 md:mt-16 lg:mt-20" : ""}>
           <Footer />
         </div>
       )}
@@ -62,7 +82,6 @@ export default function ClientProviders({
         </button>
       )}
 
-      {/* Script para scroll button */}
       {!isAuthRoute && (
         <script
           dangerouslySetInnerHTML={{

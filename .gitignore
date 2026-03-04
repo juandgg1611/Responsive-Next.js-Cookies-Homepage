@@ -5,6 +5,7 @@ out/
 
 # Environment
 .env*
+.env.local
 
 # Build
 dist/
