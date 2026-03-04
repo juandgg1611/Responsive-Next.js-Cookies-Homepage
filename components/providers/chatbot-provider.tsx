@@ -56,70 +56,60 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
   const sendMessage = useCallback(
     async (content: string) => {
       if (!content.trim()) return;
-
-      // Mensaje del usuario
+  
+      // 1. Mensaje del usuario
       const userMessage: ChatMessage = {
         id: uuidv4(),
         content,
         role: "user",
         timestamp: new Date(),
       };
-
+  
       setMessages((prev) => [...prev, userMessage]);
       setIsLoading(true);
       setUnreadCount(0);
-
-      // Mensaje de typing
-      const typingId = uuidv4();
-      const typingMessage: ChatMessage = {
-        id: typingId,
-        content: "",
-        role: "assistant",
-        timestamp: new Date(),
-        isTyping: true,
-      };
-      setMessages((prev) => [...prev, typingMessage]);
-
-      // Simular respuesta - Aquí irá Gemini 3
-      setTimeout(() => {
-        setMessages((prev) => prev.filter((msg) => msg.id !== typingId));
-
+  
+      try {
+        // 2. Llamada a tu API de Next.js (que conectamos con Gemini)
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt: content }),
+        });
+  
+        if (!response.ok) throw new Error('Error en la comunicación con Cookie');
+  
+        const data = await response.json();
+  
+        // 3. Añadir la respuesta real de Gemini al estado
         const botMessage: ChatMessage = {
           id: uuidv4(),
-          content: generateResponse(content),
+          content: data.text, // El texto que devuelve tu API Route
           role: "assistant",
           timestamp: new Date(),
         };
+  
         setMessages((prev) => [...prev, botMessage]);
+  
+      } catch (error) {
+        // Manejo de errores para que el usuario sepa que algo falló
+        const errorMessage: ChatMessage = {
+          id: uuidv4(),
+          content: "¡Ups! Se me quemaron las galletas en el horno (error de conexión). Intenta de nuevo en un momento. 🍪",
+          role: "assistant",
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+        console.error("Error de chat:", error);
+      } finally {
         setIsLoading(false);
         if (!isOpen) setUnreadCount((prev) => prev + 1);
-      }, 2000);
+      }
     },
     [isOpen],
   );
-
-  // Respuestas simuladas (temporal)
-  const generateResponse = (userMessage: string): string => {
-    const lowerMsg = userMessage.toLowerCase();
-
-    if (lowerMsg.includes("hola") || lowerMsg.includes("buenas")) {
-      return "¡Hola! Encantado de verte por aquí 🍪 ¿Qué tipo de galleta te gusta más?";
-    }
-    if (lowerMsg.includes("chocolate")) {
-      return "¡Nuestra Chocolate Chip Deluxe es la favorita! Lleva chispas de chocolate belga 70% cacao. ¿Quieres probarla? ✨";
-    }
-    if (lowerMsg.includes("envío") || lowerMsg.includes("domicilio")) {
-      return "Hacemos envíos a todo el país en 24h. 🚚 Además, por compras mayores a $500 el envío es gratis. ¿Te ayudo con tu pedido?";
-    }
-    if (lowerMsg.includes("precio") || lowerMsg.includes("cuesta")) {
-      return "Nuestras galletas premium van desde $45 hasta $120, dependiendo de la variedad. ¡También tenemos cajas de regalo! 🎁";
-    }
-    if (lowerMsg.includes("sin azúcar") || lowerMsg.includes("light")) {
-      return '¡Sí! Tenemos opciones sin azúcar y sin gluten. La línea "Vian Light" usa stevia natural. ¿Te interesa alguna en especial? 💚';
-    }
-
-    return "¡Qué interesante! ¿Te gustaría que te recomiende nuestras galletas más vendidas? 🍪✨";
-  };
 
   const toggleChat = useCallback(() => {
     setIsOpen((prev) => !prev);
