@@ -11,50 +11,56 @@ module.exports = {
     extend: {
       // ===== PALETA DE COLORES COMPLETA =====
       colors: {
-        // Color principal: Galleta horneada
+        // Color principal: Galleta horneada (FIJOS - color de marca)
         cookie: {
           50: "#FDF6E9",
           100: "#FAEDD3",
           200: "#F5DBA7",
           300: "#F0C97B",
           400: "#EBB74F",
-          500: "#D4A574", // Color principal - Galleta horneada
+          500: "#D4A574",
           600: "#A8835C",
           700: "#7C6245",
           800: "#50412D",
           900: "#242016",
         },
-        // Color de acento: Chocolate oscuro
+        // Color de acento: Chocolate oscuro (FIJOS - color de marca)
         chocolate: {
           50: "#F5EFE6",
           100: "#EBDFCD",
           200: "#D7BF9B",
           300: "#C39F69",
           400: "#AF7F37",
-          500: "#8B4513", // Chocolate oscuro - Chispas
+          500: "#8B4513",
           600: "#6F3710",
           700: "#53290C",
           800: "#371C08",
           900: "#1B0E04",
         },
+
+        // ── COLORES SEMÁNTICOS (responden al tema) ──────────────────────
+
         // Fondo principal
         background: {
-          DEFAULT: "#2C1810",
-          light: "#3A2318",
-          dark: "#1A0F0A",
-          surface: "#4A2F20",
+          DEFAULT: "rgb(var(--background))",
+          light: "rgb(var(--background-light))",
+          dark: "rgb(var(--background-dark))",
+          surface: "rgb(var(--background-surface))",
         },
-        // Colores secundarios
+
+        // Colores secundarios semánticos
         vanilla: {
-          DEFAULT: "#F5E9D9",
-          light: "#FFF8F0",
-          dark: "#E5D9C9",
+          DEFAULT: "rgb(var(--foreground))",
+          light: "rgb(var(--foreground))",
+          dark: "rgb(var(--text-secondary))",
         },
         caramel: {
-          DEFAULT: "#A67C52",
-          light: "#C9A37D",
-          dark: "#8A6840",
+          DEFAULT: "rgb(var(--text-muted))",
+          light: "rgb(var(--text-secondary))",
+          dark: "rgb(var(--text-muted))",
         },
+
+        // Butter y Honey (FIJOS - decorativos de marca)
         butter: {
           DEFAULT: "#FFD8A6",
           light: "#FFE8CC",
@@ -65,27 +71,30 @@ module.exports = {
           light: "#E8BD84",
           dark: "#C99555",
         },
+
         // Colores de texto
         text: {
-          primary: "#F5E9D9",
-          secondary: "#D4A574",
-          muted: "#A67C52",
-          inverted: "#2C1810",
+          primary: "rgb(var(--text-primary))",
+          secondary: "rgb(var(--text-secondary))",
+          muted: "rgb(var(--text-muted))",
+          inverted: "rgb(var(--background))",
         },
+
         // Estados
         state: {
-          hover: "rgba(212, 165, 116, 0.15)",
-          active: "rgba(139, 69, 19, 0.25)",
-          disabled: "rgba(166, 124, 82, 0.3)",
+          hover: "var(--state-hover)",
+          active: "var(--state-active)",
+          disabled: "var(--state-disabled)",
           success: "#10B981",
           error: "#EF4444",
           warning: "#F59E0B",
         },
+
         // Bordes
         border: {
-          light: "rgba(212, 165, 116, 0.3)",
-          dark: "rgba(139, 69, 19, 0.5)",
-          glow: "rgba(212, 165, 116, 0.5)",
+          light: "rgba(var(--border-light-rgb), var(--border-light-alpha))",
+          dark: "rgba(var(--border-dark-rgb), var(--border-dark-alpha))",
+          glow: "rgba(var(--cookie-primary), 0.5)",
         },
       },
 
@@ -96,7 +105,6 @@ module.exports = {
         handwritten: ['"Dancing Script"', "cursive"],
       },
       fontSize: {
-        // Tamaños personalizados para galletas
         "cookie-xs": "0.75rem",
         "cookie-sm": "0.875rem",
         "cookie-base": "1rem",
@@ -122,43 +130,28 @@ module.exports = {
 
       // ===== ANIMACIONES PERSONALIZADAS =====
       animation: {
-        // Flotación suave
         float: "float 6s ease-in-out infinite",
         "float-delayed": "float-delayed 7s ease-in-out infinite",
         "float-slow": "float 8s ease-in-out infinite",
-
-        // Animaciones específicas de galletas
         "cookie-spin": "cookie-spin 20s linear infinite",
         "cookie-spin-slow": "cookie-spin 30s linear infinite",
         "cookie-bake": "bake-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-
-        // Efectos de chispas
         "chocolate-fall": "chocolate-chip-fall 3s linear infinite",
         "chocolate-fall-slow": "chocolate-chip-fall 5s linear infinite",
-
-        // Efectos de precio
         "price-drop":
           "price-drop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
-
-        // Efectos visuales
         "pulse-soft": "pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "pulse-glow": "pulse-soft 2s ease-in-out infinite",
         shimmer: "shimmer 2s infinite linear",
         "gradient-shift": "gradient-shift 8s ease infinite",
-
-        // Entradas animadas
         "slide-in-up": "slide-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
         "slide-in-right":
           "slide-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
         "slide-in-left":
           "slide-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-
-        // Efectos especiales
         "confetti-fall": "confetti-fall 5s linear forwards",
         "coupon-unfold":
           "coupon-unfold 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
-
-        // Estados de hover
         "hover-lift": "hover-lift 0.3s ease forwards",
         "hover-sink": "hover-sink 0.3s ease forwards",
       },
@@ -189,12 +182,9 @@ module.exports = {
 
       // ===== FONDOS =====
       backgroundImage: {
-        // Texturas de galleta
         "cookie-texture": "url('/images/textures/cookie-bg.png')",
         "cookie-texture-light": "url('/images/textures/cookie-bg-light.png')",
         "chocolate-chip": "url('/images/textures/chocolate-chip.png')",
-
-        // Gradientes personalizados
         "gradient-cookie": "linear-gradient(135deg, #D4A574 0%, #A67C52 100%)",
         "gradient-chocolate":
           "linear-gradient(135deg, #8B4513 0%, #5D2906 100%)",
@@ -203,13 +193,12 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "gradient-baked": "linear-gradient(145deg, #3A2318 0%, #2C1A12 100%)",
-
-        // Efectos especiales
+        "gradient-baked":
+          "linear-gradient(145deg, var(--gradient-baked-from) 0%, var(--gradient-baked-to) 100%)",
         "gradient-glow":
-          "linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.1), transparent)",
+          "linear-gradient(90deg, transparent, var(--gradient-glow-color), transparent)",
         "gradient-shimmer":
-          "linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.1) 50%, transparent 100%)",
+          "linear-gradient(90deg, transparent 0%, var(--gradient-shimmer-color) 50%, transparent 100%)",
       },
       backgroundSize: {
         "200%": "200%",
@@ -218,36 +207,34 @@ module.exports = {
 
       // ===== SOMBRAS =====
       boxShadow: {
-        // Neumorfismo galleta
-        neumorphic: "20px 20px 60px #25150d, -20px -20px 60px #331b13",
-        "neumorphic-sm": "10px 10px 30px #25150d, -10px -10px 30px #331b13",
-        "neumorphic-lg": "30px 30px 90px #25150d, -30px -30px 90px #331b13",
-        "neumorphic-inset":
-          "inset 20px 20px 60px #25150d, inset -20px -20px 60px #331b13",
-        "neumorphic-inset-sm":
-          "inset 10px 10px 30px #25150d, inset -10px -10px 30px #331b13",
+        // Neumorfismo (ahora con variables)
+        neumorphic: "var(--neumorphic)",
+        "neumorphic-sm": "var(--neumorphic-sm)",
+        "neumorphic-lg": "var(--neumorphic-lg)",
+        "neumorphic-inset": "var(--neumorphic-inset)",
+        "neumorphic-inset-sm": "var(--neumorphic-inset-sm)",
 
-        // Sombras flotantes
-        cookie: "0 10px 40px -10px rgba(139, 69, 19, 0.3)",
-        "cookie-lg": "0 20px 60px -15px rgba(139, 69, 19, 0.4)",
-        "cookie-xl": "0 25px 80px -20px rgba(139, 69, 19, 0.5)",
-        floating: "0 25px 50px -12px rgba(139, 69, 19, 0.25)",
-        "floating-lg": "0 35px 70px -15px rgba(139, 69, 19, 0.35)",
+        // Sombras flotantes (ahora con variables)
+        cookie: "var(--shadow-cookie)",
+        "cookie-lg": "var(--shadow-cookie-lg)",
+        "cookie-xl": "var(--shadow-cookie-xl)",
+        floating: "var(--shadow-floating)",
+        "floating-lg": "var(--shadow-floating-lg)",
 
         // Efectos de brillo
-        glow: "0 0 30px rgba(212, 165, 116, 0.4)",
-        "glow-lg": "0 0 50px rgba(212, 165, 116, 0.6)",
-        "glow-chocolate": "0 0 30px rgba(139, 69, 19, 0.4)",
+        glow: "var(--shadow-glow)",
+        "glow-lg": "var(--shadow-glow-lg)",
+        "glow-chocolate": "var(--shadow-glow-chocolate)",
 
-        // Sombras para textos
-        "text-glow": "0 0 10px rgba(212, 165, 116, 0.5)",
+        // Sombras de texto
+        "text-glow": "0 0 10px rgba(var(--cookie-primary), 0.5)",
 
         // Sombras interactivas
-        hover: "0 20px 40px rgba(139, 69, 19, 0.2)",
-        active: "0 10px 20px rgba(139, 69, 19, 0.3)",
+        hover: "var(--shadow-hover)",
+        active: "var(--shadow-active)",
 
         // Sombras para modales
-        modal: "0 50px 100px -20px rgba(0, 0, 0, 0.5)",
+        modal: "var(--shadow-modal)",
       },
 
       // ===== BORDES Y RADIOS =====
@@ -411,36 +398,36 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/aspect-ratio"),
-    function ({ addUtilities, theme }) {
+    function ({ addUtilities }) {
       const newUtilities = {
-        // Utilidades de textura
+        // Textura de galleta
         ".texture-cookie": {
-          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(212, 165, 116, 0.05) 2%, transparent 2.5%),
-                          radial-gradient(circle at 75% 75%, rgba(212, 165, 116, 0.05) 2%, transparent 2.5%)`,
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(var(--chocolate-primary), var(--texture-opacity)) 2%, transparent 2.5%),
+                          radial-gradient(circle at 75% 75%, rgba(var(--chocolate-primary), var(--texture-opacity)) 2%, transparent 2.5%)`,
           backgroundSize: "60px 60px",
         },
         // Efecto vidrio esmerilado
         ".glass-cookie": {
-          background: "rgba(58, 35, 24, 0.7)",
+          background: "var(--glass-bg)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid rgba(212, 165, 116, 0.1)",
+          border: "1px solid var(--glass-border)",
         },
         // Gradiente de texto animado
         ".text-gradient-cookie": {
-          background: "linear-gradient(135deg, #D4A574 0%, #A67C52 100%)",
+          background:
+            "linear-gradient(135deg, var(--text-gradient-from) 0%, var(--text-gradient-to) 100%)",
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           color: "transparent",
         },
-        // Efecto de neumorfismo completo
+        // Neumorfismo completo
         ".cookie-card-3d": {
-          background: "linear-gradient(145deg, #3a2318, #2c1a12)",
+          background: `linear-gradient(145deg, var(--card-3d-from), var(--card-3d-to))`,
           borderRadius: "30px",
-          boxShadow:
-            "20px 20px 60px #25150d, -20px -20px 60px #331b13, inset 0 0 0 1px rgba(212, 165, 116, 0.1)",
+          boxShadow: "var(--card-3d-shadow)",
         },
-        // Efecto flip 3D
+        // Flip 3D
         ".perspective-1000": {
           perspective: "1000px",
         },
@@ -450,7 +437,7 @@ module.exports = {
         ".backface-hidden": {
           backfaceVisibility: "hidden",
         },
-        // Animación de loader de horneado
+        // Loader de horneado
         ".loading-bake": {
           position: "relative",
           overflow: "hidden",
@@ -462,8 +449,7 @@ module.exports = {
           left: "-100%",
           width: "100%",
           height: "100%",
-          background:
-            "linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.2), transparent)",
+          background: `linear-gradient(90deg, transparent, var(--shimmer-color), transparent)`,
           animation: "shimmer 2s infinite",
         },
       };
@@ -471,7 +457,6 @@ module.exports = {
     },
     function ({ addComponents, theme }) {
       const components = {
-        // Componentes específicos de galletas
         ".cookie-btn": {
           display: "inline-flex",
           alignItems: "center",
@@ -517,7 +502,7 @@ module.exports = {
           },
           "&:hover": {
             transform: "translateY(-3px)",
-            boxShadow: theme("boxShadow.cookie-lg"),
+            boxShadow: "var(--shadow-cookie-lg)",
           },
         },
         ".cookie-badge": {
@@ -533,21 +518,21 @@ module.exports = {
           animation: "pulse-soft 2s ease-in-out infinite",
         },
         ".cookie-input": {
-          backgroundColor: "rgba(255, 255, 255, 0.05)",
-          border: `2px solid ${theme("colors.border.light")}`,
+          backgroundColor: "var(--input-bg)",
+          border: `2px solid rgba(var(--border-light-rgb), var(--border-light-alpha))`,
           borderRadius: theme("borderRadius.cookie"),
           padding: `${theme("spacing.4")} ${theme("spacing.6")}`,
-          color: theme("colors.text.primary"),
+          color: "rgb(var(--text-primary))",
           fontSize: theme("fontSize.cookie-base"),
           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           width: "100%",
           "&:focus": {
             outline: "none",
             borderColor: theme("colors.cookie.500"),
-            boxShadow: `0 0 0 3px rgba(212, 165, 116, 0.1)`,
+            boxShadow: `0 0 0 3px rgba(var(--cookie-primary), 0.1)`,
           },
           "&::placeholder": {
-            color: theme("colors.text.muted"),
+            color: "rgb(var(--text-muted))",
           },
         },
       };

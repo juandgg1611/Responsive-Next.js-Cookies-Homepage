@@ -72,7 +72,7 @@ export default function FeaturesSection() {
       {/* Fondo CLARO con textura para contrastar con secciones oscuras */}
       <div className="absolute inset-0 bg-background-surface -z-20" />
       <div className="absolute inset-0 bg-gradient-to-br from-background-light via-background-surface to-background-light -z-20" />
-      <div className="absolute inset-0 texture-cookie opacity-[0.08] -z-10" />
+      <div className="absolute inset-0 texture-cookie texture-section-opacity -z-10" />
 
       {/* Elementos decorativos de fondo */}
       <motion.div

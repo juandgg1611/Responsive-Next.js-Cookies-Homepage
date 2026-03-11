@@ -2,7 +2,16 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Users, Award, Clock, Target, Heart, Star } from "lucide-react";
+import {
+  Users,
+  Award,
+  Clock,
+  Target,
+  Heart,
+  Star,
+  Code,
+  ChefHat,
+} from "lucide-react";
 import CookieBadge from "@/components/ui/cookie-badge";
 
 const TIMELINE = [
@@ -76,23 +85,52 @@ const VALUES = [
 
 const TEAM = [
   {
-    name: "Ana Martínez",
-    role: "Maestra Repostera",
+    name: "Andrés Gutiérrez",
+    role: "Maestro Repostero",
     image: "/images/team/chef1.jpg",
+    roleIcon: ChefHat,
     description:
-      "Especialista en pastelería francesa con 20 años de experiencia",
+      "Especialista en repostería artesanal con pasión por las recetas tradicionales",
   },
   {
-    name: "Carlos Rodríguez",
-    role: "Chocolatier",
+    name: "María Leal",
+    role: "Chef Pastelera",
     image: "/images/team/chef2.jpg",
-    description: "Certificado por la Academia del Chocolate de Bruselas",
+    roleIcon: ChefHat,
+    description:
+      "Creadora de nuestras recetas más innovadoras y combinaciones de sabores únicas",
   },
   {
-    name: "María González",
-    role: "Innovación Culinaria",
-    image: "/images/team/chef3.jpg",
-    description: "Creadora de nuestras recetas más innovadoras",
+    name: "Juan Oberto",
+    role: "Desarrollador Full Stack",
+    image: "/images/team/dev1.jpg",
+    roleIcon: Code,
+    description:
+      "Arquitecto de nuestra plataforma digital y experiencia de usuario",
+  },
+  {
+    name: "Johan Núñez",
+    role: "Desarrollador Frontend",
+    image: "/images/team/dev2.jpg",
+    roleIcon: Code,
+    description:
+      "Responsable del diseño visual y la interfaz de nuestra tienda online",
+  },
+  {
+    name: "Johan Albarrán",
+    role: "Desarrollador Backend",
+    image: "/images/team/dev3.jpg",
+    roleIcon: Code,
+    description:
+      "Encargado de la infraestructura, seguridad y rendimiento del sistema",
+  },
+  {
+    name: "José Fuenmayor",
+    role: "Desarrollador Mobile",
+    image: "/images/team/dev4.jpg",
+    roleIcon: Code,
+    description:
+      "Creador de nuestra experiencia móvil y soluciones multiplataforma",
   },
 ];
 
@@ -436,12 +474,16 @@ export default function AboutSection() {
 
         {/* ========== EQUIPO ========== */}
         <div>
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-center mb-8 sm:mb-12 text-vanilla">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-center mb-4 sm:mb-6 text-vanilla">
             Nuestro{" "}
             <span className="text-transparent bg-clip-text bg-gradient-cookie">
               Equipo
             </span>
           </h3>
+          <p className="text-center text-caramel max-w-2xl mx-auto mb-8 sm:mb-12">
+            El talento detrás de cada galleta y cada línea de código que hace
+            posible Vian Cookies.
+          </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {TEAM.map((member, index) => (
@@ -450,7 +492,7 @@ export default function AboutSection() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
                 className="bg-gradient-to-br from-background-light to-background-surface rounded-cookie-lg sm:rounded-cookie-xl overflow-hidden border border-border-light shadow-cookie-lg hover:shadow-cookie-xl transition-all duration-300 group"
               >
                 {/* Avatar del equipo */}
@@ -466,15 +508,29 @@ export default function AboutSection() {
                     </motion.div>
                   </div>
 
+                  {/* Ícono de rol */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center shadow-glow ${
+                        member.roleIcon === ChefHat
+                          ? "bg-gradient-to-br from-cookie-400 to-cookie-600"
+                          : "bg-gradient-to-br from-chocolate-500 to-chocolate-700"
+                      }`}
+                    >
+                      <member.roleIcon className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+
                   {/* Overlay en hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <div className="p-4 sm:p-6">
-                  <h4 className="text-lg sm:text-xl font-semibold mb-2 text-vanilla group-hover:text-cookie-400 transition-colors">
+                  <h4 className="text-lg sm:text-xl font-semibold mb-1 text-vanilla group-hover:text-cookie-400 transition-colors">
                     {member.name}
                   </h4>
-                  <div className="text-sm sm:text-base text-cookie-400 mb-3 font-medium">
+                  <div className="text-sm sm:text-base text-cookie-400 mb-3 font-medium flex items-center gap-2">
+                    <member.roleIcon className="w-4 h-4" />
                     {member.role}
                   </div>
                   <p className="text-xs sm:text-sm text-caramel leading-relaxed">

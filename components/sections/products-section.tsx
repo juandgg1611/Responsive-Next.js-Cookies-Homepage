@@ -11,8 +11,7 @@ const PRODUCTS = [
   {
     id: "chocolate-deluxe",
     name: "NewYork Chocochip Deluxe",
-    description:
-      "Galletas con chocolate belga, 70% cacao y crema de avellanas",
+    description: "Galletas con chocolate belga, 70% cacao y crema de avellanas",
     price: 5.99,
     originalPrice: 9.99,
     image: "/images/products/slider1.png",
@@ -25,8 +24,7 @@ const PRODUCTS = [
   {
     id: "red-velvet",
     name: "NewYork Lemon Pie",
-    description:
-      "Galletas de relleno de crema de limòn y chocolate blanco",
+    description: "Galletas de relleno de crema de limòn y chocolate blanco",
     price: 7.99,
     image: "/images/products/slider2.png",
     category: "premium",
@@ -38,8 +36,7 @@ const PRODUCTS = [
   {
     id: "matcha-green",
     name: "NewYork Chococolor",
-    description:
-      "Galletas de crema de chocolate y avellanas",
+    description: "Galletas de crema de chocolate y avellanas alemanas",
     price: 7.99,
     image: "/images/products/slider3.png",
     category: "especiales",
@@ -50,8 +47,7 @@ const PRODUCTS = [
   {
     id: "vanilla-dream",
     name: "NewYork Choconuez",
-    description:
-      "Galletas de chocolate con leche y nueces importadas",
+    description: "Galletas de chocolate con leche y nueces importadas",
     price: 9.99,
     originalPrice: 12.99,
     image: "/images/products/slider4.png",

@@ -1,20 +1,221 @@
-/* globals.css - VERSIÓN CON COLORES MARRONES */
+/* globals.css - SISTEMA DUAL: MODO CLARO / OSCURO */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Colores base del tema marrón */
-  --background: 44, 24, 16; /* #2C1810 */
-  --background-light: 58, 35, 24; /* #3A2318 */
-  --background-surface: 74, 47, 32; /* #4A2F20 */
-  --foreground: 245, 233, 217; /* #F5E9D9 */
+/* ═══════════════════════════════════════════════════════════════════════════
+   VARIABLES DE TEMA
+   
+   FILOSOFÍA:
+   - Modo oscuro: fondos #2C1810 → texto #F5E9D9 / #D4A574 / #A67C52
+   - Modo claro:  fondos #EBDAC6 → texto #2C1810 / #3A2318 / #4A2F20
+   
+   Los colores de contraste del modo claro SON los fondos del modo oscuro.
+   Los colores de contraste del modo oscuro SON los fondos del modo claro.
+   Misma paleta, roles invertidos. Consistencia total.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-  /* Colores de acento */
+:root {
+  /* ─── Fondos: beiges cálidos ─── */
+  --background: 235, 218, 198; /* #EBDAC6 */
+  --background-light: 227, 207, 183; /* #E3CFB7 */
+  --background-surface: 216, 193, 166; /* #D8C1A6 */
+  --background-dark: 242, 229, 213; /* #F2E5D5 */
+  --foreground: 44, 24, 16; /* #2C1810 — el fondo del dark mode */
+
+  /* Colores de acento (idénticos en ambos modos) */
   --cookie-primary: 212, 165, 116; /* #D4A574 */
   --chocolate-primary: 139, 69, 19; /* #8B4513 */
   --caramel: 166, 124, 82; /* #A67C52 */
+
+  /* ─── Texto: los fondos del dark mode como colores de texto ─── */
+  --text-primary: 44, 24, 16; /* #2C1810 — background del dark */
+  --text-secondary: 74, 47, 32; /* #4A2F20 — surface del dark */
+  --text-muted: 105, 72, 48; /* #694830 — entre surface y light del dark */
+
+  /* ─── Bordes: chocolate visible sobre beige ─── */
+  --border-light-rgb: 139, 95, 52;
+  --border-light-alpha: 0.4;
+  --border-dark-rgb: 90, 55, 25;
+  --border-dark-alpha: 0.35;
+
+  /* ─── Sombras: doble capa, tonos chocolate ─── */
+  --shadow-cookie:
+    0 10px 40px -10px rgba(44, 24, 16, 0.2),
+    0 4px 12px -2px rgba(44, 24, 16, 0.1);
+  --shadow-cookie-lg:
+    0 20px 60px -15px rgba(44, 24, 16, 0.25),
+    0 8px 20px -4px rgba(44, 24, 16, 0.12);
+  --shadow-cookie-xl:
+    0 25px 80px -20px rgba(44, 24, 16, 0.3),
+    0 12px 28px -6px rgba(44, 24, 16, 0.15);
+  --shadow-floating:
+    0 25px 50px -12px rgba(44, 24, 16, 0.18),
+    0 6px 16px -3px rgba(44, 24, 16, 0.1);
+  --shadow-floating-lg:
+    0 35px 70px -15px rgba(44, 24, 16, 0.25),
+    0 10px 24px -5px rgba(44, 24, 16, 0.12);
+  --shadow-glow:
+    0 0 25px rgba(139, 69, 19, 0.2), 0 0 8px rgba(139, 69, 19, 0.12);
+  --shadow-glow-lg:
+    0 0 45px rgba(139, 69, 19, 0.28), 0 0 15px rgba(139, 69, 19, 0.16);
+  --shadow-glow-chocolate:
+    0 0 25px rgba(74, 47, 32, 0.25), 0 0 8px rgba(74, 47, 32, 0.14);
+  --shadow-hover:
+    0 20px 40px rgba(44, 24, 16, 0.18), 0 6px 14px rgba(44, 24, 16, 0.1);
+  --shadow-active:
+    0 10px 20px rgba(44, 24, 16, 0.22), 0 3px 8px rgba(44, 24, 16, 0.12);
+  --shadow-modal:
+    0 50px 100px -20px rgba(26, 15, 10, 0.4),
+    0 20px 40px -10px rgba(26, 15, 10, 0.2);
+
+  /* ─── Neumorfismo ─── */
+  --neumorphic: 20px 20px 60px #b8a088, -20px -20px 60px #fff5e8;
+  --neumorphic-sm: 10px 10px 30px #b8a088, -10px -10px 30px #fff5e8;
+  --neumorphic-lg: 30px 30px 90px #b8a088, -30px -30px 90px #fff5e8;
+  --neumorphic-inset:
+    inset 20px 20px 60px #b8a088, inset -20px -20px 60px #fff5e8;
+  --neumorphic-inset-sm:
+    inset 10px 10px 30px #b8a088, inset -10px -10px 30px #fff5e8;
+
+  /* ─── Glass ─── */
+  --glass-bg: rgba(227, 207, 183, 0.82);
+  --glass-border: rgba(74, 47, 32, 0.15);
+
+  /* ─── Card 3D ─── */
+  --card-3d-from: rgb(232, 215, 192);
+  --card-3d-to: rgb(216, 193, 166);
+  --card-3d-shadow:
+    20px 20px 60px #b8a088, -20px -20px 60px #fff5e8,
+    inset 0 0 0 1px rgba(74, 47, 32, 0.08);
+
+  /* ─── Gradientes ─── */
+  --gradient-baked-from: #e3cfb7;
+  --gradient-baked-to: #d8c1a6;
+
+  /* ─── Textura ─── */
+  --texture-opacity: 0.06;
+  --texture-section-opacity: 0.05;
+
+  /* ─── Scrollbar ─── */
+  --scrollbar-track: rgb(216, 193, 166);
+  --scrollbar-border: rgb(235, 218, 198);
+
+  /* ─── Estados ─── */
+  --state-hover: rgba(44, 24, 16, 0.08);
+  --state-active: rgba(44, 24, 16, 0.15);
+  --state-disabled: rgba(105, 72, 48, 0.25);
+
+  /* ─── Shimmer ─── */
+  --gradient-glow-color: rgba(139, 69, 19, 0.08);
+  --gradient-shimmer-color: rgba(139, 69, 19, 0.08);
+
+  /* ─── Input ─── */
+  --input-bg: rgba(216, 193, 166, 0.6);
+
+  /* ─── Selection ─── */
+  --selection-bg: rgba(44, 24, 16, 0.18);
+  --selection-color: rgb(44, 24, 16);
+
+  /* ─── Shimmer ─── */
+  --shimmer-color: rgba(139, 69, 19, 0.1);
+
+  /* ─── Text gradient: chocolate oscuro del dark mode ─── */
+  --text-gradient-from: #2c1810;
+  --text-gradient-to: #4a2f20;
 }
+
+.dark {
+  /* Fondos */
+  --background: 44, 24, 16; /* #2C1810 */
+  --background-light: 58, 35, 24; /* #3A2318 */
+  --background-surface: 74, 47, 32; /* #4A2F20 */
+  --background-dark: 26, 15, 10; /* #1A0F0A */
+  --foreground: 245, 233, 217; /* #F5E9D9 */
+
+  /* Texto */
+  --text-primary: 245, 233, 217; /* #F5E9D9 */
+  --text-secondary: 212, 165, 116; /* #D4A574 */
+  --text-muted: 166, 124, 82; /* #A67C52 */
+
+  /* Bordes */
+  --border-light-rgb: 212, 165, 116;
+  --border-light-alpha: 0.3;
+  --border-dark-rgb: 139, 69, 19;
+  --border-dark-alpha: 0.5;
+
+  /* Sombras */
+  --shadow-cookie: 0 10px 40px -10px rgba(139, 69, 19, 0.3);
+  --shadow-cookie-lg: 0 20px 60px -15px rgba(139, 69, 19, 0.4);
+  --shadow-cookie-xl: 0 25px 80px -20px rgba(139, 69, 19, 0.5);
+  --shadow-floating: 0 25px 50px -12px rgba(139, 69, 19, 0.25);
+  --shadow-floating-lg: 0 35px 70px -15px rgba(139, 69, 19, 0.35);
+  --shadow-glow: 0 0 30px rgba(212, 165, 116, 0.4);
+  --shadow-glow-lg: 0 0 50px rgba(212, 165, 116, 0.6);
+  --shadow-glow-chocolate: 0 0 30px rgba(139, 69, 19, 0.4);
+  --shadow-hover: 0 20px 40px rgba(139, 69, 19, 0.2);
+  --shadow-active: 0 10px 20px rgba(139, 69, 19, 0.3);
+  --shadow-modal: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+
+  /* Neumorfismo */
+  --neumorphic: 20px 20px 60px #25150d, -20px -20px 60px #331b13;
+  --neumorphic-sm: 10px 10px 30px #25150d, -10px -10px 30px #331b13;
+  --neumorphic-lg: 30px 30px 90px #25150d, -30px -30px 90px #331b13;
+  --neumorphic-inset:
+    inset 20px 20px 60px #25150d, inset -20px -20px 60px #331b13;
+  --neumorphic-inset-sm:
+    inset 10px 10px 30px #25150d, inset -10px -10px 30px #331b13;
+
+  /* Glass */
+  --glass-bg: rgba(58, 35, 24, 0.7);
+  --glass-border: rgba(212, 165, 116, 0.1);
+
+  /* Card 3D */
+  --card-3d-from: rgb(58, 35, 24);
+  --card-3d-to: rgb(44, 26, 18);
+  --card-3d-shadow:
+    20px 20px 60px #25150d, -20px -20px 60px #331b13,
+    inset 0 0 0 1px rgba(212, 165, 116, 0.1);
+
+  /* Gradientes de fondo */
+  --gradient-baked-from: #3a2318;
+  --gradient-baked-to: #2c1a12;
+
+  /* Textura */
+  --texture-opacity: 0.03;
+  --texture-section-opacity: 0.08;
+
+  /* Scrollbar */
+  --scrollbar-track: rgb(44, 24, 16);
+  --scrollbar-border: rgb(44, 24, 16);
+
+  /* Estados hover */
+  --state-hover: rgba(212, 165, 116, 0.15);
+  --state-active: rgba(139, 69, 19, 0.25);
+  --state-disabled: rgba(166, 124, 82, 0.3);
+
+  /* Gradiente shimmer/glow */
+  --gradient-glow-color: rgba(212, 165, 116, 0.1);
+  --gradient-shimmer-color: rgba(212, 165, 116, 0.1);
+
+  /* Input */
+  --input-bg: rgba(255, 255, 255, 0.05);
+
+  /* Selection */
+  --selection-bg: rgba(212, 165, 116, 0.3);
+  --selection-color: rgb(245, 233, 217);
+
+  /* Loading bake shimmer */
+  --shimmer-color: rgba(212, 165, 116, 0.2);
+
+  /* Text gradient */
+  --text-gradient-from: #d4a574;
+  --text-gradient-to: #a67c52;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ESTILOS BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 body {
   background-color: rgb(var(--background));
@@ -25,23 +226,26 @@ body {
   font-family: var(--font-inter, system-ui, sans-serif);
 }
 
-/* Componentes reutilizables con tema marrón */
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENTES REUTILIZABLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-cookie text-white 
-           font-semibold rounded-full hover:scale-105 
+    @apply px-6 py-3 bg-gradient-cookie text-white
+           font-semibold rounded-full hover:scale-105
            transition-all shadow-cookie hover:shadow-cookie-lg;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-background-surface text-vanilla 
+    @apply px-6 py-3 bg-background-surface text-vanilla
            font-semibold rounded-full border border-border-light
            hover:border-cookie-500 hover:bg-background-light
            transition-all;
   }
 
   .cookie-card {
-    @apply bg-background-surface/50 backdrop-blur-sm rounded-cookie 
+    @apply bg-background-surface/50 backdrop-blur-sm rounded-cookie
            border border-border-light p-6 shadow-cookie
            hover:shadow-cookie-lg hover:border-cookie-500/30
            transition-all;
@@ -49,22 +253,22 @@ body {
 
   .cookie-card-elevated {
     @apply bg-gradient-to-br from-background-light to-background-surface
-           rounded-cookie-lg border border-border-light p-8 
+           rounded-cookie-lg border border-border-light p-8
            shadow-cookie-xl hover:shadow-floating-lg
            transition-all duration-300;
   }
 
   .glass-cookie-custom {
-    @apply bg-background-light/70 backdrop-blur-cookie 
+    @apply bg-background-light/70 backdrop-blur-cookie
            border border-border-light rounded-cookie
            shadow-cookie;
   }
 
   .input-cookie {
-    @apply w-full px-4 py-3 rounded-cookie 
+    @apply w-full px-4 py-3 rounded-cookie
            bg-background-surface border border-border-light
            text-vanilla placeholder-caramel
-           focus:outline-none focus:ring-2 focus:ring-cookie-500 
+           focus:outline-none focus:ring-2 focus:ring-cookie-500
            focus:border-cookie-500 transition-all;
   }
 
@@ -81,33 +285,43 @@ body {
   }
 }
 
-/* Scrollbar personalizada con tema marrón */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-cookie rounded-full;
-  border: 2px solid rgb(var(--background));
+  background: linear-gradient(135deg, #d4a574 0%, #a67c52 100%);
+  border-radius: 9999px;
+  border: 2px solid var(--scrollbar-border);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gradient-chocolate;
+  background: linear-gradient(135deg, #8b4513 0%, #5d2906 100%);
 }
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgb(var(--cookie-primary)) rgb(var(--background));
 }
 
-/* Animaciones suaves para transiciones */
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMACIONES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @layer utilities {
+  .texture-section-opacity {
+    opacity: var(--texture-section-opacity);
+  }
+
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
@@ -152,31 +366,32 @@ body {
   }
 }
 
-/* Efecto de selección de texto */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SELECCIÓN DE TEXTO
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 ::selection {
-  background-color: rgba(var(--cookie-primary), 0.3);
-  color: rgb(var(--foreground));
+  background-color: var(--selection-bg);
+  color: var(--selection-color);
 }
 
 ::-moz-selection {
-  background-color: rgba(var(--cookie-primary), 0.3);
-  color: rgb(var(--foreground));
+  background-color: var(--selection-bg);
+  color: var(--selection-color);
 }
 
-/* Ajustes para modo oscuro si lo necesitas */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 44, 24, 16;
-    --foreground: 245, 233, 217;
-  }
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESIBILIDAD
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Mejoras de accesibilidad */
 .focus-visible:focus {
   @apply outline-none ring-2 ring-cookie-500 ring-offset-2 ring-offset-background;
 }
 
-/* Efectos de hover suaves */
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOVER LIFT
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 .hover-lift {
   transition:
     transform 0.3s ease,
@@ -185,10 +400,13 @@ body {
 
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(var(--chocolate-primary), 0.2);
+  box-shadow: var(--shadow-hover);
 }
 
-/* Textura sutil de fondo */
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEXTURA DE FONDO SUTIL
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 body::before {
   content: "";
   position: fixed;
@@ -199,12 +417,12 @@ body::before {
   background-image:
     radial-gradient(
       circle at 25% 25%,
-      rgba(212, 165, 116, 0.03) 2%,
+      rgba(var(--chocolate-primary), var(--texture-opacity)) 2%,
       transparent 2.5%
     ),
     radial-gradient(
       circle at 75% 75%,
-      rgba(212, 165, 116, 0.03) 2%,
+      rgba(var(--chocolate-primary), var(--texture-opacity)) 2%,
       transparent 2.5%
     );
   background-size: 60px 60px;
@@ -212,8 +430,124 @@ body::before {
   z-index: 0;
 }
 
-/* Asegura que el contenido esté por encima de la textura */
 body > * {
   position: relative;
   z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DETALLES EXCLUSIVOS MODO CLARO
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Inner shadow en cards ── */
+html:not(.dark) .cookie-card,
+html:not(.dark) .cookie-card-elevated {
+  box-shadow:
+    var(--shadow-cookie),
+    inset 0 2px 4px rgba(255, 245, 232, 0.5),
+    inset 0 -2px 6px rgba(44, 24, 16, 0.04);
+}
+
+html:not(.dark) .cookie-card:hover,
+html:not(.dark) .cookie-card-elevated:hover {
+  box-shadow:
+    var(--shadow-cookie-lg),
+    inset 0 2px 6px rgba(255, 245, 232, 0.6),
+    inset 0 -2px 8px rgba(44, 24, 16, 0.06);
+}
+
+/* ── Glass con borde luminoso ── */
+html:not(.dark) .glass-cookie,
+html:not(.dark) .glass-cookie-custom {
+  border-top: 1px solid rgba(255, 248, 235, 0.6);
+  border-left: 1px solid rgba(255, 248, 235, 0.3);
+}
+
+/* ── Botones con volumen ── */
+html:not(.dark) .btn-primary,
+html:not(.dark) .cookie-btn {
+  box-shadow:
+    var(--shadow-cookie),
+    0 1px 0 rgba(255, 245, 232, 0.3) inset,
+    0 -1px 0 rgba(44, 24, 16, 0.15) inset;
+}
+
+html:not(.dark) .btn-primary:hover,
+html:not(.dark) .cookie-btn:hover {
+  box-shadow:
+    var(--shadow-cookie-lg),
+    0 1px 0 rgba(255, 245, 232, 0.4) inset,
+    0 -1px 0 rgba(44, 24, 16, 0.2) inset;
+}
+
+/* ── Separadores entre secciones ── */
+html:not(.dark) section + section {
+  position: relative;
+}
+
+html:not(.dark) section + section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(44, 24, 16, 0.12) 20%,
+    rgba(139, 69, 19, 0.2) 50%,
+    rgba(44, 24, 16, 0.12) 80%,
+    transparent
+  );
+  z-index: 2;
+}
+
+/* ── Inputs con inner glow ── */
+html:not(.dark) .input-cookie:focus,
+html:not(.dark) .cookie-input:focus,
+html:not(.dark) input:focus {
+  box-shadow:
+    0 0 0 3px rgba(139, 69, 19, 0.1),
+    inset 0 1px 3px rgba(44, 24, 16, 0.06),
+    inset 0 0 8px rgba(139, 69, 19, 0.04);
+}
+
+/* ── Scrollbar con profundidad ── */
+html:not(.dark) ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(44, 24, 16, 0.06);
+}
+
+/* ── Resplandor ambiental superior ── */
+html:not(.dark) body::after {
+  content: "";
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 165, 116, 0.08) 0%,
+    rgba(212, 165, 116, 0.03) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Efecto pergamino en body ── */
+html:not(.dark) body {
+  background-image:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(200, 160, 100, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 50%,
+      rgba(160, 100, 40, 0.03) 0%,
+      transparent 50%
+    );
 }

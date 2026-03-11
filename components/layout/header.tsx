@@ -19,6 +19,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/components/providers/cart-provider";
 import { createClient } from "@/lib/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import ThemeToggle from "@/components/features/theme-toggle/theme-toggle";
 
 const navItems = [
   { label: "Inicio", href: "/" },
@@ -151,6 +152,8 @@ export default function Header() {
               >
                 <Search className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
               </button>
+
+              <ThemeToggle />
 
               {/* ── User Account (Desktop) ── */}
               <div className="hidden sm:block">

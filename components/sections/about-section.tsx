@@ -2,7 +2,16 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Users, Award, Clock, Target, Heart, Star } from "lucide-react";
+import {
+  Users,
+  Award,
+  Clock,
+  Target,
+  Heart,
+  Star,
+  Code,
+  ChefHat,
+} from "lucide-react";
 import CookieBadge from "@/components/ui/cookie-badge";
 
 const TIMELINE = [
@@ -76,23 +85,52 @@ const VALUES = [
 
 const TEAM = [
   {
-    name: "Ana Martínez",
-    role: "Maestra Repostera",
+    name: "Andrés Gutiérrez",
+    role: "Maestro Repostero",
     image: "/images/team/chef1.jpg",
+    icon: ChefHat,
     description:
-      "Especialista en pastelería francesa con 20 años de experiencia",
+      "Especialista en repostería artesanal con pasión por las recetas tradicionales",
   },
   {
-    name: "Carlos Rodríguez",
-    role: "Chocolatier",
+    name: "María Leal",
+    role: "Chef Pastelera",
     image: "/images/team/chef2.jpg",
-    description: "Certificado por la Academia del Chocolate de Bruselas",
+    icon: ChefHat,
+    description:
+      "Creadora de nuestras recetas más innovadoras y combinaciones de sabores únicas",
   },
   {
-    name: "María González",
-    role: "Innovación Culinaria",
-    image: "/images/team/chef3.jpg",
-    description: "Creadora de nuestras recetas más innovadoras",
+    name: "Juan Oberto",
+    role: "Desarrollador Full Stack",
+    image: "/images/products/slider1.png",
+    icon: Code,
+    description:
+      "Arquitecto de nuestra plataforma digital y experiencia de usuario",
+  },
+  {
+    name: "Johan Núñez",
+    role: "Desarrollador Frontend",
+    image: "/images/team/dev2.jpg",
+    icon: Code,
+    description:
+      "Responsable del diseño visual y la interfaz de nuestra tienda online",
+  },
+  {
+    name: "Johan Albarrán",
+    role: "Desarrollador Backend",
+    image: "/images/team/dev3.jpg",
+    icon: Code,
+    description:
+      "Encargado de la infraestructura, seguridad y rendimiento del sistema",
+  },
+  {
+    name: "José Fuenmayor",
+    role: "Desarrollador Mobile",
+    image: "/images/team/dev4.jpg",
+    icon: Code,
+    description:
+      "Creador de nuestra experiencia móvil y soluciones multiplataforma",
   },
 ];
 
@@ -243,10 +281,8 @@ export default function AboutSection() {
             className="relative order-1 lg:order-2"
           >
             <div className="relative rounded-cookie-lg sm:rounded-cookie-xl overflow-hidden h-64 sm:h-80 md:h-96 lg:h-[500px] bg-gradient-to-br from-background-light to-background-surface border border-border-light shadow-cookie-xl">
-              {/* Placeholder de imagen - reemplazar con imagen real */}
               <div className="absolute inset-0 bg-gradient-to-br from-cookie-500/20 to-chocolate-600/20" />
 
-              {/* Elementos decorativos animados */}
               <motion.div
                 animate={{
                   y: [0, -20, 0],
@@ -273,7 +309,6 @@ export default function AboutSection() {
                 className="absolute bottom-1/4 right-1/4 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-chocolate opacity-30 blur-xl"
               />
 
-              {/* Icono central decorativo */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
@@ -287,7 +322,6 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Estadísticas flotantes */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -318,7 +352,6 @@ export default function AboutSection() {
               </div>
             </motion.div>
 
-            {/* Borde decorativo */}
             <div className="absolute -inset-1 bg-gradient-cookie opacity-20 rounded-cookie-lg sm:rounded-cookie-xl blur-sm -z-10" />
           </motion.div>
         </div>
@@ -333,7 +366,6 @@ export default function AboutSection() {
           </h3>
 
           <div className="relative max-w-5xl mx-auto">
-            {/* Línea de tiempo central (solo visible en desktop) */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-cookie-400 via-chocolate-500 to-cookie-400 hidden lg:block" />
 
             <div className="space-y-8 sm:space-y-12">
@@ -348,13 +380,11 @@ export default function AboutSection() {
                     index % 2 === 0 ? "lg:flex-row-reverse" : ""
                   }`}
                 >
-                  {/* Punto en la línea de tiempo */}
                   <div className="relative z-10 flex-shrink-0 hidden lg:block">
                     <div className="w-6 h-6 rounded-full bg-gradient-cookie shadow-glow" />
                     <div className="absolute inset-0 rounded-full bg-cookie-400 animate-ping opacity-20" />
                   </div>
 
-                  {/* Contenido de timeline */}
                   <div
                     className={`flex-1 w-full lg:w-auto ${index % 2 === 0 ? "lg:pr-8 lg:text-right" : "lg:pl-8"}`}
                   >
@@ -415,7 +445,6 @@ export default function AboutSection() {
                   {stat.value}
                 </div>
 
-                {/* Efecto de brillo animado */}
                 <motion.div
                   animate={{ x: ["-100%", "200%"] }}
                   transition={{
@@ -436,12 +465,16 @@ export default function AboutSection() {
 
         {/* ========== EQUIPO ========== */}
         <div>
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-center mb-8 sm:mb-12 text-vanilla">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-center mb-4 sm:mb-6 text-vanilla">
             Nuestro{" "}
             <span className="text-transparent bg-clip-text bg-gradient-cookie">
               Equipo
             </span>
           </h3>
+          <p className="text-center text-caramel max-w-2xl mx-auto mb-8 sm:mb-12">
+            El talento detrás de cada galleta y cada línea de código que hace
+            posible Vian Cookies.
+          </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {TEAM.map((member, index) => (
@@ -450,7 +483,7 @@ export default function AboutSection() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
                 className="bg-gradient-to-br from-background-light to-background-surface rounded-cookie-lg sm:rounded-cookie-xl overflow-hidden border border-border-light shadow-cookie-lg hover:shadow-cookie-xl transition-all duration-300 group"
               >
                 {/* Avatar del equipo */}
@@ -466,22 +499,36 @@ export default function AboutSection() {
                     </motion.div>
                   </div>
 
+                  {/* Ícono de rol */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center shadow-glow ${
+                        member.icon === ChefHat
+                          ? "bg-gradient-to-br from-cookie-400 to-cookie-600"
+                          : "bg-gradient-to-br from-chocolate-500 to-chocolate-700"
+                      }`}
+                    >
+                      <member.icon className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+
                   {/* Overlay en hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <div className="p-4 sm:p-6">
-                  <h4 className="text-lg sm:text-xl font-semibold mb-2 text-vanilla group-hover:text-cookie-400 transition-colors">
+                  <h4 className="text-lg sm:text-xl font-semibold mb-1 text-vanilla group-hover:text-cookie-400 transition-colors">
                     {member.name}
                   </h4>
-                  <div className="text-sm sm:text-base text-cookie-400 mb-3 font-medium">
+                  <div className="text-sm sm:text-base text-cookie-400 mb-3 font-medium flex items-center gap-2">
+                    <member.icon className="w-4 h-4" />
                     {member.role}
                   </div>
                   <p className="text-xs sm:text-sm text-caramel leading-relaxed">
                     {member.description}
                   </p>
 
-                  {/* Redes sociales (placeholder) */}
+                  {/* Redes sociales */}
                   <div className="flex gap-3 mt-4">
                     {["instagram", "linkedin", "twitter"].map((social) => (
                       <motion.a
