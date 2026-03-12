@@ -852,7 +852,7 @@ function Carousel3D({
                       </div>
                     </div>
 
-                    <h3 className="font-display text-base md:text-lg font-bold text-vanilla uppercase tracking-tight leading-tight mb-2">
+                    <h3 className="font-display text-base md:text-lg font-bold text-white uppercase tracking-tight leading-tight mb-2">
                       {product.name}
                     </h3>
 
@@ -865,7 +865,7 @@ function Carousel3D({
                           exit={{ opacity: 0, y: -8 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <p className="text-xs text-caramel/65 leading-relaxed mb-3 line-clamp-2">
+                          <p className="text-xs text-white leading-relaxed mb-3 line-clamp-2">
                             {product.description}
                           </p>
 
