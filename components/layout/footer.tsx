@@ -55,7 +55,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-caramel">
               <li className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
-                Av 5 de Julio, Venezuela
+                Av 5 de Julio, Maracaibo-Venezuela
               </li>
               <li className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
@@ -72,7 +72,7 @@ export default function Footer() {
             <h4 className="font-semibold text-vanilla mb-4">Síguenos</h4>
             <div className="flex space-x-4">
               {[
-                { icon: Instagram, label: "Instagram", href: "#" },
+                { icon: Instagram, label: "Instagram", href: "viancookies" },
                 { icon: Facebook, label: "Facebook", href: "#" },
                 { icon: Twitter, label: "Twitter", href: "#" },
                 {
