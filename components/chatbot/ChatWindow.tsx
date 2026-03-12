@@ -15,13 +15,12 @@ import { useChatbot } from "@/components/providers/chatbot-provider";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import ChatTypingIndicator from "./ChatTypingIndicator";
-import ChatSuggestions from "./ChatSuggestions";
+
 
 export default function ChatWindow() {
   const { messages, isOpen, toggleChat, isLoading } = useChatbot();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [showSuggestions, setShowSuggestions] = useState(true);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -109,17 +108,6 @@ export default function ChatWindow() {
           {isLoading && <ChatTypingIndicator />}
           <div ref={messagesEndRef} />
         </div>
-
-        {/* Suggestions */}
-        {showSuggestions && messages.length < 3 && (
-          <div className="flex-shrink-0 px-4 pb-4">
-            <ChatSuggestions
-              onSuggestionClick={() => {
-                setShowSuggestions(false);
-              }}
-            />
-          </div>
-        )}
 
         {/* Input Area */}
         <div className="flex-shrink-0 p-4 border-t border-[#4A2F20]/50 bg-gradient-to-t from-[#2C1810]/50 to-transparent">
