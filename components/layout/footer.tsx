@@ -72,7 +72,7 @@ export default function Footer() {
             <h4 className="font-semibold text-vanilla mb-4">Síguenos</h4>
             <div className="flex space-x-4">
               {[
-                { icon: Instagram, label: "Instagram", href: "https.instagram.com/viancookies" },
+                { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/viancookies" },
                 { icon: Facebook, label: "Facebook", href: "#" },
                 { icon: Twitter, label: "Twitter", href: "#" },
                 {
