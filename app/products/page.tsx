@@ -1306,7 +1306,7 @@ function GridCard({
                   "relative px-3 sm:px-4 py-2 rounded-xl font-black text-[11px] uppercase tracking-wide overflow-hidden transition-all duration-300",
                   added
                     ? "bg-emerald-600 text-white"
-                    : `bg-gradient-to-r ${product.accentClass} text-vanilla shadow-lg`,
+                    : `bg-gradient-to-r ${product.accentClass} text-cookie-500 shadow-lg`,
                 )}
               >
                 <motion.div
