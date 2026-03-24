@@ -1,7 +1,18 @@
-# netlify.toml — debe estar en la RAIZ del proyecto (mismo nivel que package.json)
+# netlify.toml — raiz del proyecto junto a package.json
+
 [build]
   command = "npm run build"
   publish = ".next"
 
+[functions]
+  directory = "netlify/functions"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Redirigir /api/bcv a la Netlify Function
+# Esto hace que el hook siga llamando a /api/bcv sin cambiar nada mas
+[[redirects]]
+  from = "/api/bcv"
+  to   = "/.netlify/functions/bcv"
+  status = 200
