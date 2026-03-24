@@ -1,7 +1,4 @@
 // hooks/useBCV.ts
-// Llama al proxy /api/bcv en vez de directamente a dolarvzla.com
-// Esto funciona tanto en localhost como en Netlify (sin CORS).
-
 import { useEffect, useState } from "react";
 
 interface BcvData {
@@ -10,9 +7,10 @@ interface BcvData {
   date: string;
 }
 
+// Fallback por si el proxy tambien falla
 const FALLBACK: BcvData = {
-  usd: 36.85,
-  eur: 40.1,
+  usd: 459.45,
+  eur: 500.0,
   date: new Date().toLocaleDateString("es-VE"),
 };
 
@@ -29,14 +27,11 @@ export function useBCV() {
       setError(null);
 
       try {
-        // Llama a tu propio route handler — sin CORS, funciona en produccion
-        const res = await fetch("/api/bcv");
+        const res = await fetch("/api/bcv", { cache: "no-store" });
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const json = await res.json();
-
-        if (json.error) throw new Error(json.error);
 
         if (!cancelled) {
           setData({ usd: json.usd, eur: json.eur, date: json.date });
@@ -53,8 +48,6 @@ export function useBCV() {
     }
 
     fetchBCV();
-
-    // Actualizar cada 5 minutos
     const interval = setInterval(fetchBCV, 5 * 60 * 1000);
     return () => {
       cancelled = true;

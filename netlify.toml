@@ -1,0 +1,7 @@
+# netlify.toml — debe estar en la RAIZ del proyecto (mismo nivel que package.json)
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

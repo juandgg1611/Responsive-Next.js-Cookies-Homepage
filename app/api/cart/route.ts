@@ -5,29 +5,26 @@ const API_KEY =
   "a37f147c890a759b23ab7e7f3c3ea9b4d2c07e8fcb7572416ebafb24f552018f";
 const API_URL = "https://api.dolarvzla.com/public/exchange-rate";
 
-// Cache en memoria del servidor — se resetea al redeploy pero evita
-// saturar la API en cada render. En Netlify las funciones son stateless
-// asi que el cache dura lo que dure la instancia (minutos/horas).
+// Fallback hardcodeado — se usa si la API falla
+const FALLBACK = { usd: 459.45, eur: 500.0 };
+
 let cache: {
   usd: number;
   eur: number;
   date: string;
   fetchedAt: number;
 } | null = null;
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutos
+const CACHE_TTL = 5 * 60 * 1000;
+
+export const dynamic = "force-dynamic"; // Netlify: no pre-render esta ruta
 
 export async function GET() {
-  // Devolver cache si es reciente
   if (cache && Date.now() - cache.fetchedAt < CACHE_TTL) {
-    return NextResponse.json(
-      { usd: cache.usd, eur: cache.eur, date: cache.date, cached: true },
-      {
-        headers: {
-          // Cache en el CDN de Netlify por 5 minutos
-          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=60",
-        },
-      },
-    );
+    return NextResponse.json({
+      usd: cache.usd,
+      eur: cache.eur,
+      date: cache.date,
+    });
   }
 
   try {
@@ -37,26 +34,17 @@ export async function GET() {
         "x-dolarvzla-key": API_KEY,
         "Content-Type": "application/json",
       },
-      // Next.js cache: revalidar cada 5 minutos en el servidor
-      next: { revalidate: 300 },
+      cache: "no-store",
     });
 
-    if (!res.ok) {
-      throw new Error(`dolarvzla responded ${res.status}`);
-    }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
-
-    if (!data.current) {
-      throw new Error("Formato de respuesta inesperado");
-    }
+    if (!data.current) throw new Error("Formato inesperado");
 
     const usd = Number(data.current.usd);
     const eur = Number(data.current.eur);
-
-    if (isNaN(usd) || isNaN(eur)) {
-      throw new Error("Tasas invalidas");
-    }
+    if (isNaN(usd) || isNaN(eur)) throw new Error("Tasas invalidas");
 
     const date = new Date(data.current.date).toLocaleDateString("es-VE", {
       day: "2-digit",
@@ -65,35 +53,21 @@ export async function GET() {
     });
 
     cache = { usd, eur, date, fetchedAt: Date.now() };
-
-    return NextResponse.json(
-      { usd, eur, date, cached: false },
-      {
-        headers: {
-          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=60",
-        },
-      },
-    );
+    return NextResponse.json({ usd, eur, date });
   } catch (err) {
-    console.error("[BCV] fetch error:", err);
+    console.error("[BCV] error:", err);
 
-    // Si hay cache vieja, usarla como fallback
-    if (cache) {
-      return NextResponse.json(
-        {
-          usd: cache.usd,
-          eur: cache.eur,
-          date: cache.date,
-          cached: true,
-          stale: true,
-        },
-        { status: 200 },
-      );
-    }
-
-    return NextResponse.json(
-      { error: "No se pudo obtener la tasa BCV" },
-      { status: 503 },
-    );
+    // Devolver fallback — nunca 503, siempre algo util
+    const date = new Date().toLocaleDateString("es-VE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    return NextResponse.json({
+      usd: FALLBACK.usd,
+      eur: FALLBACK.eur,
+      date,
+      fallback: true,
+    });
   }
 }
