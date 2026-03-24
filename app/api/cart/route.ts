@@ -1,191 +1,99 @@
-// app/api/cart/route.ts
-// Maneja operaciones de carrito para usuarios ANÓNIMOS via service role.
-// Los usuarios autenticados operan directamente con el cliente de Supabase.
-
-import { createAdminClient } from "@/lib/supabase/server";
-import { cookies } from "next/headers";
+// app/api/bcv/route.ts
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 
-const SESSION_COOKIE = "nyc_session_id";
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 días
+const API_KEY =
+  "a37f147c890a759b23ab7e7f3c3ea9b4d2c07e8fcb7572416ebafb24f552018f";
+const API_URL = "https://api.dolarvzla.com/public/exchange-rate";
 
-// ── Helper: obtener o crear session_id desde cookie HttpOnly ──
-function getSessionId(req: NextRequest): string {
-  return req.cookies.get(SESSION_COOKIE)?.value ?? "";
-}
+// Cache en memoria del servidor — se resetea al redeploy pero evita
+// saturar la API en cada render. En Netlify las funciones son stateless
+// asi que el cache dura lo que dure la instancia (minutos/horas).
+let cache: {
+  usd: number;
+  eur: number;
+  date: string;
+  fetchedAt: number;
+} | null = null;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutos
 
-function setSessionCookie(res: NextResponse, sessionId: string) {
-  res.cookies.set(SESSION_COOKIE, sessionId, {
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: COOKIE_MAX_AGE,
-    path: "/",
-    secure: process.env.NODE_ENV === "production",
-  });
-}
-
-// ── GET /api/cart — cargar carrito anónimo ────────────────────
-export async function GET(req: NextRequest) {
-  const sessionId = getSessionId(req);
-
-  if (!sessionId) {
-    // Primera visita: devolver carrito vacío, la cookie se crea en el primer POST
-    return NextResponse.json({ cartId: null, items: [] });
+export async function GET() {
+  // Devolver cache si es reciente
+  if (cache && Date.now() - cache.fetchedAt < CACHE_TTL) {
+    return NextResponse.json(
+      { usd: cache.usd, eur: cache.eur, date: cache.date, cached: true },
+      {
+        headers: {
+          // Cache en el CDN de Netlify por 5 minutos
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=60",
+        },
+      },
+    );
   }
 
-  const supabase = createAdminClient();
-
-  const { data: cart } = await supabase
-    .from("carts")
-    .select("id")
-    .eq("session_id", sessionId)
-    .is("user_id", null)
-    .maybeSingle();
-
-  if (!cart) {
-    return NextResponse.json({ cartId: null, items: [] });
-  }
-
-  const { data: items } = await supabase
-    .from("cart_items")
-    .select("*")
-    .eq("cart_id", cart.id)
-    .order("created_at");
-
-  return NextResponse.json({ cartId: cart.id, items: items ?? [] });
-}
-
-// ── POST /api/cart/item — añadir o actualizar item ────────────
-export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { product_id, name, price, image, badge, max_quantity = 10 } = body;
-
-  if (!product_id || !name || price == null) {
-    return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
-  }
-
-  let sessionId = getSessionId(req);
-  const isNew = !sessionId;
-  if (isNew) sessionId = uuidv4();
-
-  const supabase = createAdminClient();
-
-  // Obtener o crear carrito
-  let cartId: string;
-
-  const { data: existingCart } = await supabase
-    .from("carts")
-    .select("id")
-    .eq("session_id", sessionId)
-    .is("user_id", null)
-    .maybeSingle();
-
-  if (existingCart) {
-    cartId = existingCart.id;
-  } else {
-    const { data: newCart, error } = await supabase
-      .from("carts")
-      .insert({ session_id: sessionId })
-      .select("id")
-      .single();
-
-    if (error || !newCart) {
-      return NextResponse.json({ error: "No se pudo crear el carrito" }, { status: 500 });
-    }
-    cartId = newCart.id;
-  }
-
-  // Verificar si el item ya existe
-  const { data: existingItem } = await supabase
-    .from("cart_items")
-    .select("id, quantity")
-    .eq("cart_id", cartId)
-    .eq("product_id", product_id)
-    .maybeSingle();
-
-  if (existingItem) {
-    // Sumar cantidad
-    const newQty = Math.min(existingItem.quantity + 1, max_quantity);
-    await supabase
-      .from("cart_items")
-      .update({ quantity: newQty })
-      .eq("id", existingItem.id);
-  } else {
-    // Insertar nuevo item
-    await supabase.from("cart_items").insert({
-      cart_id: cartId,
-      product_id,
-      name,
-      price,
-      image,
-      badge,
-      quantity: 1,
-      max_quantity,
+  try {
+    const res = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        "x-dolarvzla-key": API_KEY,
+        "Content-Type": "application/json",
+      },
+      // Next.js cache: revalidar cada 5 minutos en el servidor
+      next: { revalidate: 300 },
     });
+
+    if (!res.ok) {
+      throw new Error(`dolarvzla responded ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    if (!data.current) {
+      throw new Error("Formato de respuesta inesperado");
+    }
+
+    const usd = Number(data.current.usd);
+    const eur = Number(data.current.eur);
+
+    if (isNaN(usd) || isNaN(eur)) {
+      throw new Error("Tasas invalidas");
+    }
+
+    const date = new Date(data.current.date).toLocaleDateString("es-VE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
+    cache = { usd, eur, date, fetchedAt: Date.now() };
+
+    return NextResponse.json(
+      { usd, eur, date, cached: false },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=60",
+        },
+      },
+    );
+  } catch (err) {
+    console.error("[BCV] fetch error:", err);
+
+    // Si hay cache vieja, usarla como fallback
+    if (cache) {
+      return NextResponse.json(
+        {
+          usd: cache.usd,
+          eur: cache.eur,
+          date: cache.date,
+          cached: true,
+          stale: true,
+        },
+        { status: 200 },
+      );
+    }
+
+    return NextResponse.json(
+      { error: "No se pudo obtener la tasa BCV" },
+      { status: 503 },
+    );
   }
-
-  const res = NextResponse.json({ success: true, cartId });
-  if (isNew) setSessionCookie(res, sessionId);
-  return res;
-}
-
-// ── PATCH /api/cart/item — actualizar cantidad ────────────────
-export async function PATCH(req: NextRequest) {
-  const body = await req.json();
-  const { product_id, quantity } = body;
-  const sessionId = getSessionId(req);
-
-  if (!sessionId || !product_id || quantity == null) {
-    return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });
-  }
-
-  const supabase = createAdminClient();
-
-  const { data: cart } = await supabase
-    .from("carts")
-    .select("id")
-    .eq("session_id", sessionId)
-    .is("user_id", null)
-    .maybeSingle();
-
-  if (!cart) return NextResponse.json({ error: "Carrito no encontrado" }, { status: 404 });
-
-  if (quantity <= 0) {
-    await supabase
-      .from("cart_items")
-      .delete()
-      .eq("cart_id", cart.id)
-      .eq("product_id", product_id);
-  } else {
-    await supabase
-      .from("cart_items")
-      .update({ quantity })
-      .eq("cart_id", cart.id)
-      .eq("product_id", product_id);
-  }
-
-  return NextResponse.json({ success: true });
-}
-
-// ── DELETE /api/cart — vaciar carrito ─────────────────────────
-export async function DELETE(req: NextRequest) {
-  const sessionId = getSessionId(req);
-  if (!sessionId) return NextResponse.json({ success: true });
-
-  const supabase = createAdminClient();
-
-  const { data: cart } = await supabase
-    .from("carts")
-    .select("id")
-    .eq("session_id", sessionId)
-    .is("user_id", null)
-    .maybeSingle();
-
-  if (cart) {
-    await supabase.from("cart_items").delete().eq("cart_id", cart.id);
-  }
-
-  return NextResponse.json({ success: true });
 }

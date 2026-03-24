@@ -1,4 +1,7 @@
 // hooks/useBCV.ts
+// Llama al proxy /api/bcv en vez de directamente a dolarvzla.com
+// Esto funciona tanto en localhost como en Netlify (sin CORS).
+
 import { useEffect, useState } from "react";
 
 interface BcvData {
@@ -6,10 +9,6 @@ interface BcvData {
   eur: number;
   date: string;
 }
-
-const API_KEY =
-  "a37f147c890a759b23ab7e7f3c3ea9b4d2c07e8fcb7572416ebafb24f552018f";
-const API_URL = "https://api.dolarvzla.com/public/exchange-rate";
 
 const FALLBACK: BcvData = {
   usd: 36.85,
@@ -23,51 +22,44 @@ export function useBCV() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function fetchBCV() {
       setLoading(true);
       setError(null);
 
       try {
-        const response = await fetch(API_URL, {
-          method: "GET",
-          headers: {
-            "x-dolarvzla-key": API_KEY,
-            "Content-Type": "application/json",
-          },
-        });
+        // Llama a tu propio route handler — sin CORS, funciona en produccion
+        const res = await fetch("/api/bcv");
 
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const result = await response.json();
+        const json = await res.json();
 
-        if (!result.current) throw new Error("Formato de respuesta inválido");
+        if (json.error) throw new Error(json.error);
 
-        const usd = result.current.usd;
-        const eur = result.current.eur;
-
-        if (isNaN(usd) || isNaN(eur)) throw new Error("Tasas inválidas");
-
-        setData({
-          usd,
-          eur,
-          date: new Date(result.current.date).toLocaleDateString("es-VE", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          }),
-        });
+        if (!cancelled) {
+          setData({ usd: json.usd, eur: json.eur, date: json.date });
+        }
       } catch (err) {
-        console.error("Error obteniendo tasa BCV:", err);
-        setError("No se pudo cargar la tasa BCV");
-        setData(FALLBACK);
+        console.error("[useBCV] error:", err);
+        if (!cancelled) {
+          setError("No se pudo cargar la tasa BCV");
+          setData(FALLBACK);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
     fetchBCV();
-    const interval = setInterval(fetchBCV, 300000); // cada 5 minutos
-    return () => clearInterval(interval);
+
+    // Actualizar cada 5 minutos
+    const interval = setInterval(fetchBCV, 5 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
   }, []);
 
   return { data, loading, error };
