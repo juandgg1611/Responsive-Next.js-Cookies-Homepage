@@ -38,6 +38,8 @@ import {
 } from "lucide-react";
 import { useState, useRef, useEffect, useCallback, CSSProperties } from "react";
 import { cn } from "@/lib/utils";
+import { useBCV } from "@/hooks/useBCV";
+import { useCart } from "@/components/providers/cart-provider";
 
 // ─── Productos ────────────────────────────────────────────────────────────────
 const PRODUCTS = [
@@ -535,8 +537,10 @@ function Particles() {
 // ─── Carrusel 3D Compacto & Responsive ────────────────────────────────────────
 function Carousel3D({
   onAddToCart,
+  bcvRate,
 }: {
   onAddToCart: (p: (typeof PRODUCTS)[0]) => void;
+  bcvRate?: number | null;
 }) {
   const total = CAROUSEL_ITEMS.length;
   const [active, setActive] = useState(0);
@@ -892,6 +896,15 @@ function Carousel3D({
                                   ${product.originalPrice}
                                 </span>
                               )}
+                              {bcvRate && (
+                                <p className="text-[10px] text-caramel/50 mt-0.5">
+                                  Bs.{" "}
+                                  {new Intl.NumberFormat("es-VE", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  }).format(product.price * bcvRate)}
+                                </p>
+                              )}
                             </div>
                             <motion.button
                               whileHover={{ scale: 1.05 }}
@@ -1116,12 +1129,14 @@ function GridCard({
   isFavorite,
   onToggleFavorite,
   onAddToCart,
+  bcvRate,
 }: {
   product: (typeof PRODUCTS)[0];
   index: number;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
   onAddToCart: (p: (typeof PRODUCTS)[0]) => void;
+  bcvRate?: number | null;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const { rotateX, rotateY, onMouseMove, onMouseLeave } = useTilt(cardRef);
@@ -1297,6 +1312,15 @@ function GridCard({
                     ${product.originalPrice}
                   </div>
                 )}
+                {bcvRate && (
+                  <div className="text-[10px] text-caramel/50 mt-0.5">
+                    Bs.{" "}
+                    {new Intl.NumberFormat("es-VE", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }).format(product.price * bcvRate)}
+                  </div>
+                )}
               </div>
               <motion.button
                 whileHover={{ scale: 1.08 }}
@@ -1354,12 +1378,14 @@ function ListCard({
   isFavorite,
   onToggleFavorite,
   onAddToCart,
+  bcvRate,
 }: {
   product: (typeof PRODUCTS)[0];
   index: number;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
   onAddToCart: (p: (typeof PRODUCTS)[0]) => void;
+  bcvRate?: number | null;
 }) {
   const [added, setAdded] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -1541,6 +1567,15 @@ function ListCard({
                   </span>
                 )}
               </div>
+              {bcvRate && (
+                <p className="text-xs text-caramel/50 -mt-1 mb-1">
+                  Bs.{" "}
+                  {new Intl.NumberFormat("es-VE", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(product.price * bcvRate)}
+                </p>
+              )}
               {discount && (
                 <span className="inline-block text-[11px] font-bold text-rose-400">
                   Ahorra {discount}%
@@ -1687,15 +1722,26 @@ export default function ProductsPage() {
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id],
     );
-  const handleAddToCart = (p: (typeof PRODUCTS)[0]) =>
-    console.log("Cart:", p.name);
+  const { addItem, openCart } = useCart();
+  const { data: bcv } = useBCV();
+  const handleAddToCart = (p: (typeof PRODUCTS)[0]) => {
+    addItem({
+      id: p.id,
+      name: p.name,
+      price: p.price,
+      image: p.image,
+      badge: p.tag ?? undefined,
+      maxQuantity: 10,
+    });
+    openCart();
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-background-dark overflow-hidden">
       <Particles />
 
       {/* ══ CARRUSEL 3D ═══════════════════════════════════════════════════════ */}
-      <Carousel3D onAddToCart={handleAddToCart} />
+      <Carousel3D onAddToCart={handleAddToCart} bcvRate={bcv?.usd ?? null} />
 
       {/* ══ BARRA STICKY ══════════════════════════════════════════════════════ */}
       <div className="sticky top-0 z-40 bg-background/88 backdrop-blur-xl border-b border-cookie-950">
@@ -1887,6 +1933,7 @@ export default function ProductsPage() {
                     isFavorite={favorites.includes(product.id)}
                     onToggleFavorite={toggleFavorite}
                     onAddToCart={handleAddToCart}
+                    bcvRate={bcv?.usd ?? null}
                   />
                 ))}
               </motion.div>
@@ -1903,6 +1950,7 @@ export default function ProductsPage() {
                     isFavorite={favorites.includes(product.id)}
                     onToggleFavorite={toggleFavorite}
                     onAddToCart={handleAddToCart}
+                    bcvRate={bcv?.usd ?? null}
                   />
                 ))}
               </motion.div>

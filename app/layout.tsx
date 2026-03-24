@@ -9,6 +9,7 @@ import ChatWindow from "@/components/chatbot/ChatWindow";
 import CartSidebar from "@/components/cart/CartSidebar";
 import { CartProvider } from "@/components/providers/cart-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { AddressProvider } from "@/components/providers/address-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,12 +47,14 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <CartProvider>
-            <ClientProviders>{children}</ClientProviders>
-            <CartSidebar />
-            <ChatbotProvider>
-              <ChatWindow />
-              <ChatButton />
-            </ChatbotProvider>
+            <AddressProvider>
+              <ClientProviders>{children}</ClientProviders>
+              <CartSidebar />
+              <ChatbotProvider>
+                <ChatWindow />
+                <ChatButton />
+              </ChatbotProvider>
+            </AddressProvider>
           </CartProvider>
         </ThemeProvider>
       </body>

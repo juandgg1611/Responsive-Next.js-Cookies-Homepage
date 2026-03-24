@@ -6,6 +6,7 @@ import { ShoppingCart, Star, Heart, Eye, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useCart } from "@/components/providers/cart-provider";
+import { useBCV } from "@/hooks/useBCV";
 
 const PRODUCTS = [
   {
@@ -67,6 +68,7 @@ const CATEGORIES = [
 
 export default function ProductsSection() {
   const { addItem, openCart } = useCart();
+  const { data: bcv } = useBCV();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [favorites, setFavorites] = useState<string[]>([]);
 
@@ -287,6 +289,15 @@ export default function ProductsSection() {
                         <span className="ml-2 text-sm text-caramel line-through">
                           ${product.originalPrice}
                         </span>
+                      )}
+                      {bcv && (
+                        <p className="text-xs text-caramel/60 mt-0.5">
+                          Bs.{" "}
+                          {new Intl.NumberFormat("es-VE", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          }).format(product.price * bcv.usd)}
+                        </p>
                       )}
                     </div>
 
