@@ -134,7 +134,7 @@ export default function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-vanilla hover:text-vanilla transition-colors font-medium relative group text-lg"
+                  className="text-vanilla hover:text-cookie-400 transition-colors font-medium relative group text-lg"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-cookie group-hover:w-full transition-all duration-300" />
