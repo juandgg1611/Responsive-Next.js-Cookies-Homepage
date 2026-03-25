@@ -11,7 +11,7 @@ export default function ChatTypingIndicator() {
         <Cookie className="w-4 h-4 text-white" />
       </div>
 
-      <div className="bg-[#2C1810] border border-cookie-500/20 rounded-2xl rounded-tl-none p-4">
+      <div className="bg-gradient-to-br from-background-light to-background-dark border border-cookie-500/20 rounded-2xl rounded-tl-none p-4">
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {[0, 1, 2].map((i) => (

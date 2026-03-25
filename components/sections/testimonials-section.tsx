@@ -84,9 +84,9 @@ export default function TestimonialsSection() {
           className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
           <div className="flex justify-center mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cookie-400/10 to-chocolate-500/10 border border-cookie-400/30">
-              <Heart className="w-4 h-4 text-cookie-400" />
-              <span className="text-sm font-semibold text-cookie-400">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cookie-400/10 to-chocolate-500/10 border-vanilla-light border-cookie-400/30">
+              <Heart className="w-4 h-4 text-vanilla dark:text-cookie-400" />
+              <span className="text-sm font-semibold text-vanilla dark:text-cookie-400">
                 Lo que dicen nuestros clientes
               </span>
             </div>
@@ -362,7 +362,7 @@ export default function TestimonialsSection() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 rounded-lg bg-transparent border-2 border-cookie-400 text-cookie-400 font-semibold hover:bg-cookie-400/10 transition-all duration-300 flex items-center justify-center gap-2 group"
+                  className="px-8 py-3 rounded-lg bg-transparent border-2 border-transparent border-cookie-400 text-cookie-400 font-semibold hover:bg-cookie-400/10 transition-all duration-300 flex items-center justify-center gap-2 group btn-discount-light"
                   onClick={() => window.open("#testimonials", "_blank")}
                 >
                   <Star className="w-4 h-4 group-hover:rotate-12 transition-transform" />

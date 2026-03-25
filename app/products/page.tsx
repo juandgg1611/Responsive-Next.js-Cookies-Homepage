@@ -856,7 +856,7 @@ function Carousel3D({
                       </div>
                     </div>
 
-                    <h3 className="font-display text-base md:text-lg font-bold text-vanilla uppercase tracking-tight leading-tight mb-2">
+                    <h3 className="font-display text-white dark:text-base md:text-lg font-bold text-vanilla uppercase tracking-tight leading-tight mb-2">
                       {product.name}
                     </h3>
 
@@ -918,7 +918,7 @@ function Carousel3D({
                                 "font-black text-xs uppercase tracking-wide overflow-hidden transition-colors duration-300 shrink-0",
                                 isAdded
                                   ? "bg-emerald-600 text-white"
-                                  : `bg-gradient-to-r ${product.accentClass} text-vanilla shadow-md`,
+                                  : `bg-gradient-to-r ${product.accentClass} text-white dark:text-vanilla shadow-md`,
                               )}
                             >
                               <motion.div
@@ -1330,7 +1330,7 @@ function GridCard({
                   "relative px-3 sm:px-4 py-2 rounded-xl font-black text-[11px] uppercase tracking-wide overflow-hidden transition-all duration-300",
                   added
                     ? "bg-emerald-600 text-white"
-                    : `bg-gradient-to-r ${product.accentClass} text-vanilla shadow-lg`,
+                    : `bg-gradient-to-r ${product.accentClass} text-white dark:text-vanilla shadow-lg`,
                 )}
               >
                 <motion.div
@@ -1610,7 +1610,7 @@ function ListCard({
                   "relative w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-black text-sm uppercase tracking-wide overflow-hidden transition-all duration-300",
                   added
                     ? "bg-emerald-600 text-white"
-                    : `bg-gradient-to-r ${product.accentClass} text-vanilla shadow-lg`,
+                    : `bg-gradient-to-r ${product.accentClass} text-white dark:text-vanilla shadow-lg`,
                 )}
               >
                 <motion.div

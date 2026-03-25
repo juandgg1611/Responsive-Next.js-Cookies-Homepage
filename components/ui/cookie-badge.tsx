@@ -16,7 +16,7 @@ export default function CookieBadge({
     default: "bg-cookie-500 text-background-dark",
     new: "bg-gradient-to-r from-cookie-400 to-cookie-600 text-white",
     popular:
-      "bg-gradient-to-r from-chocolate-500 to-chocolate-700 text-vanilla-light",
+      "bg-gradient-to-r from-chocolate-500 to-chocolate-700 text-white",
     sale: "bg-gradient-to-r from-red-500 to-red-600 text-white",
   };
 

@@ -18,7 +18,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       animate={{ opacity: 1, y: 0, x: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className={`flex items-start gap-3 ${isBot ? "justify-start" : "justify-end flex-row-reverse"}`}
+      className={`flex items-start gap-3 ${isBot ? "justify-start" : "justify-end flex-row"}`}
     >
       {/* Avatar */}
       <div className={`flex-shrink-0 ${isBot ? "" : "order-last"}`}>
@@ -38,8 +38,8 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <div
           className={`rounded-2xl p-4 ${
             isBot
-              ? "bg-[#2C1810] border border-cookie-500/20 rounded-tl-none"
-              : "bg-gradient-to-br from-[#4A2F20] to-[#3A2318] border border-cookie-500/30 rounded-tr-none"
+              ? "bg-gradient-to-br from-background-light via-background-surface to-background-light border border-cookie-500/20 rounded-tl-none"
+              : "bg-gradient-cookie from-[#4A2F20] to-[#3A2318] border border-cookie-500/30 rounded-tr-none"
           } shadow-cookie`}
         >
           <p className="text-sm text-vanilla leading-relaxed whitespace-pre-wrap">

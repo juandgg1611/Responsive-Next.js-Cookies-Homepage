@@ -551,3 +551,28 @@ html:not(.dark) body {
       transparent 50%
     );
 }
+
+/* ── Botón Obtener Descuento: Gradiente solo en modo claro ── */
+.btn-discount-light {
+  background-image: linear-gradient(135deg, #D4A574 0%, #A67C52 100%);
+  color: white;
+}
+
+.btn-discount-light:hover {
+  box-shadow: 0 20px 60px -15px rgba(44, 24, 16, 0.25), 0 8px 20px -4px rgba(44, 24, 16, 0.12);
+}
+
+.dark .btn-discount-light {
+  background-image: none;
+  background-color: transparent;
+  color: rgb(235, 183, 79);
+}
+
+.dark .btn-discount-light:hover {
+  background-color: rgba(212, 165, 116, 0.1);
+  border-color: rgb(235, 183, 79);
+}
+
+.Title-Thing {
+  text: 
+}

@@ -366,7 +366,7 @@ export default function CTASection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg bg-transparent border-2 border-cookie-500 text-cookie-400 font-semibold hover:bg-cookie-500/10 transition-all duration-300 flex items-center justify-center gap-2"
+              className="px-8 py-4 rounded-lg bg-transparent border-2 border-cookie-500 text-cookie-400 font-semibold hover:bg-cookie-500/10 transition-all duration-300 flex items-center justify-center gap-2 btn-discount-light"
             >
               <Mail className="w-5 h-5" />
               Pedir por WhatsApp

@@ -15,7 +15,6 @@ import { useChatbot } from "@/components/providers/chatbot-provider";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import ChatTypingIndicator from "./ChatTypingIndicator";
-import ChatSuggestions from "./ChatSuggestions";
 
 export default function ChatWindow() {
   const { messages, isOpen, toggleChat, isLoading } = useChatbot();
@@ -42,7 +41,7 @@ export default function ChatWindow() {
         transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
         className={`fixed bottom-24 right-8 z-47 flex flex-col
           ${isFullscreen ? "inset-8 w-auto h-auto" : "w-[380px] h-[600px]"}
-          bg-gradient-to-br from-[#3A2318]/95 to-[#2C1810]/95 
+          bg-background-surface from-[#3A2318]/95 to-[#2C1810]/95 
           backdrop-blur-xl rounded-3xl 
           border border-[#4A2F20]/50 shadow-2xl
           transition-all duration-300`}
@@ -110,16 +109,7 @@ export default function ChatWindow() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Suggestions */}
-        {showSuggestions && messages.length < 3 && (
-          <div className="flex-shrink-0 px-4 pb-4">
-            <ChatSuggestions
-              onSuggestionClick={() => {
-                setShowSuggestions(false);
-              }}
-            />
-          </div>
-        )}
+
 
         {/* Input Area */}
         <div className="flex-shrink-0 p-4 border-t border-[#4A2F20]/50 bg-gradient-to-t from-[#2C1810]/50 to-transparent">

@@ -54,7 +54,7 @@ export default function ChatInput() {
         {/* Efecto de borde animado */}
         <div className="absolute -inset-0.5 bg-gradient-cookie rounded-xl opacity-0 blur-sm transition-opacity duration-300 group-focus-within:opacity-50" />
 
-        <div className="relative flex items-end gap-1 sm:gap-2 bg-[#4A2F20]/70 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl focus-within:border-cookie-400 focus-within:ring-2 sm:focus-within:ring-4 focus-within:ring-cookie-400/20 transition-all duration-300">
+        <div className="relative flex items-end gap-1 sm:gap-2 bg-background-surface backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl focus-within:border-cookie-400 focus-within:ring-2 sm:focus-within:ring-4 focus-within:ring-cookie-400/20 transition-all duration-300">
           {/* Botones de acción - Solo emoji en móvil, más opciones en desktop */}
           <button
             type="button"
@@ -94,24 +94,24 @@ export default function ChatInput() {
             disabled={!message.trim() || isLoading}
             whileHover={{ scale: message.trim() && !isLoading ? 1.05 : 1 }}
             whileTap={{ scale: message.trim() && !isLoading ? 0.95 : 1 }}
-            className={`mr-1 sm:mr-2 mb-2 p-1.5 sm:p-2.5 rounded-lg transition-all duration-300 ${
+            className={`mr-1 sm:mr-2 mb-2 p-1.5  sm:p-2.5 rounded-lg transition-all duration-300 ${
               message.trim() && !isLoading
                 ? "bg-gradient-cookie text-white shadow-cookie hover:shadow-cookie-lg"
-                : "bg-[#4A2F20]/50 text-caramel/50 cursor-not-allowed"
+                : "bg-background-surface text-caramel/50 cursor-not-allowed"
             }`}
             aria-label="Enviar mensaje"
           >
-            <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Send className="w-5 h-5 sm:w-4 sm:h-4 " />
           </motion.button>
         </div>
       </div>
 
       {/* Mensaje de privacidad - Oculto en móvil muy pequeño */}
       <div className="hidden xs:block">
-        <p className="text-[8px] sm:text-[10px] text-caramel/50 text-center mt-1.5 sm:mt-2 flex items-center justify-center gap-1">
-          <span className="w-1 h-1 bg-cookie-400 rounded-full" />
+        <p className="text-[8px] sm:text-[10px] text-vanilla text-center mt-1.5 sm:mt-2 flex items-center justify-center gap-1">
+          <span className="w-1 h-1 bg-vanilla rounded-full" />
           Tus mensajes son seguros y encriptados
-          <span className="w-1 h-1 bg-cookie-400 rounded-full" />
+          <span className="w-1 h-1 bg-vanilla rounded-full" />
         </p>
       </div>
     </form>
