@@ -272,7 +272,7 @@ export default function ProductsSection() {
                   </div>
 
                   {/* Nombre y descripción */}
-                  <h3 className="text-lg sm:text-xl font-semibold text-vanilla mb-2 group-hover:text-cookie-400 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-semibold text-vanilla mb-2 group-hover:text-white transition-colors">
                     {product.name}
                   </h3>
                   <p className="text-sm text-caramel mb-4 line-clamp-2">
