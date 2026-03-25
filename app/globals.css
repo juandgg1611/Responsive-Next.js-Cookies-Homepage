@@ -219,7 +219,7 @@
 
 body {
   background-color: rgb(var(--background));
-  color: rgb(var(--foreground));
+  color: #ff5500;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
