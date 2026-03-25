@@ -121,7 +121,7 @@ export default function Header() {
                 <span className="text-2xl font-bold text-cookie-500">
                   Vian Cookies
                 </span>
-                <span className="text-xs text-caramel flex items-center">
+                <span className="text-xs text-vanilla-dark flex items-center">
                   <span className="w-1.5 h-1.5 bg-cookie-500 rounded-full mr-2 animate-pulse-soft" />
                   Galletas Artesanales
                 </span>
