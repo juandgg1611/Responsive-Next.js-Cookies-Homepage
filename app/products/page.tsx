@@ -856,7 +856,7 @@ function Carousel3D({
                       </div>
                     </div>
 
-                    <h3 className="font-display text-white dark:text-base md:text-lg font-bold text-vanilla uppercase tracking-tight leading-tight mb-2">
+                    <h3 className="font-display text-base md:text-lg font-bold text-white uppercase tracking-tight leading-tight mb-2">
                       {product.name}
                     </h3>
 
