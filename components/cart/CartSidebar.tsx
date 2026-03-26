@@ -79,7 +79,7 @@ export default function CartSidebar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 z-50 h-full w-full sm:w-[400px] md:w-[450px] bg-gradient-to-br from-[#3A2318] to-[#2C1810] shadow-2xl border-l border-[#4A2F20] flex flex-col"
+              className="fixed top-0 right-0 z-50 h-full w-full sm:w-[400px] md:w-[450px] bg-gradient-to-br from-background-light via-background-surface to-background-light shadow-2xl border-l border-[#4A2F20] flex flex-col"
             >
               {/* Header */}
               <div className="flex-shrink-0 p-4 sm:p-6 border-b border-[#4A2F20]/50">
@@ -156,11 +156,11 @@ export default function CartSidebar() {
                 {/* Tasa BCV */}
                 {items.length > 0 && (
                   <div className="mt-3 flex items-center gap-2 text-xs">
-                    <span className="text-caramel/60">Tasa BCV:</span>
+                    <span className="text-chocolate-500">Tasa BCV:</span>
                     {bcvLoading ? (
                       <Loader2 className="w-3 h-3 text-cookie-400 animate-spin" />
                     ) : bcv ? (
-                      <span className="text-cookie-400 font-semibold">
+                      <span className="text-chocolate-500 font-semibold">
                         Bs. {bcv.usd.toFixed(2)} / USD
                       </span>
                     ) : (
@@ -316,13 +316,13 @@ export default function CartSidebar() {
                           )}
                         </div>
                       </div>
-                      <p className="text-[10px] text-caramel/40 mt-1">
+                      <p className="text-[10px] text-chocolate-800 dark:text-white mt-1">
                         El envio se calcula al finalizar el pedido
                       </p>
                     </div>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="flex flex-col gap-1.5">
                     {/* Boton principal: abre el modal de checkout */}
                     <motion.button
                       whileHover={{ scale: 1.02 }}
@@ -334,11 +334,11 @@ export default function CartSidebar() {
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </motion.button>
 
-                    <Link href="/products" onClick={toggleCart}>
+                    <Link href="/products" onClick={toggleCart} className="w-full">
                       <motion.button
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
-                        className="w-full py-3 bg-[#4A2F20]/40 backdrop-blur-sm border-2 border-[#5D3A2B] text-caramel hover:text-cookie-400 rounded-xl font-medium hover:border-cookie-500/50 transition-all duration-300 flex items-center justify-center gap-2"
+                        className="w-full py-3 btn-discount-light backdrop-blur-sm text-caramel hover:text-cookie-400 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
                       >
                         <Cookie className="w-4 h-4" />
                         Seguir comprando
@@ -349,14 +349,14 @@ export default function CartSidebar() {
                   <div className="mt-4 flex items-center justify-center gap-4">
                     <div className="flex items-center gap-1">
                       <Shield className="w-3 h-3 text-cookie-400" />
-                      <span className="text-[10px] text-caramel/70">
+                      <span className="text-[10px] text-white/70">
                         Pago seguro
                       </span>
                     </div>
                     <div className="w-1 h-1 bg-caramel/30 rounded-full" />
                     <div className="flex items-center gap-1">
                       <Sparkles className="w-3 h-3 text-cookie-400" />
-                      <span className="text-[10px] text-caramel/70">
+                      <span className="text-[10px] text-white/70">
                         Envio rapido
                       </span>
                     </div>

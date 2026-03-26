@@ -130,8 +130,8 @@ export default function ProductsSection() {
         >
           <div className="flex justify-center mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cookie-400/10 to-chocolate-500/10 border border-cookie-400/30">
-              <Star className="w-4 h-4 text-cookie-400" />
-              <span className="text-sm font-semibold text-cookie-400">
+              <Star className="w-4 h-4 text-vanilla dark:text-cookie-400" />
+              <span className="text-sm font-semibold text-vanilla dark:text-cookie-400">
                 Nuestra Colección
               </span>
             </div>
@@ -207,7 +207,7 @@ export default function ProductsSection() {
                     <div
                       className={`px-3 py-1 rounded-full text-xs font-semibold ${
                         product.badge === "más vendido"
-                          ? "bg-cookie-400 text-white"
+                          ? "bg-cookie-200 text-white"
                           : product.badge === "nuevo"
                             ? "bg-chocolate-500 text-white"
                             : "bg-emerald-500 text-white"

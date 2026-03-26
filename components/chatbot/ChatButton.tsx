@@ -62,7 +62,7 @@ export default function ChatButton() {
 
           {/* Tooltip */}
           <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <div className="bg-[#3A2318]/95 backdrop-blur-sm text-vanilla text-sm py-2.5 px-5 rounded-cookie-lg border border-cookie-500/30 shadow-cookie whitespace-nowrap">
+            <div className="bg-[#3A2318]/95 backdrop-blur-sm text-white text-sm py-2.5 px-5 rounded-cookie-lg border border-cookie-500/30 shadow-cookie whitespace-nowrap">
               <span className="flex items-center gap-2">
                 <MessageCircle className="w-4 h-4 text-cookie-400" />
                 ¡Pregúntame sobre galletas! 🍪

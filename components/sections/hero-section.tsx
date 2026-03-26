@@ -201,7 +201,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-transparent border-2 border-cookie-500 text-cookie-400 hover:bg-cookie-500/10 hover:border-cookie-400 font-semibold text-base sm:text-lg transition-all duration-300"
+                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-cookie-500 font-semibold text-base sm:text-lg transition-all duration-300 btn-discount-light"
                 onClick={() =>
                   document
                     .getElementById("cta")

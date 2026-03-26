@@ -550,7 +550,7 @@ export default function DeliveryPage() {
     addrLabel.trim() !== "";
 
   return (
-    <div className="min-h-screen bg-[#2C1810] overflow-x-hidden">
+    <div className="min-h-screen bg-background-surface overflow-x-hidden">
       {/* Fondo */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <motion.div
@@ -1071,7 +1071,7 @@ export default function DeliveryPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-gradient-to-br from-[#3A2318]/80 to-[#2C1810]/60 border border-[#4A2F20] shadow-lg"
+                className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-gradient-to-br from-background-light via-background-surface to-background-light  border border-[#4A2F20] shadow-lg"
               >
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center"
@@ -1112,24 +1112,24 @@ export default function DeliveryPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#3A2318] via-[#2C1810] to-[#1a0f0a] border border-[#4A2F20]"
+            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-background-light to-background-light  border-[#4A2F20]"
           >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cookie-500/40 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-br from-background-light via-background-surface to-background-light" />
             <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10">
               <div className="text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start gap-2 mb-3">
-                  <Sparkles className="w-4 h-4 text-cookie-400 animate-pulse" />
-                  <span className="text-[11px] font-black uppercase tracking-[0.3em] text-cookie-400">
+                  <Sparkles className="w-4 h-4 text-chocolate-600 dark:text-cookie-400 animate-pulse" />
+                  <span className="text-[11px] font-black uppercase tracking-[0.3em] text-chocolate-600 dark:text-cookie-400">
                     Oferta de bienvenida
                   </span>
                 </div>
                 <h3 className="font-display text-2xl sm:text-3xl font-bold text-vanilla mb-2">
                   Primer pedido con{" "}
-                  <span className="bg-gradient-to-r from-cookie-400 to-caramel bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-chocolate-400 to-caramel bg-clip-text text-transparent">
                     20% OFF
                   </span>
                 </h3>
-                <p className="text-xs text-caramel/40 max-w-xs">
+                <p className="text-xs text-chocolate-600 dark:text-cookie-400/40 max-w-xs">
                   Registrate y recibe envio gratis en tu primera compra.
                 </p>
               </div>
