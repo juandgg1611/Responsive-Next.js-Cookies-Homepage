@@ -6,9 +6,7 @@ import { Toaster } from "sonner";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { usePathname } from "next/navigation";
-import { ChatbotProvider } from "./chatbot-provider";
-import ChatButton from "../chatbot/ChatButton";
-import ChatWindow from "../chatbot/ChatWindow";
+import { useEffect, useState } from "react";
 
 export default function ClientProviders({
   children,
@@ -16,8 +14,14 @@ export default function ClientProviders({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 300);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const isAuthRoute = pathname?.startsWith("/auth/");
-  const isBotRoute = pathname?.startsWith("/chatbot/");
 
   // Páginas que manejan su propio fondo y espaciado
   // (no necesitan pt-32 en main ni mt en footer)
@@ -71,38 +75,14 @@ export default function ClientProviders({
       />
 
       {/* Botón scroll to top */}
-      {!isAuthRoute && (
+      {!isAuthRoute && showScrollTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 left-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-0"
-          id="scroll-to-top"
+          className="fixed bottom-8 left-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
           aria-label="Volver arriba"
         >
           ↑
         </button>
-      )}
-
-      {!isAuthRoute && (
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.addEventListener('DOMContentLoaded', function() {
-                const scrollButton = document.getElementById('scroll-to-top');
-                const updateButton = () => {
-                  if (window.scrollY > 300) {
-                    scrollButton.style.opacity = '1';
-                    scrollButton.style.pointerEvents = 'auto';
-                  } else {
-                    scrollButton.style.opacity = '0';
-                    scrollButton.style.pointerEvents = 'none';
-                  }
-                };
-                window.addEventListener('scroll', updateButton);
-                updateButton();
-              });
-            `,
-          }}
-        />
       )}
     </ThemeProvider>
   );

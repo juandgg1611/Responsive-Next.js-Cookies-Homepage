@@ -8,7 +8,6 @@ import ChatButton from "@/components/chatbot/ChatButton";
 import ChatWindow from "@/components/chatbot/ChatWindow";
 import CartSidebar from "@/components/cart/CartSidebar";
 import { CartProvider } from "@/components/providers/cart-provider";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AddressProvider } from "@/components/providers/address-provider";
 
 const inter = Inter({
@@ -45,18 +44,16 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${dancingScript.variable}`}
     >
       <body>
-        <ThemeProvider>
-          <CartProvider>
-            <AddressProvider>
-              <ClientProviders>{children}</ClientProviders>
-              <CartSidebar />
-              <ChatbotProvider>
-                <ChatWindow />
-                <ChatButton />
-              </ChatbotProvider>
-            </AddressProvider>
-          </CartProvider>
-        </ThemeProvider>
+        <CartProvider>
+          <AddressProvider>
+            <ClientProviders>{children}</ClientProviders>
+            <CartSidebar />
+            <ChatbotProvider>
+              <ChatWindow />
+              <ChatButton />
+            </ChatbotProvider>
+          </AddressProvider>
+        </CartProvider>
       </body>
     </html>
   );

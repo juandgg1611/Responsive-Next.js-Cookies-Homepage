@@ -160,14 +160,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (event === "SIGNED_IN" && session?.user) {
         setIsLoading(true);
         try {
-          // Hacer merge del carrito anónimo (si existe) al autenticado
-          await supabase.rpc("merge_anonymous_cart", {
-            p_session_id:
-              document.cookie
-                .split("; ")
-                .find((c) => c.startsWith("nyc_session_id="))
-                ?.split("=")[1] ?? "",
-            p_user_id: session.user.id,
+          // Hacer merge del carrito anónimo (si existe) al autenticado.
+          // Se hace vía /api/cart/merge porque nyc_session_id es httpOnly
+          // y document.cookie no puede leerla.
+          await fetch("/api/cart/merge", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id: session.user.id }),
           });
 
           setIsAuthenticated(true);
