@@ -42,14 +42,14 @@ import type { LatLng, CoverageZone } from "@/app/delivery/data";
 const DeliveryMap = dynamic(() => import("@/components/delivery/DeliveryMap"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-[#1a0f0a] rounded-3xl border border-[#3A2318]">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-cookie-50 dark:bg-background rounded-3xl border border-cookie-200 dark:border-cookie-500/30">
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
       >
-        <Map className="w-10 h-10 text-cookie-400" />
+        <Map className="w-10 h-10 text-cookie-500" />
       </motion.div>
-      <p className="text-caramel/60 text-sm mt-3 font-medium tracking-widest uppercase">
+      <p className="text-chocolate-500 text-sm mt-3 font-medium tracking-widest uppercase">
         Cargando mapa...
       </p>
     </div>
@@ -135,39 +135,39 @@ function DeleteConfirmModal({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 8 }}
         transition={{ type: "spring", damping: 28, stiffness: 350 }}
-        className="relative z-10 w-full max-w-sm bg-gradient-to-br from-[#3A2318] to-[#2C1810] rounded-3xl border border-[#4A2F20] shadow-2xl p-6"
+        className="relative z-10 w-full max-w-sm bg-gradient-to-br from-cookie-50 to-cookie-100 dark:from-background dark:to-background-dark rounded-3xl border border-cookie-200 dark:border-cookie-500/30 shadow-2xl p-6"
       >
         {/* Icono de alerta */}
-        <div className="w-14 h-14 rounded-2xl bg-red-950/40 border border-red-800/30 flex items-center justify-center mx-auto mb-5">
-          <AlertTriangle className="w-7 h-7 text-red-400" />
+        <div className="w-14 h-14 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-center mx-auto mb-5">
+          <AlertTriangle className="w-7 h-7 text-red-500" />
         </div>
 
-        <h3 className="text-lg font-display font-bold text-vanilla text-center mb-2">
+        <h3 className="text-lg font-display font-bold text-chocolate-900 dark:text-vanilla text-center mb-2">
           Eliminar direccion
         </h3>
-        <p className="text-sm text-caramel/50 text-center mb-1">
+        <p className="text-sm text-chocolate-500 dark:text-caramel text-center mb-1">
           Estas por eliminar:
         </p>
 
         {/* Tarjeta de la dirección */}
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-[#2C1810]/60 border border-[#4A2F20] mb-6">
-          <div className="w-9 h-9 rounded-lg bg-[#3A2318] border border-[#4A2F20] flex items-center justify-center shrink-0">
-            <Icon className="w-4 h-4 text-caramel/50" />
+        <div className="flex items-center gap-3 p-3 rounded-xl bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 mb-6">
+          <div className="w-9 h-9 rounded-lg bg-cookie-200 border border-cookie-300 flex items-center justify-center shrink-0">
+            <Icon className="w-4 h-4 text-chocolate-500" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-bold text-vanilla">{addr.label}</p>
-            <p className="text-xs text-caramel/40 truncate">{addr.address}</p>
+            <p className="text-sm font-bold text-chocolate-900 dark:text-vanilla">{addr.label}</p>
+            <p className="text-xs text-chocolate-500 dark:text-caramel truncate">{addr.address}</p>
           </div>
         </div>
 
-        <p className="text-xs text-caramel/40 text-center mb-5">
+        <p className="text-xs text-chocolate-500 dark:text-caramel text-center mb-5">
           Esta accion no se puede deshacer.
         </p>
 
         <div className="flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 py-3 rounded-xl border border-[#4A2F20] text-caramel/60 hover:text-cookie-400 hover:border-cookie-500/40 transition-all text-sm font-bold"
+            className="flex-1 py-3 rounded-xl border border-cookie-200 dark:border-cookie-500/30 text-chocolate-600 dark:text-caramel hover:text-cookie-600 dark:text-cookie-400 hover:border-cookie-400 transition-all text-sm font-bold"
           >
             Cancelar
           </button>
@@ -175,7 +175,7 @@ function DeleteConfirmModal({
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
             onClick={onConfirm}
-            className="flex-1 py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold text-sm flex items-center justify-center gap-2 transition-all"
+            className="flex-1 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold text-sm flex items-center justify-center gap-2 transition-all"
           >
             <Trash2 className="w-4 h-4" />
             Eliminar
@@ -212,7 +212,7 @@ function SuccessModal({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9 }}
         transition={{ type: "spring", damping: 24, stiffness: 340 }}
-        className="relative z-10 w-full max-w-sm bg-gradient-to-br from-[#3A2318] to-[#2C1810] rounded-3xl border border-[#4A2F20] shadow-2xl p-8 text-center"
+        className="relative z-10 w-full max-w-sm bg-gradient-to-br from-cookie-50 to-cookie-100 dark:from-background dark:to-background-dark rounded-3xl border border-cookie-200 dark:border-cookie-500/30 shadow-2xl p-8 text-center"
       >
         {/* Check animado */}
         <motion.div
@@ -224,21 +224,21 @@ function SuccessModal({
             damping: 16,
             stiffness: 300,
           }}
-          className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-5"
+          className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-5"
         >
-          <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+          <CheckCircle2 className="w-8 h-8 text-emerald-600" />
         </motion.div>
 
-        <h3 className="text-xl font-display font-bold text-vanilla mb-2">
+        <h3 className="text-xl font-display font-bold text-chocolate-900 dark:text-vanilla mb-2">
           {isEdit ? "Cambios guardados" : "Direccion guardada"}
         </h3>
-        <p className="text-sm text-caramel/50 mb-1">
-          <span className="text-cookie-400 font-semibold">"{label}"</span>
+        <p className="text-sm text-chocolate-600 dark:text-caramel mb-1">
+          <span className="text-cookie-600 dark:text-cookie-400 font-semibold">"{label}"</span>
           {isEdit
             ? " ha sido actualizada."
             : " ha sido agregada a tus favoritos."}
         </p>
-        <p className="text-xs text-caramel/30 mb-7">
+        <p className="text-xs text-chocolate-400 dark:text-caramel mb-7">
           Ya estara disponible al finalizar tu proximo pedido.
         </p>
 
@@ -279,15 +279,15 @@ function AddressCard({
       exit={{ opacity: 0, scale: 0.95, y: -8 }}
       transition={{ type: "spring", damping: 24, stiffness: 300 }}
       className={cn(
-        "relative rounded-2xl border p-5 transition-all duration-300",
+        "relative rounded-2xl border p-5 transition-all duration-300 bg-white dark:bg-background-surface shadow-sm",
         addr.is_default
-          ? "bg-cookie-500/8 border-cookie-500/40"
-          : "bg-[#3A2318]/40 border-[#4A2F20] hover:border-cookie-500/30",
+          ? "border-cookie-400"
+          : "border-cookie-200 dark:border-cookie-500/30 hover:border-cookie-400",
       )}
     >
       {addr.is_default && (
         <div className="absolute top-4 right-4">
-          <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-cookie-500/20 border border-cookie-500/30 text-[10px] font-black text-cookie-400 uppercase tracking-wider">
+          <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-300 text-[10px] font-black text-cookie-600 dark:text-cookie-400 uppercase tracking-wider">
             <CheckCircle2 className="w-3 h-3" /> Predeterminada
           </span>
         </div>
@@ -298,21 +298,21 @@ function AddressCard({
           className={cn(
             "w-12 h-12 rounded-xl flex items-center justify-center shrink-0",
             addr.is_default
-              ? "bg-cookie-500/20 border border-cookie-500/30"
-              : "bg-[#2C1810] border border-[#4A2F20]",
+              ? "bg-cookie-200 border border-cookie-300"
+              : "bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30",
           )}
         >
           <Icon
             className={cn(
               "w-5 h-5",
-              addr.is_default ? "text-cookie-400" : "text-caramel/50",
+              addr.is_default ? "text-cookie-600 dark:text-cookie-400" : "text-chocolate-500",
             )}
           />
         </div>
 
         <div className="flex-1 min-w-0 pr-28">
-          <p className="font-bold text-vanilla text-base mb-1">{addr.label}</p>
-          <p className="text-sm text-caramel/60 leading-snug mb-2">
+          <p className="font-bold text-chocolate-900 dark:text-vanilla text-base mb-1">{addr.label}</p>
+          <p className="text-sm text-chocolate-600 dark:text-caramel leading-snug mb-2">
             {addr.address}
           </p>
           {addr.maps_url && (
@@ -320,12 +320,12 @@ function AddressCard({
               href={addr.maps_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-cookie-400/70 hover:text-cookie-400 transition-colors"
+              className="inline-flex items-center gap-1 text-xs text-cookie-500 hover:text-cookie-700 transition-colors"
             >
               <Link2 className="w-3 h-3" /> Ver en Maps
             </a>
           )}
-          <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-caramel/40">
+          <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-chocolate-500 dark:text-caramel">
             {addr.zone_name && (
               <span className="flex items-center gap-1">
                 <MapPin className="w-3 h-3" />
@@ -347,11 +347,11 @@ function AddressCard({
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-4 pt-4 border-t border-[#4A2F20]/50">
+      <div className="flex items-center gap-2 mt-4 pt-4 border-t border-cookie-200 dark:border-cookie-500/30">
         {!addr.is_default && (
           <button
             onClick={() => onSetDefault(addr)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2C1810] border border-[#4A2F20] text-xs text-caramel/50 hover:text-cookie-400 hover:border-cookie-500/40 transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 text-xs text-chocolate-600 dark:text-caramel hover:text-cookie-600 dark:text-cookie-400 hover:border-cookie-400 transition-all"
           >
             <CheckCircle2 className="w-3 h-3" />
             Predeterminar
@@ -359,14 +359,14 @@ function AddressCard({
         )}
         <button
           onClick={() => onEdit(addr)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2C1810] border border-[#4A2F20] text-xs text-caramel/50 hover:text-cookie-400 hover:border-cookie-500/40 transition-all"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 text-xs text-chocolate-600 dark:text-caramel hover:text-cookie-600 dark:text-cookie-400 hover:border-cookie-400 transition-all"
         >
           <Edit2 className="w-3 h-3" />
           Editar
         </button>
         <button
           onClick={() => onDelete(addr)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2C1810] border border-[#4A2F20] text-xs text-caramel/50 hover:text-red-400 hover:border-red-800/40 transition-all ml-auto"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-500 hover:text-red-600 hover:border-red-300 transition-all ml-auto"
         >
           <Trash2 className="w-3 h-3" />
           Eliminar
@@ -550,7 +550,7 @@ export default function DeliveryPage() {
     addrLabel.trim() !== "";
 
   return (
-    <div className="min-h-screen bg-background-surface overflow-x-hidden">
+    <div className="min-h-screen bg-cookie-50 dark:bg-background overflow-x-hidden">
       {/* Fondo */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <motion.div
@@ -579,7 +579,7 @@ export default function DeliveryPage() {
           <motion.div
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#3A2318]/80 border border-cookie-500/30 text-cookie-400 text-xs font-black uppercase tracking-[0.3em] mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-300 text-cookie-600 dark:text-cookie-400 text-xs font-black uppercase tracking-[0.3em] mb-6"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Mis direcciones · Maracaibo
@@ -588,7 +588,7 @@ export default function DeliveryPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-display text-4xl sm:text-5xl font-bold text-vanilla leading-tight mb-4"
+            className="font-display text-4xl sm:text-5xl font-bold text-chocolate-900 dark:text-vanilla leading-tight mb-4"
           >
             Guarda tus{" "}
             <span className="bg-gradient-to-r from-cookie-400 to-caramel bg-clip-text text-transparent">
@@ -599,7 +599,7 @@ export default function DeliveryPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-caramel/60 text-base max-w-lg mx-auto"
+            className="text-chocolate-600 dark:text-caramel text-base max-w-lg mx-auto"
           >
             Registra hasta {MAX_ADDRESSES} direcciones. Al pedir, seleccionas la
             que necesites directamente desde el carrito.
@@ -621,13 +621,13 @@ export default function DeliveryPage() {
               >
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h2 className="text-xl font-display font-bold text-vanilla">
+                    <h2 className="text-xl font-display font-bold text-chocolate-900 dark:text-vanilla">
                       Mis direcciones
-                      <span className="ml-3 text-sm font-normal text-caramel/40">
+                      <span className="ml-3 text-sm font-normal text-chocolate-400">
                         {addresses.length}/{MAX_ADDRESSES}
                       </span>
                     </h2>
-                    <p className="text-xs text-caramel/40 mt-0.5">
+                    <p className="text-xs text-chocolate-500 dark:text-caramel mt-0.5">
                       {addresses.length === 0
                         ? "Aun no tienes direcciones guardadas"
                         : "Se usan al finalizar tu pedido desde el carrito"}
@@ -648,7 +648,7 @@ export default function DeliveryPage() {
 
                 {isLoading ? (
                   <div className="flex items-center justify-center py-20">
-                    <Loader2 className="w-8 h-8 text-cookie-400 animate-spin" />
+                    <Loader2 className="w-8 h-8 text-cookie-500 animate-spin" />
                   </div>
                 ) : addresses.length === 0 ? (
                   <motion.div
@@ -656,13 +656,13 @@ export default function DeliveryPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center py-20 text-center"
                   >
-                    <div className="w-24 h-24 rounded-3xl bg-[#3A2318]/60 border border-[#4A2F20] flex items-center justify-center mb-6">
-                      <MapPin className="w-10 h-10 text-cookie-400/30" />
+                    <div className="w-24 h-24 rounded-3xl bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 flex items-center justify-center mb-6">
+                      <MapPin className="w-10 h-10 text-cookie-300" />
                     </div>
-                    <h3 className="font-display text-xl font-bold text-vanilla mb-2">
+                    <h3 className="font-display text-xl font-bold text-chocolate-900 dark:text-vanilla mb-2">
                       Sin direcciones guardadas
                     </h3>
-                    <p className="text-sm text-caramel/40 max-w-xs mb-8">
+                    <p className="text-sm text-chocolate-500 dark:text-caramel max-w-xs mb-8">
                       Agrega tu casa, trabajo o cualquier lugar al que enviemos
                       tus galletas.
                     </p>
@@ -696,7 +696,7 @@ export default function DeliveryPage() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={openAdd}
-                        className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl border-2 border-dashed border-[#4A2F20] hover:border-cookie-500/40 text-caramel/30 hover:text-cookie-400 transition-all min-h-[180px]"
+                        className="flex flex-col items-center justify-center gap-3 p-8 rounded-2xl border-2 border-dashed border-cookie-300 hover:border-cookie-400 text-chocolate-400 hover:text-cookie-600 dark:text-cookie-400 transition-all min-h-[180px]"
                       >
                         <Plus className="w-8 h-8" />
                         <span className="text-sm font-bold uppercase tracking-wider">
@@ -713,18 +713,18 @@ export default function DeliveryPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
-                    className="mt-8 p-5 rounded-2xl bg-[#3A2318]/40 border border-[#4A2F20] flex items-start gap-4"
+                    className="mt-8 p-5 rounded-2xl bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 flex items-start gap-4"
                   >
                     <div className="w-10 h-10 rounded-xl bg-cookie-500/15 border border-cookie-500/20 flex items-center justify-center shrink-0">
                       <Package className="w-5 h-5 text-cookie-400" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-vanilla mb-1">
+                      <p className="text-sm font-bold text-chocolate-900 dark:text-vanilla mb-1">
                         Como usar tus direcciones
                       </p>
-                      <p className="text-xs text-caramel/50 leading-relaxed">
+                      <p className="text-xs text-chocolate-600 dark:text-caramel leading-relaxed">
                         Al presionar{" "}
-                        <strong className="text-caramel/70">
+                        <strong className="text-chocolate-800">
                           Finalizar pedido
                         </strong>{" "}
                         en el carrito, podras elegir Delivery y seleccionar
@@ -747,17 +747,17 @@ export default function DeliveryPage() {
                 <div className="flex items-center gap-4 mb-6">
                   <button
                     onClick={() => setMode("list")}
-                    className="w-9 h-9 rounded-xl bg-[#3A2318]/60 border border-[#4A2F20] flex items-center justify-center hover:border-cookie-500/40 transition-all"
+                    className="w-9 h-9 rounded-xl bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 flex items-center justify-center hover:border-cookie-400 transition-all"
                   >
-                    <X className="w-4 h-4 text-caramel/60" />
+                    <X className="w-4 h-4 text-chocolate-600 dark:text-caramel" />
                   </button>
                   <div>
-                    <h2 className="text-xl font-display font-bold text-vanilla">
+                    <h2 className="text-xl font-display font-bold text-chocolate-900 dark:text-vanilla">
                       {mode === "edit"
                         ? `Editar: ${editingAddr?.label}`
                         : "Nueva direccion"}
                     </h2>
-                    <p className="text-xs text-caramel/40 mt-0.5">
+                    <p className="text-xs text-chocolate-500 dark:text-caramel mt-0.5">
                       Haz clic en el mapa o usa tu GPS
                     </p>
                   </div>
@@ -765,7 +765,7 @@ export default function DeliveryPage() {
 
                 <div className="grid lg:grid-cols-[1fr_400px] gap-6">
                   {/* Mapa */}
-                  <div className="relative h-[440px] sm:h-[520px] rounded-3xl overflow-hidden border border-[#4A2F20] shadow-2xl">
+                  <div className="relative h-[440px] sm:h-[520px] rounded-3xl overflow-hidden border border-cookie-200 dark:border-cookie-500/30 shadow-lg">
                     <DeliveryMap
                       center={MARACAIBO_CENTER}
                       selectedLatLng={selectedLatLng}
@@ -780,18 +780,18 @@ export default function DeliveryPage() {
                       onClick={handleGeolocate}
                       disabled={isLocating}
                       title="Usar mi ubicacion"
-                      className="absolute top-4 right-4 z-[500] w-10 h-10 rounded-xl bg-[#2C1810]/95 border border-[#4A2F20] backdrop-blur-sm flex items-center justify-center hover:border-cookie-500 transition-all shadow-lg"
+                      className="absolute top-4 right-4 z-[500] w-10 h-10 rounded-xl bg-cookie-50 dark:bg-background/95 border border-cookie-200 dark:border-cookie-500/30 backdrop-blur-sm flex items-center justify-center hover:border-cookie-400 transition-all shadow-md"
                     >
                       {isLocating ? (
-                        <Loader2 className="w-4 h-4 text-cookie-400 animate-spin" />
+                        <Loader2 className="w-4 h-4 text-cookie-500 animate-spin" />
                       ) : (
-                        <Navigation className="w-4 h-4 text-cookie-400" />
+                        <Navigation className="w-4 h-4 text-cookie-500" />
                       )}
                     </button>
                     <div className="absolute top-4 left-4 z-[500]">
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2C1810]/90 border border-[#3A2318] backdrop-blur-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-[10px] font-bold text-caramel/60 uppercase tracking-widest">
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cookie-50 dark:bg-background/95 border border-cookie-200 dark:border-cookie-500/30 backdrop-blur-sm shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[10px] font-bold text-chocolate-600 dark:text-caramel uppercase tracking-widest">
                           {COVERAGE_ZONES.length} zonas activas
                         </span>
                       </div>
@@ -803,7 +803,7 @@ export default function DeliveryPage() {
                           initial={{ opacity: 0, y: 12 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 12 }}
-                          className="absolute bottom-4 left-4 right-4 z-[500] bg-[#2C1810]/95 backdrop-blur-md rounded-2xl border border-[#4A2F20] p-4 shadow-xl"
+                          className="absolute bottom-4 left-4 right-4 z-[500] bg-cookie-50 dark:bg-background/98 backdrop-blur-md rounded-2xl border border-cookie-200 dark:border-cookie-500/30 p-4 shadow-xl"
                         >
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
@@ -820,10 +820,10 @@ export default function DeliveryPage() {
                                 />
                               </div>
                               <div>
-                                <p className="text-sm font-black text-vanilla uppercase">
+                                <p className="text-sm font-black text-chocolate-900 dark:text-vanilla uppercase">
                                   {feeState.zone.name}
                                 </p>
-                                <div className="flex items-center gap-3 text-xs text-caramel/50 mt-0.5">
+                                <div className="flex items-center gap-3 text-xs text-chocolate-500 mt-0.5">
                                   <span className="flex items-center gap-1">
                                     <Clock className="w-3 h-3" />
                                     {feeState.zone.time}
@@ -838,9 +838,9 @@ export default function DeliveryPage() {
                               onClick={() =>
                                 setFeeState((p) => ({ ...p, zone: null }))
                               }
-                              className="w-6 h-6 rounded-full bg-[#3A2318] flex items-center justify-center hover:bg-[#4A2F20]"
+                              className="w-6 h-6 rounded-full bg-cookie-100 dark:bg-cookie-900/30 flex items-center justify-center hover:bg-cookie-200"
                             >
-                              <X className="w-3 h-3 text-caramel/60" />
+                              <X className="w-3 h-3 text-chocolate-500" />
                             </button>
                           </div>
                         </motion.div>
@@ -851,8 +851,8 @@ export default function DeliveryPage() {
                   {/* Panel de datos */}
                   <div className="flex flex-col gap-5">
                     {/* Nombre y tipo */}
-                    <div className="bg-[#3A2318]/40 border border-[#4A2F20] rounded-2xl p-5 space-y-4">
-                      <p className="text-[10px] uppercase tracking-widest font-bold text-caramel/30">
+                    <div className="bg-white dark:bg-background-surface border border-cookie-200 dark:border-cookie-500/30 rounded-2xl p-5 space-y-4 shadow-sm">
+                      <p className="text-[10px] uppercase tracking-widest font-bold text-chocolate-500 dark:text-caramel">
                         Nombre y tipo
                       </p>
                       <input
@@ -860,7 +860,7 @@ export default function DeliveryPage() {
                         value={addrLabel}
                         onChange={(e) => setAddrLabel(e.target.value)}
                         placeholder="Ej: Casa, Trabajo, Universidad..."
-                        className="w-full px-4 py-3 rounded-xl bg-[#2C1810] border border-[#4A2F20] text-vanilla text-sm placeholder-caramel/30 focus:outline-none focus:border-cookie-500/60 transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-cookie-50 dark:bg-background border border-cookie-200 dark:border-cookie-500/30 text-chocolate-900 dark:text-vanilla text-sm placeholder-chocolate-400 focus:outline-none focus:border-cookie-400 transition-all"
                       />
                       <div className="flex gap-2">
                         {ADDR_ICONS.map(({ id, label, Icon }) => (
@@ -871,24 +871,24 @@ export default function DeliveryPage() {
                             className={cn(
                               "flex-1 flex flex-col items-center gap-1.5 py-3 rounded-xl border transition-all",
                               addrIcon === id
-                                ? "bg-cookie-500/20 border-cookie-500/40"
-                                : "bg-[#2C1810] border-[#4A2F20] hover:border-[#5D3A2B]",
+                                ? "bg-cookie-200 border-cookie-400"
+                                : "bg-cookie-50 dark:bg-background border-cookie-200 dark:border-cookie-500/30 hover:border-cookie-300",
                             )}
                           >
                             <Icon
                               className={cn(
                                 "w-4 h-4",
                                 addrIcon === id
-                                  ? "text-cookie-400"
-                                  : "text-caramel/40",
+                                  ? "text-cookie-600 dark:text-cookie-400"
+                                  : "text-chocolate-400",
                               )}
                             />
                             <span
                               className={cn(
                                 "text-[9px] font-bold",
                                 addrIcon === id
-                                  ? "text-cookie-400"
-                                  : "text-caramel/30",
+                                  ? "text-cookie-600 dark:text-cookie-400"
+                                  : "text-chocolate-400",
                               )}
                             >
                               {label}
@@ -899,32 +899,32 @@ export default function DeliveryPage() {
                     </div>
 
                     {/* Ubicación */}
-                    <div className="bg-[#3A2318]/40 border border-[#4A2F20] rounded-2xl p-5 space-y-3">
-                      <p className="text-[10px] uppercase tracking-widest font-bold text-caramel/30">
+                    <div className="bg-white dark:bg-background-surface border border-cookie-200 dark:border-cookie-500/30 rounded-2xl p-5 space-y-3 shadow-sm">
+                      <p className="text-[10px] uppercase tracking-widest font-bold text-chocolate-500 dark:text-caramel">
                         Ubicacion
                       </p>
                       <div className="relative">
-                        <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-cookie-700" />
+                        <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-cookie-500" />
                         <input
                           type="text"
                           value={addrText}
                           onChange={(e) => setAddrText(e.target.value)}
                           placeholder="Se llena al hacer clic en el mapa"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#2C1810] border border-[#4A2F20] text-vanilla text-sm placeholder-caramel/30 focus:outline-none focus:border-cookie-500/60 transition-all"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-cookie-50 dark:bg-background border border-cookie-200 dark:border-cookie-500/30 text-chocolate-900 dark:text-vanilla text-sm placeholder-chocolate-400 focus:outline-none focus:border-cookie-400 transition-all"
                         />
                       </div>
                       <div className="relative">
-                        <Link2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-cookie-700" />
+                        <Link2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-cookie-500" />
                         <input
                           type="text"
                           value={mapsUrl}
                           onChange={(e) => setMapsUrl(e.target.value)}
                           placeholder="Pega tu link de Google Maps (opcional)"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#2C1810] border border-[#4A2F20] text-vanilla text-sm placeholder-caramel/30 focus:outline-none focus:border-cookie-500/60 transition-all"
+                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-cookie-50 dark:bg-background border border-cookie-200 dark:border-cookie-500/30 text-chocolate-900 dark:text-vanilla text-sm placeholder-chocolate-400 focus:outline-none focus:border-cookie-400 transition-all"
                         />
                       </div>
                       {mapsUrl && (
-                        <p className="text-[11px] text-cookie-400/60 pl-1">
+                        <p className="text-[11px] text-cookie-500 pl-1">
                           El link se incluira en el WhatsApp para el repartidor.
                         </p>
                       )}
@@ -937,7 +937,7 @@ export default function DeliveryPage() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="flex items-center gap-2 p-3 rounded-xl bg-red-950/40 border border-red-800/30 text-xs text-red-400"
+                          className="flex items-center gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600"
                         >
                           <WifiOff className="w-3.5 h-3.5 shrink-0" />
                           {locationError}
@@ -955,20 +955,20 @@ export default function DeliveryPage() {
                           className={cn(
                             "p-4 rounded-xl border flex items-center gap-3",
                             feeState.inCoverage
-                              ? "bg-emerald-950/30 border-emerald-800/30"
-                              : "bg-red-950/30 border-red-800/30",
+                              ? "bg-emerald-50 border-emerald-200"
+                              : "bg-red-50 border-red-200",
                           )}
                         >
                           {feeState.inCoverage ? (
                             <>
-                              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                               <div>
-                                <p className="text-sm font-bold text-emerald-400">
+                                <p className="text-sm font-bold text-emerald-700">
                                   Zona con cobertura
                                 </p>
-                                <p className="text-xs text-caramel/50 mt-0.5">
+                                <p className="text-xs text-chocolate-600 dark:text-caramel mt-0.5">
                                   {feeState.time} · Envio{" "}
-                                  <span className="text-cookie-400 font-bold">
+                                  <span className="text-cookie-600 dark:text-cookie-400 font-bold">
                                     ${feeState.fee.toFixed(2)}
                                   </span>
                                   {feeState.zone && ` · ${feeState.zone.name}`}
@@ -977,12 +977,12 @@ export default function DeliveryPage() {
                             </>
                           ) : (
                             <>
-                              <XCircle className="w-5 h-5 text-red-400 shrink-0" />
+                              <XCircle className="w-5 h-5 text-red-500 shrink-0" />
                               <div>
-                                <p className="text-sm font-bold text-red-400">
+                                <p className="text-sm font-bold text-red-600">
                                   Fuera de cobertura
                                 </p>
-                                <p className="text-xs text-caramel/50 mt-0.5">
+                                <p className="text-xs text-chocolate-600 dark:text-caramel mt-0.5">
                                   Intenta otra ubicacion.
                                 </p>
                               </div>
@@ -994,7 +994,7 @@ export default function DeliveryPage() {
 
                     {/* Botones */}
                     {saveError && (
-                      <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/30 text-xs text-red-400">
+                      <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600">
                         {saveError}
                       </div>
                     )}
@@ -1005,7 +1005,7 @@ export default function DeliveryPage() {
                           setMode("list");
                           setSaveError(null);
                         }}
-                        className="flex-1 py-3 rounded-xl border border-[#4A2F20] text-caramel/60 hover:text-cookie-400 hover:border-cookie-500/40 transition-all text-sm font-bold"
+                        className="flex-1 py-3 rounded-xl border border-cookie-200 dark:border-cookie-500/30 text-chocolate-600 dark:text-caramel hover:text-cookie-600 dark:text-cookie-400 hover:border-cookie-400 transition-all text-sm font-bold bg-white dark:bg-background-surface"
                       >
                         Cancelar
                       </button>
@@ -1017,8 +1017,8 @@ export default function DeliveryPage() {
                         className={cn(
                           "flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all",
                           canSave
-                            ? "bg-gradient-to-r from-cookie-500 to-chocolate-600 text-white shadow-[0_8px_30px_rgba(139,69,19,0.3)]"
-                            : "bg-[#3A2318]/50 text-[#5D3A2B] border border-[#3A2318] cursor-not-allowed",
+                            ? "bg-gradient-to-r from-cookie-500 to-chocolate-600 text-white shadow-cookie"
+                            : "bg-cookie-100 dark:bg-cookie-900/30 text-chocolate-400 border border-cookie-200 dark:border-cookie-500/30 cursor-not-allowed",
                         )}
                       >
                         {isSaving ? (
@@ -1046,7 +1046,7 @@ export default function DeliveryPage() {
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#3A2318]/60 border border-[#4A2F20] text-cookie-400 text-xs font-black uppercase tracking-[0.25em] mb-4"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-300 text-cookie-600 dark:text-cookie-400 text-xs font-black uppercase tracking-[0.25em] mb-4"
             >
               <Map className="w-4 h-4" /> Cobertura actual
             </motion.div>
@@ -1055,7 +1055,7 @@ export default function DeliveryPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-display text-3xl sm:text-4xl font-bold text-vanilla"
+              className="font-display text-3xl sm:text-4xl font-bold text-chocolate-900 dark:text-vanilla"
             >
               Zonas de{" "}
               <span className="bg-gradient-to-r from-cookie-400 to-caramel bg-clip-text text-transparent">
@@ -1071,7 +1071,7 @@ export default function DeliveryPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-gradient-to-br from-background-light via-background-surface to-background-light  border border-[#4A2F20] shadow-lg"
+                className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-white dark:bg-background-surface border border-cookie-200 dark:border-cookie-500/30 shadow-sm"
               >
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center"
@@ -1083,10 +1083,10 @@ export default function DeliveryPage() {
                   <MapPin className="w-5 h-5" style={{ color: zone.color }} />
                 </div>
                 <div className="text-center">
-                  <p className="text-xs font-black text-vanilla uppercase tracking-tight mb-1">
+                  <p className="text-xs font-black text-chocolate-900 dark:text-vanilla uppercase tracking-tight mb-1">
                     {zone.name}
                   </p>
-                  <p className="text-[10px] text-caramel/40 mb-1">
+                  <p className="text-[10px] text-chocolate-500 dark:text-caramel mb-1">
                     {zone.time}
                   </p>
                   <p
@@ -1095,7 +1095,7 @@ export default function DeliveryPage() {
                   >
                     Envio ${zone.fee.toFixed(2)}
                   </p>
-                  <p className="text-[9px] text-caramel/25 mt-0.5">
+                  <p className="text-[9px] text-chocolate-400 dark:text-caramel/70 mt-0.5">
                     Min. {zone.minOrder}
                   </p>
                 </div>
@@ -1112,24 +1112,24 @@ export default function DeliveryPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-background-light to-background-light  border-[#4A2F20]"
+            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-cookie-100 to-cookie-200 dark:from-background-surface dark:to-background border border-cookie-300 dark:border-cookie-700"
           >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-br from-background-light via-background-surface to-background-light" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cookie-400/30 to-transparent" />
             <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10">
               <div className="text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start gap-2 mb-3">
-                  <Sparkles className="w-4 h-4 text-chocolate-600 dark:text-cookie-400 animate-pulse" />
-                  <span className="text-[11px] font-black uppercase tracking-[0.3em] text-chocolate-600 dark:text-cookie-400">
+                  <Sparkles className="w-4 h-4 text-cookie-600 dark:text-cookie-400 animate-pulse" />
+                  <span className="text-[11px] font-black uppercase tracking-[0.3em] text-cookie-600 dark:text-cookie-400">
                     Oferta de bienvenida
                   </span>
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-vanilla mb-2">
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-chocolate-900 dark:text-vanilla mb-2">
                   Primer pedido con{" "}
-                  <span className="bg-gradient-to-r from-chocolate-400 to-caramel bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-chocolate-600 to-chocolate-400 bg-clip-text text-transparent">
                     20% OFF
                   </span>
                 </h3>
-                <p className="text-xs text-chocolate-600 dark:text-cookie-400/40 max-w-xs">
+                <p className="text-xs text-chocolate-600 dark:text-caramel max-w-xs">
                   Registrate y recibe envio gratis en tu primera compra.
                 </p>
               </div>

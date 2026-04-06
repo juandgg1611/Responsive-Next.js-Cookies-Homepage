@@ -200,7 +200,7 @@ export default function ProductsSection() {
               className="relative group"
             >
               {/* Card principal */}
-              <div className="h-full bg-gradient-to-br from-background-dark to-background rounded-cookie-lg sm:rounded-cookie-xl border border-border-dark shadow-cookie-lg hover:shadow-cookie-xl transition-all duration-300 hover:border-cookie-500/40 overflow-hidden">
+              <div className="h-full flex flex-col bg-gradient-to-br from-background-dark to-background rounded-cookie-lg sm:rounded-cookie-xl border border-border-dark shadow-cookie-lg hover:shadow-cookie-xl transition-all duration-300 hover:border-cookie-500/40 overflow-hidden">
                 {/* Badge */}
                 {product.badge && (
                   <div className="absolute top-4 left-4 z-10">
@@ -250,7 +250,7 @@ export default function ProductsSection() {
                 </div>
 
                 {/* Contenido */}
-                <div className="p-5 sm:p-6">
+                <div className="p-5 sm:p-6 flex flex-col flex-1">
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-3">
                     {[...Array(5)].map((_, i) => (
@@ -275,12 +275,12 @@ export default function ProductsSection() {
                   <h3 className="text-lg sm:text-xl font-semibold text-vanilla mb-2 group-hover:text-white transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-caramel mb-4 line-clamp-2">
+                  <p className="text-sm text-caramel mb-4 line-clamp-2 flex-1">
                     {product.description}
                   </p>
 
                   {/* Precio y botón */}
-                  <div className="flex items-center justify-between mt-auto">
+                  <div className="flex items-center justify-between">
                     <div>
                       <span className="text-2xl font-bold text-cookie-400">
                         ${product.price}

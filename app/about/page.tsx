@@ -140,9 +140,9 @@ export default function AboutSection() {
       id="about"
       className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden"
     >
-      {/* Fondo OSCURO */}
-      <div className="absolute inset-0 bg-background -z-20" />
-      <div className="absolute inset-0 bg-gradient-to-br from-background-dark via-background to-background-dark -z-20" />
+      {/* Fondo claro */}
+      <div className="absolute inset-0 bg-cookie-50 dark:bg-background -z-20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-cookie-50 via-cookie-100 to-cookie-50 dark:from-background dark:via-background dark:to-background-dark -z-20" />
       <div className="absolute inset-0 texture-cookie opacity-[0.03] -z-10" />
 
       {/* Elementos decorativos de fondo */}
@@ -185,7 +185,7 @@ export default function AboutSection() {
             <CookieBadge text="Nuestra Historia" />
           </div>
 
-          <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-vanilla leading-tight">
+          <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-chocolate-900 dark:text-vanilla leading-tight">
             Una pasión que se{" "}
             <span className="relative inline-block">
               <span className="text-transparent bg-clip-text bg-gradient-cookie">
@@ -201,7 +201,7 @@ export default function AboutSection() {
             </span>
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg lg:text-xl text-caramel max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-6 text-base sm:text-lg lg:text-xl text-chocolate-600 dark:text-caramel max-w-3xl mx-auto leading-relaxed">
             Desde nuestro humilde comienzo en una pequeña cocina familiar hasta
             convertirnos en referencia de la repostería artesanal premium.
           </p>
@@ -217,7 +217,7 @@ export default function AboutSection() {
             transition={{ duration: 0.8 }}
             className="order-2 lg:order-1"
           >
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold mb-4 sm:mb-6 text-vanilla">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold mb-4 sm:mb-6 text-chocolate-900 dark:text-vanilla">
               Nuestra{" "}
               <span className="text-transparent bg-clip-text bg-gradient-cookie">
                 Filosofía
@@ -225,19 +225,19 @@ export default function AboutSection() {
             </h3>
 
             <div className="space-y-4 sm:space-y-6">
-              <p className="text-sm sm:text-base lg:text-lg text-caramel leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-chocolate-600 dark:text-caramel leading-relaxed">
                 En Vian Cookies creemos que las mejores galletas nacen de la
                 combinación perfecta entre tradición, ingredientes excepcionales
                 y, sobre todo, mucho amor.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-caramel leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-chocolate-600 dark:text-caramel leading-relaxed">
                 Cada mañana, nuestros maestros reposteros seleccionan
                 personalmente los ingredientes, respetando siempre la
                 estacionalidad y procedencia local cuando es posible.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-caramel leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-chocolate-600 dark:text-caramel leading-relaxed">
                 Rechazamos los atajos industriales. Nuestras galletas se hornean
                 en pequeños lotes, vigilando cada detalle del proceso para
                 garantizar esa textura y sabor inigualables que nuestros
@@ -260,10 +260,10 @@ export default function AboutSection() {
                     <value.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-sm sm:text-base text-vanilla group-hover:text-cookie-400 transition-colors">
+                    <h4 className="font-semibold text-sm sm:text-base text-chocolate-900 dark:text-vanilla group-hover:text-cookie-600 dark:group-hover:text-cookie-400 transition-colors">
                       {value.title}
                     </h4>
-                    <p className="text-xs sm:text-sm text-caramel">
+                    <p className="text-xs sm:text-sm text-chocolate-600 dark:text-caramel">
                       {value.desc}
                     </p>
                   </div>
@@ -529,7 +529,7 @@ export default function AboutSection() {
                   <h4 className="text-lg sm:text-xl font-semibold mb-1 text-vanilla group-hover:text-cookie-400 transition-colors">
                     {member.name}
                   </h4>
-                  <div className="text-sm sm:text-base text-cookie-400 mb-3 font-medium flex items-center gap-2">
+                  <div className="text-sm sm:text-base text-chocolate-900 dark:text-cookie-400 mb-3 font-medium flex items-center gap-2">
                     <member.roleIcon className="w-4 h-4" />
                     {member.role}
                   </div>

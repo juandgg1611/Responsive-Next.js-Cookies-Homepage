@@ -132,13 +132,13 @@ const ContactoPageContent = () => {
 
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-background to-background-dark">
+      <div className="min-h-screen bg-cookie-50 dark:bg-background">
         <div className="container mx-auto px-4 py-12">
-          <div className="h-12 w-48 bg-cookie-800/50 rounded-xl mx-auto mb-8 animate-pulse"></div>
-          <div className="h-6 w-64 bg-cookie-800/50 rounded-xl mx-auto mb-12 animate-pulse"></div>
+          <div className="h-12 w-48 bg-cookie-200 dark:bg-cookie-800/50 rounded-xl mx-auto mb-8 animate-pulse"></div>
+          <div className="h-6 w-64 bg-cookie-200 dark:bg-cookie-800/50 rounded-xl mx-auto mb-12 animate-pulse"></div>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="h-96 bg-cookie-800/50 rounded-2xl animate-pulse"></div>
-            <div className="h-96 bg-cookie-800/50 rounded-2xl animate-pulse"></div>
+            <div className="h-96 bg-cookie-200 dark:bg-cookie-800/50 rounded-2xl animate-pulse"></div>
+            <div className="h-96 bg-cookie-200 dark:bg-cookie-800/50 rounded-2xl animate-pulse"></div>
           </div>
         </div>
       </div>
@@ -146,7 +146,7 @@ const ContactoPageContent = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-background-dark">
+    <div className="min-h-screen bg-cookie-50 dark:bg-background">
       {/* Hero Section con Colores de Galleta */}
       <HeroSection />
 
@@ -187,7 +187,7 @@ const ContactoPageContent = () => {
 
 // Hero Section con Colores de Galleta
 const HeroSection = () => (
-  <div className="relative bg-gradient-to-br from-cookie-950 via-background to-chocolate-950 py-20 md:py-28 overflow-hidden">
+  <div className="relative bg-gradient-to-br from-cookie-200 via-cookie-50 to-cookie-200 dark:from-background-dark dark:via-background dark:to-background-dark py-20 md:py-28 overflow-hidden">
     {/* Elementos decorativos (chispas de chocolate) */}
     <motion.div
       animate={{
@@ -243,20 +243,20 @@ const HeroSection = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <Badge className="mb-6 px-6 py-3 text-sm font-semibold bg-gradient-to-r from-cookie-600 to-chocolate-600 text-vanilla border-0 shadow-lg shadow-cookie-600/30">
+        <Badge className="mb-6 px-6 py-3 text-sm font-semibold bg-gradient-to-r from-cookie-500 to-chocolate-500 text-white border-0 shadow-lg shadow-cookie-600/30">
           <Sparkles className="h-4 w-4 mr-2 animate-pulse" />
           Horneado con Amor
         </Badge>
 
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-vanilla mb-6">
-          <span className="bg-gradient-to-r from-cookie-400 to-caramel bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-chocolate-900 dark:text-vanilla mb-6">
+          <span className="bg-gradient-to-r from-cookie-600 to-chocolate-600 dark:to-caramel bg-clip-text text-transparent">
             Endulza
           </span>
           <br />
           tu día con nosotros
         </h1>
 
-        <p className="text-xl text-caramel max-w-2xl mx-auto mb-8">
+        <p className="text-xl text-chocolate-600 dark:text-caramel max-w-2xl mx-auto mb-8">
           Estamos aquí para resolver tus dudas, tomar tu pedido o simplemente
           hablar de galletas. ¡Tu opinión es el ingrediente secreto!
         </p>
@@ -270,7 +270,7 @@ const HeroSection = () => (
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cookie-900/50 to-chocolate-900/50 border border-cookie-500/30 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cookie-100 to-cookie-200 dark:to-chocolate-900/50 border border-cookie-300 dark:border-cookie-500/30 backdrop-blur-sm"
         >
           <div className="flex -space-x-2">
             {[1, 2, 3].map((i) => (
@@ -284,11 +284,11 @@ const HeroSection = () => (
                   repeat: Infinity,
                   delay: i * 0.3,
                 }}
-                className="w-8 h-8 rounded-full bg-gradient-to-br from-cookie-400 to-chocolate-400 border-2 border-vanilla"
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-cookie-400 to-chocolate-400 border-2 border-white"
               />
             ))}
           </div>
-          <span className="text-vanilla font-medium">
+          <span className="text-chocolate-800 dark:text-vanilla font-medium">
             +5,000 clientes satisfechos
           </span>
         </motion.div>
@@ -305,35 +305,35 @@ const DeliveryZonesSection = () => {
       time: "20min",
       gradient: "from-cookie-400 to-chocolate-500",
       icon: <Compass />,
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       name: "Sur",
       time: "40min",
       gradient: "from-cookie-500 to-chocolate-600",
       icon: <Navigation />,
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       name: "Este",
       time: "25min",
       gradient: "from-cookie-400 to-chocolate-500",
       icon: <Sun />,
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       name: "Oeste",
       time: "25min",
       gradient: "from-cookie-500 to-chocolate-600",
       icon: <Moon />,
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       name: "Centro",
       time: "30min",
       gradient: "from-cookie-400 to-chocolate-500",
       icon: <Target />,
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
   ];
 
@@ -342,13 +342,13 @@ const DeliveryZonesSection = () => {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-background-surface to-chocolate-950/50 border border-cookie-500/30"
+      className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-cookie-50 to-cookie-100 dark:from-background dark:to-background-dark border border-cookie-200 dark:border-cookie-500/30"
     >
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-display font-bold text-vanilla mb-2">
-          Zonas de <span className="text-cookie-400">entrega</span>
+        <h2 className="text-3xl font-display font-bold text-chocolate-900 dark:text-vanilla mb-2">
+          Zonas de <span className="text-cookie-600 dark:text-cookie-400">entrega</span>
         </h2>
-        <p className="text-caramel">
+        <p className="text-chocolate-600 dark:text-caramel">
           Llevamos nuestras galletas recién horneadas a toda la ciudad
         </p>
       </div>
@@ -366,7 +366,7 @@ const DeliveryZonesSection = () => {
           >
             <Card
               className={cn(
-                "relative border-2 border-cookie-500/30 bg-background-surface group-hover:border-cookie-400 transition-all duration-300",
+                "relative border-2 border-cookie-200 dark:border-cookie-500/30 bg-white dark:bg-background-surface group-hover:border-cookie-400 transition-all duration-300",
                 zone.bg,
               )}
             >
@@ -387,7 +387,7 @@ const DeliveryZonesSection = () => {
                 >
                   {zone.icon}
                 </motion.div>
-                <h3 className="text-xl font-bold text-vanilla mb-2">
+                <h3 className="text-xl font-bold text-chocolate-900 dark:text-white mb-2">
                   {zone.name}
                 </h3>
                 <Badge
@@ -472,10 +472,10 @@ const ScheduleSection = () => {
       className="space-y-6"
     >
       <div className="text-center">
-        <h2 className="text-3xl font-display font-bold text-vanilla mb-2">
-          Horarios de <span className="text-cookie-400">horneado</span>
+        <h2 className="text-3xl font-display font-bold text-chocolate-900 dark:text-vanilla mb-2">
+          Horarios de <span className="text-cookie-600 dark:text-cookie-400">horneado</span>
         </h2>
-        <p className="text-caramel">
+        <p className="text-chocolate-600 dark:text-caramel">
           WhatsApp siempre disponible para pedidos urgentes
         </p>
       </div>
@@ -490,10 +490,10 @@ const ScheduleSection = () => {
             transition={{ delay: index * 0.05 }}
             whileHover={{ scale: 1.05, y: -5 }}
             className={cn(
-              "p-4 rounded-xl border-2 text-center transition-all bg-background-surface",
+              "p-4 rounded-xl border-2 text-center transition-all bg-white dark:bg-background-surface",
               item.day === "Domingo"
-                ? "border-cookie-500 bg-cookie-900/30"
-                : "border-cookie-700 hover:border-cookie-500 hover:shadow-cookie",
+                ? "border-cookie-400 dark:border-cookie-500 bg-cookie-50 dark:bg-cookie-900/30"
+                : "border-cookie-200 dark:border-cookie-700 hover:border-cookie-400 dark:hover:border-cookie-500 hover:shadow-cookie",
             )}
           >
             <motion.div
@@ -505,18 +505,18 @@ const ScheduleSection = () => {
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="w-8 h-8 mx-auto mb-2 text-cookie-400"
+              className="w-8 h-8 mx-auto mb-2 text-cookie-600 dark:text-cookie-400"
             >
               {item.icon}
             </motion.div>
-            <h3 className="font-semibold text-vanilla mb-2">{item.day}</h3>
-            <p className="text-sm text-caramel mb-2">{item.hours}</p>
+            <h3 className="font-semibold text-chocolate-900 dark:text-vanilla mb-2">{item.day}</h3>
+            <p className="text-sm text-chocolate-600 dark:text-caramel mb-2">{item.hours}</p>
             <Badge
               variant={item.day === "Domingo" ? "outline" : "default"}
               className={cn(
                 item.day === "Domingo"
-                  ? "border-cookie-400 text-cookie-400 bg-transparent"
-                  : "bg-cookie-500/20 text-cookie-400 border-cookie-500/30",
+                  ? "border-cookie-400 text-cookie-600 dark:text-cookie-400 bg-cookie-50 dark:bg-transparent"
+                  : "bg-cookie-100 dark:bg-cookie-500/20 text-cookie-600 dark:text-cookie-400 border-cookie-300 dark:border-cookie-500/30",
               )}
             >
               {item.status}
@@ -536,28 +536,28 @@ const StatsSection = () => {
       label: "WhatsApp",
       icon: <MessageCircle />,
       gradient: "from-cookie-400 to-chocolate-500",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       value: "<1h",
       label: "Tiempo de respuesta",
       icon: <Clock />,
       gradient: "from-cookie-500 to-chocolate-600",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       value: "5K+",
       label: "Clientes atendidos",
       icon: <Users />,
       gradient: "from-cookie-400 to-chocolate-500",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       value: "100%",
       label: "Satisfacción",
       icon: <ThumbsUp />,
       gradient: "from-cookie-500 to-chocolate-600",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
   ];
 
@@ -580,7 +580,7 @@ const StatsSection = () => {
         >
           <Card
             className={cn(
-              "relative border-2 border-cookie-500/30 group-hover:border-cookie-400 transition-all duration-300",
+              "relative border-2 border-cookie-200 dark:border-cookie-500/30 group-hover:border-cookie-400 transition-all duration-300",
               stat.bg,
             )}
           >
@@ -601,10 +601,10 @@ const StatsSection = () => {
               >
                 {stat.icon}
               </motion.div>
-              <div className="text-2xl font-bold text-vanilla mb-1">
+              <div className="text-2xl font-bold text-chocolate-900 dark:text-vanilla mb-1">
                 {stat.value}
               </div>
-              <div className="text-sm text-caramel">{stat.label}</div>
+              <div className="text-sm text-chocolate-600 dark:text-caramel">{stat.label}</div>
             </CardContent>
           </Card>
         </motion.div>
@@ -644,14 +644,14 @@ const QuickTestimonialsSection = () => {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-8 p-8 rounded-2xl bg-gradient-to-br from-background-surface to-chocolate-950/50 border border-cookie-500/30"
+      className="mt-8 p-8 rounded-2xl bg-gradient-to-br from-cookie-50 to-cookie-100 dark:from-background dark:to-background-dark border border-cookie-200 dark:border-cookie-500/30"
     >
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-display font-bold text-vanilla mb-2">
+        <h2 className="text-3xl font-display font-bold text-chocolate-900 dark:text-vanilla mb-2">
           Opiniones con{" "}
-          <span className="text-cookie-400">chispas de chocolate</span>
+          <span className="text-cookie-600 dark:text-cookie-400">chispas de chocolate</span>
         </h2>
-        <p className="text-caramel">Experiencias reales de nuestros clientes</p>
+        <p className="text-chocolate-600 dark:text-caramel">Experiencias reales de nuestros clientes</p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -663,7 +663,7 @@ const QuickTestimonialsSection = () => {
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ scale: 1.05 }}
-            className="p-6 rounded-xl bg-background-surface border border-cookie-500/30 shadow-cookie"
+            className="p-6 rounded-xl bg-white dark:bg-background-surface border border-cookie-200 dark:border-cookie-500/30 shadow-cookie"
           >
             <div className="flex items-center gap-1 mb-3">
               {[...Array(testimonial.rating)].map((_, i) => (
@@ -682,14 +682,14 @@ const QuickTestimonialsSection = () => {
                 </motion.div>
               ))}
             </div>
-            <p className="text-caramel mb-4">
+            <p className="text-chocolate-600 dark:text-caramel mb-4">
               &ldquo;{testimonial.comment}&rdquo;
             </p>
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-vanilla">
+              <span className="font-semibold text-chocolate-900 dark:text-vanilla">
                 {testimonial.name}
               </span>
-              <Badge className="bg-gradient-to-r from-cookie-500/20 to-chocolate-600/20 text-cookie-400 border-cookie-500/30">
+              <Badge className="bg-cookie-100 dark:bg-cookie-500/20 text-cookie-600 dark:text-cookie-400 border-cookie-300 dark:border-cookie-500/30">
                 {testimonial.product}
               </Badge>
             </div>
@@ -709,14 +709,14 @@ const QuickFAQSection = () => {
         "Elige tus galletas favoritas, contáctanos por WhatsApp y coordinamos la entrega.",
       icon: <ShoppingBag />,
       gradient: "from-cookie-400 to-chocolate-500",
-      bg: "bg-cookie-900/30",
+      bg: "dark:bg-cookie-900/30",
     },
     {
       question: "¿Hacen envíos a domicilio?",
       answer: "Sí, entregamos en todas las zonas de la ciudad en 15-45min.",
       icon: <Truck />,
       gradient: "from-cookie-500 to-chocolate-600",
-      bg: "bg-cookie-900/30",
+      bg: "dark:bg-cookie-900/30",
     },
     {
       question: "¿Trabajan con ingredientes naturales?",
@@ -724,14 +724,14 @@ const QuickFAQSection = () => {
         "100% ingredientes naturales, sin conservantes. Horneamos diario.",
       icon: <Shield />,
       gradient: "from-cookie-400 to-chocolate-500",
-      bg: "bg-cookie-900/30",
+      bg: "dark:bg-cookie-900/30",
     },
     {
       question: "¿Aceptan pagos electrónicos?",
       answer: "Sí, aceptamos transferencias, pago móvil y efectivo al recibir.",
       icon: <CreditCard />,
       gradient: "from-cookie-500 to-chocolate-600",
-      bg: "bg-cookie-900/30",
+      bg: "dark:bg-cookie-900/30",
     },
   ];
 
@@ -743,10 +743,10 @@ const QuickFAQSection = () => {
       className="space-y-6"
     >
       <div className="text-center">
-        <h2 className="text-3xl font-display font-bold text-vanilla mb-2">
-          Preguntas <span className="text-cookie-400">frecuentes</span>
+        <h2 className="text-3xl font-display font-bold text-chocolate-900 dark:text-vanilla mb-2">
+          Preguntas <span className="text-cookie-600 dark:text-cookie-400">frecuentes</span>
         </h2>
-        <p className="text-caramel">
+        <p className="text-chocolate-600 dark:text-caramel">
           Las dudas más comunes sobre nuestras galletas
         </p>
       </div>
@@ -761,7 +761,7 @@ const QuickFAQSection = () => {
             transition={{ delay: index * 0.1 }}
             whileHover={{ scale: 1.02, x: 5 }}
             className={cn(
-              "p-6 rounded-xl bg-background-surface border border-cookie-500/30 hover:border-cookie-400 transition-all group",
+              "p-6 rounded-xl bg-white dark:bg-background-surface border border-cookie-200 dark:border-cookie-500/30 hover:border-cookie-400 transition-all group",
               faq.bg,
             )}
           >
@@ -783,10 +783,10 @@ const QuickFAQSection = () => {
                 {faq.icon}
               </motion.div>
               <div>
-                <h3 className="text-lg font-bold text-vanilla mb-2">
+                <h3 className="text-lg font-bold text-chocolate-900 dark:text-vanilla mb-2">
                   {faq.question}
                 </h3>
-                <p className="text-caramel">{faq.answer}</p>
+                <p className="text-chocolate-600 dark:text-caramel">{faq.answer}</p>
               </div>
             </div>
           </motion.div>
@@ -796,7 +796,7 @@ const QuickFAQSection = () => {
       <div className="text-center">
         <Button
           variant="link"
-          className="text-cookie-400 hover:text-cookie-300"
+          className="text-cookie-600 dark:text-cookie-400 hover:text-cookie-500 dark:hover:text-cookie-300"
           onClick={() => (window.location.href = "/faq")}
         >
           Ver todas las preguntas
@@ -816,7 +816,7 @@ const SocialSection = () => {
       followers: "2.5K",
       link: "https://instagram.com/tusgalletas",
       gradient: "from-cookie-400 to-chocolate-500",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       name: "Facebook",
@@ -824,7 +824,7 @@ const SocialSection = () => {
       followers: "1.8K",
       link: "https://facebook.com/tusgalletas",
       gradient: "from-cookie-500 to-chocolate-600",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       name: "WhatsApp",
@@ -832,7 +832,7 @@ const SocialSection = () => {
       followers: "24/7",
       link: "https://wa.me/584141234567",
       gradient: "from-cookie-400 to-chocolate-500",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
     {
       name: "TikTok",
@@ -840,7 +840,7 @@ const SocialSection = () => {
       followers: "Pronto",
       link: "#",
       gradient: "from-cookie-500 to-chocolate-600",
-      bg: "bg-cookie-900/30",
+      bg: "bg-white dark:bg-cookie-900/30",
     },
   ];
 
@@ -852,10 +852,10 @@ const SocialSection = () => {
       className="space-y-6"
     >
       <div className="text-center">
-        <h2 className="text-3xl font-display font-bold text-vanilla mb-2">
-          Síguenos en <span className="text-cookie-400">redes</span>
+        <h2 className="text-3xl font-display font-bold text-chocolate-900 dark:text-vanilla mb-2">
+          Síguenos en <span className="text-cookie-600 dark:text-cookie-400">redes</span>
         </h2>
-        <p className="text-caramel">
+        <p className="text-chocolate-600 dark:text-caramel">
           Enterate de nuevas recetas, promos y el aroma del día
         </p>
       </div>
@@ -876,7 +876,7 @@ const SocialSection = () => {
           >
             <Card
               className={cn(
-                "relative border-2 border-cookie-500/30 group-hover:border-cookie-400 transition-all duration-300",
+                "relative border-2 border-cookie-200 dark:border-cookie-500/30 group-hover:border-cookie-400 transition-all duration-300",
                 social.bg,
               )}
             >
@@ -897,10 +897,10 @@ const SocialSection = () => {
                 >
                   {social.icon}
                 </motion.div>
-                <h3 className="text-xl font-bold text-vanilla mb-1">
+                <h3 className="text-xl font-bold text-chocolate-900 dark:text-vanilla mb-1">
                   {social.name}
                 </h3>
-                <p className="text-sm text-caramel">
+                <p className="text-sm text-chocolate-600 dark:text-caramel">
                   {social.followers} seguidores
                 </p>
               </CardContent>

@@ -50,7 +50,7 @@ export default function ThemeToggle() {
             exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
           >
-            <Moon className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
+            <Moon className="w-5 h-5 text-chocolate-600 group-hover:text-chocolate-900 transition-colors" />
           </motion.div>
         )}
       </AnimatePresence>
