@@ -84,8 +84,8 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
     if (percentage >= 60)
       return {
         level: "Moderada",
-        color: "text-caramel",
-        bg: "bg-caramel",
+        color: "text-vanilla",
+        bg: "bg-vanilla",
         emoji: "",
       };
     if (percentage >= 40)
@@ -154,7 +154,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
           <Lock className="h-5 w-5 text-cookie-400" />
           Nueva Contraseña
         </h3>
-        <p className="text-caramel">
+        <p className="text-vanilla">
           Crea una contraseña tan única como nuestras galletas
         </p>
       </div>
@@ -162,7 +162,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Campo de contraseña */}
         <div className="space-y-3">
-          <label className="block text-sm text-caramel">Nueva contraseña</label>
+          <label className="block text-sm text-vanilla">Nueva contraseña</label>
           <div className="relative group">
             <input
               type={showPassword ? "text" : "password"}
@@ -170,14 +170,14 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Ingresa tu nueva contraseña"
               autoComplete="new-password"
-              className="w-full px-4 py-3 pl-11 pr-11 bg-background-surface/30 backdrop-blur-sm border-2 border-cookie-500/30 rounded-xl text-vanilla placeholder:text-caramel/50 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+              className="w-full px-4 py-3 pl-11 pr-11 bg-background-surface/30 backdrop-blur-sm border-2 border-cookie-500/30 rounded-xl text-vanilla placeholder:text-vanilla/50 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
               autoFocus
             />
-            <Lock className="absolute left-3 top-3 h-4 w-4 text-caramel/60 group-focus-within:text-cookie-400 transition-colors" />
+            <Lock className="absolute left-3 top-3 h-4 w-4 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-3 text-caramel/60 hover:text-cookie-400 transition-colors"
+              className="absolute right-3 top-3 text-vanilla/60 hover:text-cookie-400 transition-colors"
             >
               {showPassword ? (
                 <EyeOff className="h-4 w-4" />
@@ -190,7 +190,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
 
         {/* Campo de confirmación */}
         <div className="space-y-3">
-          <label className="block text-sm text-caramel">
+          <label className="block text-sm text-vanilla">
             Confirmar contraseña
           </label>
           <div className="relative group">
@@ -200,13 +200,13 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Repite tu nueva contraseña"
               autoComplete="new-password"
-              className="w-full px-4 py-3 pl-11 pr-11 bg-background-surface/30 backdrop-blur-sm border-2 border-cookie-500/30 rounded-xl text-vanilla placeholder:text-caramel/50 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+              className="w-full px-4 py-3 pl-11 pr-11 bg-background-surface/30 backdrop-blur-sm border-2 border-cookie-500/30 rounded-xl text-vanilla placeholder:text-vanilla/50 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
             />
-            <Lock className="absolute left-3 top-3 h-4 w-4 text-caramel/60 group-focus-within:text-cookie-400 transition-colors" />
+            <Lock className="absolute left-3 top-3 h-4 w-4 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-3 text-caramel/60 hover:text-cookie-400 transition-colors"
+              className="absolute right-3 top-3 text-vanilla/60 hover:text-cookie-400 transition-colors"
             >
               {showConfirmPassword ? (
                 <EyeOff className="h-4 w-4" />
@@ -220,7 +220,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
         {/* Indicador de fortaleza - Estilo galleta */}
         <div className="bg-gradient-to-br from-background-surface/50 to-background-dark/30 backdrop-blur-sm border border-cookie-500/20 rounded-xl p-4 shadow-cookie-sm">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm text-caramel">Seguridad:</span>
+            <span className="text-sm text-vanilla">Seguridad:</span>
             <span
               className={`font-semibold ${strength.color} flex items-center gap-1`}
             >
@@ -271,10 +271,10 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
                 {validation[req.key] ? (
                   <CheckCircle2 className="h-4 w-4 text-cookie-400" />
                 ) : (
-                  <XCircle className="h-4 w-4 text-caramel/50" />
+                  <XCircle className="h-4 w-4 text-vanilla/50" />
                 )}
                 <span
-                  className={`text-sm ${validation[req.key] ? "text-cookie-400" : "text-caramel/70"}`}
+                  className={`text-sm ${validation[req.key] ? "text-cookie-400" : "text-vanilla/70"}`}
                 >
                   {req.label}
                 </span>
@@ -295,7 +295,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
               <Zap className="h-4 w-4 text-cookie-400" />
             </div>
             <div className="flex-1">
-              <p className="text-sm text-caramel mb-2">
+              <p className="text-sm text-vanilla mb-2">
                 {" "}
                 <span className="font-medium text-vanilla">
                   Sugerencia del chef:
@@ -324,7 +324,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 py-3 px-4 bg-background-surface/30 backdrop-blur-sm border-2 border-cookie-500/30 text-caramel hover:text-cookie-400 rounded-xl font-medium transition-colors hover:border-cookie-400/50"
+              className="flex-1 py-3 px-4 bg-background-surface/30 backdrop-blur-sm border-2 border-cookie-500/30 text-vanilla hover:text-cookie-400 rounded-xl font-medium transition-colors hover:border-cookie-400/50"
             >
               Cancelar
             </button>
@@ -336,7 +336,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
             className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center ${
               isFormValid && !isSubmitting
                 ? "bg-gradient-cookie text-white hover:shadow-cookie-lg hover:scale-[1.02]"
-                : "bg-background-surface/30 text-caramel/50 cursor-not-allowed border-2 border-cookie-500/20"
+                : "bg-background-surface/30 text-vanilla/50 cursor-not-allowed border-2 border-cookie-500/20"
             }`}
           >
             {isSubmitting ? (
@@ -353,7 +353,7 @@ export const NewPasswordForm: React.FC<NewPasswordFormProps> = ({
 
       {/* Nota de seguridad con temática de galletas */}
       <div className="pt-4 border-t border-cookie-500/20">
-        <div className="flex items-start gap-2 text-xs text-caramel/60">
+        <div className="flex items-start gap-2 text-xs text-vanilla/60">
           <Shield className="h-3 w-3 mt-0.5 flex-shrink-0 text-cookie-400" />
           <span>
             Tu contraseña se almacena con la misma seguridad con la que
