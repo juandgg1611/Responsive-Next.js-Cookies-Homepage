@@ -34,6 +34,7 @@ import {
   Gamepad2,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import ThemeToggle from "@/components/features/theme-toggle/theme-toggle";
 
 // ── Animaciones ──────────────────────────────────────────────────────────────
 const floatingAnimation = {
@@ -49,7 +50,7 @@ const DiscordIcon = ({ className }: { className?: string }) => (
     className={className}
     viewBox="0 0 16 16"
   >
-    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612" />
+    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612" />
   </svg>
 );
 
@@ -63,7 +64,7 @@ const pulseGlow = {
 const STATS = [
   { icon: Cookie, label: "50+ variedades", color: "text-cookie-400" },
   { icon: Users, label: "15K+ clientes", color: "text-chocolate-400" },
-  { icon: Truck, label: "Envío 24h", color: "text-caramel" },
+  { icon: Truck, label: "Envío 24h", color: "text-vanilla" },
   { icon: Award, label: "Premium 2024", color: "text-cookie-400" },
 ];
 
@@ -262,7 +263,7 @@ export default function RegisterPage() {
   // ── Vista de éxito (confirmación de email pendiente) ──────────────────────
   if (success && !isLoading) {
     return (
-      <div className="min-h-screen bg-[#2C1810] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -274,7 +275,7 @@ export default function RegisterPage() {
           <h2 className="text-2xl font-bold text-vanilla mb-3">
             ¡Cuenta creada!
           </h2>
-          <p className="text-caramel mb-6">
+          <p className="text-vanilla mb-6">
             Revisa tu bandeja de entrada y confirma tu correo para activar tu
             cuenta.
           </p>
@@ -294,7 +295,7 @@ export default function RegisterPage() {
 
   // ── Vista principal ───────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#2C1810] relative overflow-hidden">
+    <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Fondo decorativo (igual que antes) */}
       <motion.div
         animate={{ scale: [1, 1.5, 1], rotate: [0, 90, 180, 270, 360] }}
@@ -350,7 +351,7 @@ export default function RegisterPage() {
       </motion.div>
       <motion.div
         animate={{ ...floatingAnimation, transition: { delay: 2 } }}
-        className="absolute top-40 right-40 text-caramel/10"
+        className="absolute top-40 right-40 text-vanilla/10"
       >
         <Heart className="w-16 h-16" />
       </motion.div>
@@ -372,18 +373,21 @@ export default function RegisterPage() {
                 <h1 className="text-2xl font-bold text-cookie-500">
                   Vian Cookies
                 </h1>
-                <p className="text-xs text-caramel">Registro de miembros</p>
+                <p className="text-xs text-vanilla">Registro de miembros</p>
               </div>
             </Link>
-            <div className="flex items-center gap-2 text-caramel bg-[#3A2318]/50 px-4 py-2 rounded-full backdrop-blur-sm border border-[#4A2F20] w-fit">
-              <Clock className="h-4 w-4 text-cookie-400" />
-              <span className="text-sm">
-                {new Date().toLocaleDateString("es-ES", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-vanilla bg-background-surface/50 px-4 py-2 rounded-full backdrop-blur-sm border border-border-light w-fit">
+                <Clock className="h-4 w-4 text-cookie-400" />
+                <span className="text-sm">
+                  {new Date().toLocaleDateString("es-ES", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
+              <ThemeToggle />
             </div>
           </div>
         </header>
@@ -410,7 +414,7 @@ export default function RegisterPage() {
                       <User className="w-6 h-6 text-cookie-400" />
                       Crear cuenta
                     </h3>
-                    <p className="text-sm text-caramel mt-1">
+                    <p className="text-sm text-vanilla mt-1">
                       Completa tus datos para registrarte
                     </p>
                   </div>
@@ -448,7 +452,7 @@ export default function RegisterPage() {
                         placeholder="María González"
                         required
                       />
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-caramel/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
                     </div>
                   </div>
 
@@ -467,7 +471,7 @@ export default function RegisterPage() {
                         placeholder="tu@viancookies.com"
                         required
                       />
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-caramel/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
                     </div>
                   </div>
 
@@ -515,11 +519,11 @@ export default function RegisterPage() {
                         placeholder="••••••••"
                         required
                       />
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-caramel/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-caramel/60 hover:text-cookie-400 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-vanilla/60 hover:text-cookie-400 transition-colors"
                       >
                         {showPassword ? (
                           <EyeOff className="w-5 h-5" />
@@ -538,11 +542,11 @@ export default function RegisterPage() {
                             {req.met ? (
                               <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
                             ) : (
-                              <X className="w-3.5 h-3.5 text-caramel/60" />
+                              <X className="w-3.5 h-3.5 text-vanilla/60" />
                             )}
                             <span
                               className={
-                                req.met ? "text-green-400" : "text-caramel/80"
+                                req.met ? "text-green-400" : "text-vanilla/80"
                               }
                             >
                               {req.text}
@@ -568,13 +572,13 @@ export default function RegisterPage() {
                         placeholder="••••••••"
                         required
                       />
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-caramel/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
                       <button
                         type="button"
                         onClick={() =>
                           setShowConfirmPassword(!showConfirmPassword)
                         }
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-caramel/60 hover:text-cookie-400 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-vanilla/60 hover:text-cookie-400 transition-colors"
                       >
                         {showConfirmPassword ? (
                           <EyeOff className="w-5 h-5" />
@@ -599,7 +603,7 @@ export default function RegisterPage() {
                       onChange={(e) => setAcceptTerms(e.target.checked)}
                       className="mt-1 w-4 h-4 rounded border-[#5D3A2B] bg-[#4A2F20] text-cookie-400 focus:ring-cookie-400 focus:ring-offset-0 transition-colors"
                     />
-                    <span className="text-sm text-caramel group-hover:text-cookie-400 transition-colors">
+                    <span className="text-sm text-vanilla group-hover:text-cookie-400 transition-colors">
                       Acepto los términos y condiciones, y autorizo el uso de
                       mis datos para recibir ofertas y novedades.
                     </span>
@@ -652,7 +656,7 @@ export default function RegisterPage() {
                         <div className="w-full border-t border-[#4A2F20]" />
                       </div>
                       <div className="relative flex justify-center text-xs">
-                        <span className="px-3 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-caramel">
+                        <span className="px-3 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-vanilla">
                           o continúa con
                         </span>
                       </div>
@@ -722,7 +726,7 @@ export default function RegisterPage() {
                       <div className="w-full border-t border-[#4A2F20]" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-4 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-caramel">
+                      <span className="px-4 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-vanilla">
                         ¿Ya tienes cuenta?
                       </span>
                     </div>
@@ -733,7 +737,7 @@ export default function RegisterPage() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="button"
-                      className="w-full py-3 bg-[#4A2F20]/40 backdrop-blur-sm border-2 border-[#5D3A2B] text-caramel hover:text-cookie-400 rounded-xl font-semibold hover:border-cookie-500/50 transition-all duration-300"
+                      className="w-full py-3 bg-[#4A2F20]/40 backdrop-blur-sm border-2 border-[#5D3A2B] text-vanilla hover:text-cookie-400 rounded-xl font-semibold hover:border-cookie-500/50 transition-all duration-300"
                     >
                       Iniciar sesión
                     </motion.button>
@@ -742,7 +746,7 @@ export default function RegisterPage() {
                   <div className="mt-4 text-center">
                     <Link
                       href="/"
-                      className="inline-flex items-center gap-2 text-sm text-caramel hover:text-cookie-400 transition-colors group"
+                      className="inline-flex items-center gap-2 text-sm text-vanilla hover:text-cookie-400 transition-colors group"
                     >
                       <span className="w-8 h-px bg-[#4A2F20] group-hover:bg-cookie-400 transition-colors" />
                       <span>Regresar a la tienda</span>
@@ -776,7 +780,7 @@ export default function RegisterPage() {
                   <h2 className="text-3xl md:text-4xl font-display font-bold text-vanilla mb-2">
                     Únete a la familia
                   </h2>
-                  <p className="text-caramel text-lg flex items-center gap-2">
+                  <p className="text-vanilla text-lg flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-cookie-400" />
                     <span>y recibe 20% OFF en tu primera compra</span>
                     <Sparkles className="w-5 h-5 text-cookie-400" />
@@ -823,7 +827,7 @@ export default function RegisterPage() {
                   <h3 className="font-semibold text-vanilla text-sm mb-1">
                     {b.title}
                   </h3>
-                  <p className="text-xs text-caramel">{b.description}</p>
+                  <p className="text-xs text-vanilla">{b.description}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -854,7 +858,7 @@ export default function RegisterPage() {
                       />
                     ))}
                   </div>
-                  <p className="text-xs text-caramel mt-1">
+                  <p className="text-xs text-vanilla mt-1">
                     +15,000 clientes felices
                   </p>
                 </div>
