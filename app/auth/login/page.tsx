@@ -1,3 +1,4 @@
+
 // app/auth/login/page.tsx
 "use client";
 
@@ -27,7 +28,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import ThemeToggle from "@/components/features/theme-toggle/theme-toggle";
 
-// ── Discord Icon ──────────────────────────────────────────────────────
+// ── Discord Icon ──────────────────────────────────────────────────────────────
 const DiscordIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -37,11 +38,11 @@ const DiscordIcon = ({ className }: { className?: string }) => (
     className={className}
     viewBox="0 0 16 16"
   >
-    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612" />
+    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612" />
   </svg>
 );
 
-// ── Animaciones ───────────────────────────────────────────────────────
+// ── Animaciones ───────────────────────────────────────────────────────────────
 const floatingAnimation = {
   y: [0, -15, 0],
   transition: { duration: 5, repeat: Infinity, ease: "easeInOut" },
@@ -88,7 +89,7 @@ const FEATURES = [
   },
 ];
 
-// ── Componente ────────────────────────────────────────────────────────
+// ── Componente ────────────────────────────────────────────────────────────────
 export default function LoginPage() {
   const router = useRouter();
   const supabase = createClient();
@@ -105,7 +106,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  // ── Login con email/password ──────────────────────────────────────
+  // ── Login con email/password ──────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -135,7 +136,7 @@ export default function LoginPage() {
     }
   };
 
-  // ── Login con Google ──────────────────────────────────────────────
+  // ── Login con Google ──────────────────────────────────────────────────────
   const handleGoogleSignIn = async () => {
     setError(null);
     setIsGoogleLoading(true);
@@ -253,11 +254,11 @@ export default function LoginPage() {
                 <h1 className="text-2xl font-bold text-cookie-500">
                   Vian Cookies
                 </h1>
-                <p className="text-xs text-vanilla">Área de miembros</p>
+                <p className="text-xs text-[#D4A574]">Área de miembros</p>
               </div>
             </Link>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-vanilla bg-background-surface/50 px-4 py-2 rounded-full backdrop-blur-sm border border-border-light w-fit">
+              <div className="flex items-center gap-2 text-foreground bg-background-surface/50 px-4 py-2 rounded-full backdrop-blur-sm border border-border-light w-fit">
                 <Clock className="h-4 w-4 text-cookie-400" />
                 <span className="text-sm">
                   {new Date().toLocaleDateString("es-ES", {
@@ -290,11 +291,11 @@ export default function LoginPage() {
               <div className="relative bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 backdrop-blur-xl rounded-3xl p-8 border border-[#4A2F20]/50 shadow-2xl">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <h3 className="text-2xl font-display font-bold text-vanilla flex items-center gap-2">
+                    <h3 className="text-2xl font-display font-bold text-white flex items-center gap-2">
                       <Lock className="w-6 h-6 text-cookie-400" />
                       Iniciar Sesión
                     </h3>
-                    <p className="text-sm text-vanilla mt-1">
+                    <p className="text-sm text-[#D4A574] mt-1">
                       Accede a tu cuenta de miembro
                     </p>
                   </div>
@@ -319,7 +320,7 @@ export default function LoginPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Email */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-vanilla flex items-center gap-2">
+                    <label className="text-sm font-medium text-[#D4A574] flex items-center gap-2">
                       <Mail className="w-4 h-4 text-cookie-400" />
                       Correo electrónico
                     </label>
@@ -328,17 +329,17 @@ export default function LoginPage() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-3 pl-11 bg-[#4A2F20]/60 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl text-vanilla placeholder-caramel/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+                        className="w-full px-4 py-3 pl-11 bg-background/60 backdrop-blur-sm border-2 border-border rounded-xl text-[#D4A574] placeholder-[#D4A574]/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
                         placeholder="tu@viancookies.com"
                         required
                       />
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4A574]/60 group-focus-within:text-cookie-400 transition-colors" />
                     </div>
                   </div>
 
                   {/* Contraseña */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-vanilla flex items-center gap-2">
+                    <label className="text-sm font-medium text-[#D4A574] flex items-center gap-2">
                       <Lock className="w-4 h-4 text-cookie-400" />
                       Contraseña
                     </label>
@@ -347,15 +348,15 @@ export default function LoginPage() {
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-4 py-3 pl-11 pr-11 bg-[#4A2F20]/60 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl text-vanilla placeholder-caramel/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+                        className="w-full px-4 py-3 pl-11 pr-11 bg-background/60 backdrop-blur-sm border-2 border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
                         placeholder="••••••••"
                         required
                       />
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4A574]/60 group-focus-within:text-cookie-400 transition-colors" />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-vanilla/60 hover:text-cookie-400 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#D4A574]/60 hover:text-cookie-400 transition-colors"
                       >
                         {showPassword ? (
                           <EyeOff className="w-5 h-5" />
@@ -375,13 +376,11 @@ export default function LoginPage() {
                         onChange={(e) => setRememberMe(e.target.checked)}
                         className="w-4 h-4 rounded border-[#5D3A2B] bg-[#4A2F20] text-cookie-400 focus:ring-cookie-400 focus:ring-offset-0 transition-colors"
                       />
-                      <span className="text-sm text-vanilla group-hover:text-cookie-400 transition-colors">
-                        Recordarme
-                      </span>
+                      <span className="text-sm text-white group-hover:text-cookie-400 transition-colors">Recordarme</span>
                     </label>
                     <Link
                       href="/auth/recover"
-                      className="text-sm text-vanilla hover:text-cookie-400 transition-colors relative group"
+                      className="text-sm text-white hover:text-cookie-400 transition-colors relative group"
                     >
                       ¿Olvidaste tu contraseña?
                       <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-cookie group-hover:w-full transition-all duration-300" />
@@ -423,10 +422,10 @@ export default function LoginPage() {
                   {/* Separador */}
                   <div className="relative my-2">
                     <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-[#4A2F20]" />
+                      <div className="w-full border-t border-border" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-4 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-vanilla">
+                      <span className="px-4 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-white">
                         o continúa con
                       </span>
                     </div>
@@ -441,7 +440,7 @@ export default function LoginPage() {
                       disabled={isGoogleLoading || isDiscordLoading}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center gap-2 py-3 bg-white/5 hover:bg-white/10 border-2 border-[#5D3A2B] hover:border-cookie-500/50 rounded-xl text-vanilla font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex items-center justify-center gap-2 py-3 bg-background/5 hover:bg-background/10 border-2 border-border hover:border-cookie-500/50 rounded-xl text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isGoogleLoading ? (
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -477,7 +476,7 @@ export default function LoginPage() {
                       disabled={isGoogleLoading || isDiscordLoading}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="flex items-center justify-center gap-2 py-3 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 border-2 border-[#5D3A2B] hover:border-[#5865F2]/50 rounded-xl text-vanilla font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex items-center justify-center gap-2 py-3 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 border-2 border-border hover:border-[#5865F2]/50 rounded-xl text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isDiscordLoading ? (
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -497,7 +496,7 @@ export default function LoginPage() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         type="button"
-                        className="w-full py-4 bg-gradient-to-r from-cookie-500/20 to-chocolate-600/20 border-2 border-cookie-500/30 text-cookie-400 hover:text-cookie-300 rounded-xl font-semibold hover:border-cookie-400 hover:bg-cookie-500/10 transition-all duration-300 group"
+                        className="w-full py-4 bg-gradient-to-r from-cookie-500/20 to-chocolate-600/20 border-2 border-cookie-500/30 text-white hover:text-cookie-400 rounded-xl font-semibold hover:border-cookie-400 hover:bg-cookie-500/10 transition-all duration-300 group"
                       >
                         <span className="flex items-center justify-center gap-2">
                           Crear cuenta nueva
@@ -511,7 +510,7 @@ export default function LoginPage() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         type="button"
-                        className="w-full py-4 bg-[#4A2F20]/40 backdrop-blur-sm border-2 border-[#5D3A2B] text-vanilla hover:text-cookie-400 rounded-xl font-semibold hover:border-cookie-500/50 transition-all duration-300"
+                        className="w-full py-4 bg-background/40 backdrop-blur-sm border-2 border-border text-white hover:text-cookie-400 rounded-xl font-semibold hover:border-cookie-500/50 transition-all duration-300"
                       >
                         ¿Olvidaste tu contraseña? Recupérala aquí
                       </motion.button>
@@ -522,11 +521,11 @@ export default function LoginPage() {
                   <div className="mt-6 text-center">
                     <Link
                       href="/"
-                      className="inline-flex items-center gap-2 text-sm text-vanilla hover:text-cookie-400 transition-colors group"
+                      className="inline-flex items-center gap-2 text-sm text-white hover:text-cookie-400 transition-colors group"
                     >
-                      <span className="w-8 h-px bg-[#4A2F20] group-hover:bg-cookie-400 transition-colors" />
+                      <span className="w-8 h-px bg-border group-hover:bg-cookie-400 transition-colors" />
                       <span>Regresar a la tienda</span>
-                      <span className="w-8 h-px bg-[#4A2F20] group-hover:bg-cookie-400 transition-colors" />
+                      <span className="w-8 h-px bg-border group-hover:bg-cookie-400 transition-colors" />
                     </Link>
                   </div>
                 </form>
@@ -553,10 +552,10 @@ export default function LoginPage() {
                   />
                 </div>
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-display font-bold text-vanilla mb-2">
+                  <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
                     Bienvenido de vuelta
                   </h2>
-                  <p className="text-vanilla text-lg flex items-center gap-2">
+                  <p className="text-[#D4A574] text-lg flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-cookie-400" />
                     <span>Tu momento dulce comienza aquí</span>
                     <Sparkles className="w-5 h-5 text-cookie-400" />
@@ -575,7 +574,7 @@ export default function LoginPage() {
                     <stat.icon
                       className={`w-6 h-6 ${stat.color} mb-2 group-hover:scale-110 transition-transform`}
                     />
-                    <p className="text-sm font-medium text-vanilla">
+                    <p className="text-sm font-medium text-[#D4A574]">
                       {stat.label}
                     </p>
                   </motion.div>
@@ -600,10 +599,10 @@ export default function LoginPage() {
                   >
                     <feature.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-semibold text-vanilla text-sm mb-1">
+                  <h3 className="font-semibold text-[#D4A574] text-sm mb-1">
                     {feature.title}
                   </h3>
-                  <p className="text-xs text-vanilla">{feature.description}</p>
+                  <p className="text-xs text-[#D4A574]">{feature.description}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -634,12 +633,12 @@ export default function LoginPage() {
                       />
                     ))}
                   </div>
-                  <p className="text-xs text-vanilla mt-1">
+                  <p className="text-xs text-[#D4A574] mt-1">
                     +15,000 clientes felices
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-vanilla/90 italic">
+              <p className="text-sm text-[#D4A574] italic">
                 "Las mejores galletas artesanales que he probado. El sabor es
                 incomparable."
               </p>
