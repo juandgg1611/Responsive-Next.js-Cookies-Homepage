@@ -50,7 +50,7 @@ const DiscordIcon = ({ className }: { className?: string }) => (
     className={className}
     viewBox="0 0 16 16"
   >
-    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612" />
+    <path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612" />
   </svg>
 );
 
@@ -373,11 +373,11 @@ export default function RegisterPage() {
                 <h1 className="text-2xl font-bold text-cookie-500">
                   Vian Cookies
                 </h1>
-                <p className="text-xs text-vanilla">Registro de miembros</p>
+                <p className="text-xs text-[#D4A574]">Registro de miembros</p>
               </div>
             </Link>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-vanilla bg-background-surface/50 px-4 py-2 rounded-full backdrop-blur-sm border border-border-light w-fit">
+              <div className="flex items-center gap-2 text-foreground bg-background-surface/50 px-4 py-2 rounded-full backdrop-blur-sm border border-border-light w-fit">
                 <Clock className="h-4 w-4 text-cookie-400" />
                 <span className="text-sm">
                   {new Date().toLocaleDateString("es-ES", {
@@ -410,11 +410,11 @@ export default function RegisterPage() {
               <div className="relative bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 backdrop-blur-xl rounded-3xl p-8 border border-[#4A2F20]/50 shadow-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h3 className="text-2xl font-display font-bold text-vanilla flex items-center gap-2">
-                      <User className="w-6 h-6 text-cookie-400" />
+                    <h3 className="text-2xl font-display font-bold text-white flex items-center gap-2">
+                      <Lock className="w-6 h-6 text-cookie-400" />
                       Crear cuenta
                     </h3>
-                    <p className="text-sm text-vanilla mt-1">
+                    <p className="text-sm text-[#D4A574] mt-1">
                       Completa tus datos para registrarte
                     </p>
                   </div>
@@ -439,7 +439,7 @@ export default function RegisterPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {/* Nombre completo */}
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-vanilla flex items-center gap-2">
+                    <label className="text-sm font-medium text-[#D4A574] flex items-center gap-2">
                       <User className="w-4 h-4 text-cookie-400" />
                       Nombre completo
                     </label>
@@ -448,17 +448,17 @@ export default function RegisterPage() {
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="w-full px-4 py-3 pl-11 bg-[#4A2F20]/60 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl text-vanilla placeholder-caramel/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+                        className="w-full px-4 py-3 pl-11 bg-background/60 backdrop-blur-sm border-2 border-border rounded-xl text-[#D4A574] placeholder-[#D4A574]/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
                         placeholder="María González"
                         required
                       />
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4A574]/60 group-focus-within:text-cookie-400 transition-colors" />
                     </div>
                   </div>
 
                   {/* Email */}
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-vanilla flex items-center gap-2">
+                    <label className="text-sm font-medium text-[#D4A574] flex items-center gap-2">
                       <Mail className="w-4 h-4 text-cookie-400" />
                       Correo electrónico
                     </label>
@@ -467,18 +467,18 @@ export default function RegisterPage() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-3 pl-11 bg-[#4A2F20]/60 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl text-vanilla placeholder-caramel/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+                        className="w-full px-4 py-3 pl-11 bg-background/60 backdrop-blur-sm border-2 border-border rounded-xl text-[#D4A574] placeholder-[#D4A574]/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
                         placeholder="tu@viancookies.com"
                         required
                       />
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4A574]/60 group-focus-within:text-cookie-400 transition-colors" />
                     </div>
                   </div>
 
                   {/* Contraseña */}
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <label className="text-sm font-medium text-vanilla flex items-center gap-2">
+                      <label className="text-sm font-medium text-[#D4A574] flex items-center gap-2">
                         <Lock className="w-4 h-4 text-cookie-400" />
                         Contraseña
                       </label>
@@ -515,15 +515,15 @@ export default function RegisterPage() {
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-4 py-3 pl-11 pr-11 bg-[#4A2F20]/60 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl text-vanilla placeholder-caramel/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+                        className="w-full px-4 py-3 pl-11 pr-11 bg-background/60 backdrop-blur-sm border-2 border-border rounded-xl text-[#D4A574] placeholder-[#D4A574]/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
                         placeholder="••••••••"
                         required
                       />
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4A574]/60 group-focus-within:text-cookie-400 transition-colors" />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-vanilla/60 hover:text-cookie-400 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#D4A574]/60 hover:text-cookie-400 transition-colors"
                       >
                         {showPassword ? (
                           <EyeOff className="w-5 h-5" />
@@ -559,7 +559,7 @@ export default function RegisterPage() {
 
                   {/* Confirmar contraseña */}
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-vanilla flex items-center gap-2">
+                    <label className="text-sm font-medium text-[#D4A574] flex items-center gap-2">
                       <Lock className="w-4 h-4 text-cookie-400" />
                       Confirmar contraseña
                     </label>
@@ -568,17 +568,17 @@ export default function RegisterPage() {
                         type={showConfirmPassword ? "text" : "password"}
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full px-4 py-3 pl-11 pr-11 bg-[#4A2F20]/60 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl text-vanilla placeholder-caramel/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+                        className="w-full px-4 py-3 pl-11 pr-11 bg-background/60 backdrop-blur-sm border-2 border-border rounded-xl text-[#D4A574] placeholder-[#D4A574]/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
                         placeholder="••••••••"
                         required
                       />
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4A574]/60 group-focus-within:text-cookie-400 transition-colors" />
                       <button
                         type="button"
                         onClick={() =>
                           setShowConfirmPassword(!showConfirmPassword)
                         }
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-vanilla/60 hover:text-cookie-400 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#D4A574]/60 hover:text-cookie-400 transition-colors"
                       >
                         {showConfirmPassword ? (
                           <EyeOff className="w-5 h-5" />
@@ -603,13 +603,11 @@ export default function RegisterPage() {
                       onChange={(e) => setAcceptTerms(e.target.checked)}
                       className="mt-1 w-4 h-4 rounded border-[#5D3A2B] bg-[#4A2F20] text-cookie-400 focus:ring-cookie-400 focus:ring-offset-0 transition-colors"
                     />
-                    <span className="text-sm text-vanilla group-hover:text-cookie-400 transition-colors">
+                    <span className="text-sm text-[#D4A574] group-hover:text-cookie-400 transition-colors">
                       Acepto los términos y condiciones, y autorizo el uso de
                       mis datos para recibir ofertas y novedades.
                     </span>
                   </label>
-
-                  {/* Botón submit */}
                   <motion.button
                     type="submit"
                     disabled={
@@ -656,7 +654,7 @@ export default function RegisterPage() {
                         <div className="w-full border-t border-[#4A2F20]" />
                       </div>
                       <div className="relative flex justify-center text-xs">
-                        <span className="px-3 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-vanilla">
+                        <span className="px-3 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-white">
                           o continúa con
                         </span>
                       </div>
@@ -670,7 +668,7 @@ export default function RegisterPage() {
                         disabled={isGoogleLoading || isDiscordLoading}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="flex items-center justify-center gap-2 py-3 bg-white/5 hover:bg-white/10 border-2 border-[#5D3A2B] hover:border-cookie-500/50 rounded-xl text-vanilla font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center justify-center gap-2 py-3 bg-background/5 hover:bg-background/10 border-2 border-border hover:border-cookie-500/50 rounded-xl text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isGoogleLoading ? (
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -706,7 +704,7 @@ export default function RegisterPage() {
                         disabled={isGoogleLoading || isDiscordLoading}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="flex items-center justify-center gap-2 py-3 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 border-2 border-[#5D3A2B] hover:border-[#5865F2]/50 rounded-xl text-vanilla font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center justify-center gap-2 py-3 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 border-2 border-border hover:border-[#5865F2]/50 rounded-xl text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isDiscordLoading ? (
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -726,7 +724,7 @@ export default function RegisterPage() {
                       <div className="w-full border-t border-[#4A2F20]" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-4 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-vanilla">
+                      <span className="px-4 bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 text-white">
                         ¿Ya tienes cuenta?
                       </span>
                     </div>
@@ -746,7 +744,7 @@ export default function RegisterPage() {
                   <div className="mt-4 text-center">
                     <Link
                       href="/"
-                      className="inline-flex items-center gap-2 text-sm text-vanilla hover:text-cookie-400 transition-colors group"
+                      className="inline-flex items-center gap-2 text-sm text-cookie-400 group-hover:text-cookie-400 transition-colors"
                     >
                       <span className="w-8 h-px bg-[#4A2F20] group-hover:bg-cookie-400 transition-colors" />
                       <span>Regresar a la tienda</span>
@@ -799,7 +797,7 @@ export default function RegisterPage() {
                     <stat.icon
                       className={`w-6 h-6 ${stat.color} mb-2 group-hover:scale-110 transition-transform`}
                     />
-                    <p className="text-sm font-medium text-vanilla">
+                    <p className="text-sm font-medium text-[#D4A574]">
                       {stat.label}
                     </p>
                   </motion.div>
@@ -824,10 +822,10 @@ export default function RegisterPage() {
                   >
                     <b.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-semibold text-vanilla text-sm mb-1">
+                  <h3 className="font-semibold text-[#D4A574] text-sm mb-1">
                     {b.title}
                   </h3>
-                  <p className="text-xs text-vanilla">{b.description}</p>
+                  <p className="text-xs text-[#D4A574]">{b.description}</p>
                 </motion.div>
               ))}
             </motion.div>
