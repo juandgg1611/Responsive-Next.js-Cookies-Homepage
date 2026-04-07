@@ -49,7 +49,7 @@ const pulseGlow = {
 const STATS = [
   { icon: Cookie, label: "50+ variedades", color: "text-cookie-400" },
   { icon: Users, label: "15K+ clientes", color: "text-chocolate-400" },
-  { icon: Truck, label: "Envío 24h", color: "text-vanilla" },
+  { icon: Truck, label: "Envío 24h", color: "text-caramel" },
   { icon: Award, label: "Premium 2024", color: "text-cookie-400" },
 ];
 
@@ -342,7 +342,7 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
       </motion.div>
       <motion.div
         animate={{ ...floatingAnimation, transition: { delay: 2 } }}
-        className="absolute top-40 right-40 text-vanilla/10"
+        className="absolute top-40 right-40 text-caramel/10"
       >
         <Heart className="w-16 h-16" />
       </motion.div>
@@ -370,11 +370,11 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                 <h1 className="text-2xl font-bold text-cookie-500">
                   Vian Cookies
                 </h1>
-                <p className="text-xs text-vanilla">Recuperar acceso</p>
+                <p className="text-xs text-[#D4A574]">Recuperar acceso</p>
               </div>
             </Link>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-vanilla bg-background-surface/50 px-4 py-2 rounded-full backdrop-blur-sm border border-border-light w-fit">
+              <div className="flex items-center gap-2 text-foreground bg-background-surface/50 px-4 py-2 rounded-full backdrop-blur-sm border border-border-light w-fit">
                 <Clock className="h-4 w-4 text-cookie-400" />
                 <span className="text-sm">
                   {time.toLocaleDateString("es-ES", {
@@ -407,11 +407,11 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
               <div className="relative bg-gradient-to-br from-[#3A2318]/90 to-[#2C1810]/80 backdrop-blur-xl rounded-3xl p-8 border border-[#4A2F20]/50 shadow-2xl">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <h3 className="text-2xl font-display font-bold text-vanilla flex items-center gap-2">
+                    <h3 className="text-2xl font-display font-bold text-white flex items-center gap-2">
                       {currentStep.icon}
                       {currentStep.title}
                     </h3>
-                    <p className="text-sm text-vanilla mt-1">
+                    <p className="text-sm text-[#D4A574] mt-1">
                       {currentStep.description}
                     </p>
                   </div>
@@ -423,7 +423,7 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                 {/* Barra de progreso (pasos 2-4) */}
                 {step > 1 && (
                   <div className="mb-6">
-                    <div className="flex justify-between text-xs text-vanilla mb-2">
+                    <div className="flex justify-between text-xs text-[#D4A574] mb-2">
                       <span>Paso {step - 1} de 3</span>
                       <span>{Math.round(((step - 1) / 3) * 100)}%</span>
                     </div>
@@ -460,7 +460,7 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                     {step === 1 && (
                       <form onSubmit={handleEmailSubmit} className="space-y-6">
                         <div className="space-y-2">
-                          <label className="text-sm font-medium text-vanilla flex items-center gap-2">
+                          <label className="text-sm font-medium text-[#D4A574] flex items-center gap-2">
                             <Mail className="w-4 h-4 text-cookie-400" />
                             Correo electrónico
                           </label>
@@ -469,12 +469,12 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                               type="email"
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              className="w-full px-4 py-3 pl-11 bg-[#4A2F20]/60 backdrop-blur-sm border-2 border-[#5D3A2B] rounded-xl text-vanilla placeholder-caramel/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
+                              className="w-full px-4 py-3 pl-11 bg-background/60 backdrop-blur-sm border-2 border-border rounded-xl text-[#D4A574] placeholder-[#D4A574]/60 focus:outline-none focus:border-cookie-400 focus:ring-4 focus:ring-cookie-400/20 transition-all duration-300"
                               placeholder="tu@viancookies.com"
                               required
                               autoFocus
                             />
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-vanilla/60 group-focus-within:text-cookie-400 transition-colors" />
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D4A574]/60 group-focus-within:text-cookie-400 transition-colors" />
                           </div>
                         </div>
 
@@ -545,7 +545,7 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                   <div className="mt-6 pt-4 border-t border-[#4A2F20]/50">
                     <Link
                       href="/auth/login"
-                      className="text-cookie-400 hover:text-cookie-300 text-sm font-medium transition-colors flex items-center justify-center mx-auto group"
+                      className="text-[#D4A574] hover:text-cookie-400 text-sm font-medium transition-colors flex items-center justify-center mx-auto group"
                     >
                       <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                       Volver al inicio de sesión
@@ -556,11 +556,11 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                 <div className="mt-4 text-center">
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-2 text-sm text-vanilla hover:text-cookie-400 transition-colors group"
+                    className="inline-flex items-center gap-2 text-sm text-[#D4A574] hover:text-cookie-400 transition-colors group"
                   >
-                    <span className="w-8 h-px bg-[#4A2F20] group-hover:bg-cookie-400 transition-colors" />
+                    <span className="w-8 h-px bg-background/50 group-hover:bg-[#D4A574]/50 transition-colors" />
                     <span>Regresar a la tienda</span>
-                    <span className="w-8 h-px bg-[#4A2F20] group-hover:bg-cookie-400 transition-colors" />
+                    <span className="w-8 h-px bg-background/50 group-hover:bg-[#D4A574]/50 transition-colors" />
                   </Link>
                 </div>
               </div>
@@ -586,10 +586,10 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                   />
                 </div>
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-display font-bold text-vanilla mb-2">
+                  <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
                     ¿Olvidaste tu contraseña?
                   </h2>
-                  <p className="text-vanilla text-lg flex items-center gap-2">
+                  <p className="text-[#D4A574] text-lg flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-cookie-400" />
                     <span>No te preocupes, te ayudamos</span>
                     <Sparkles className="w-5 h-5 text-cookie-400" />
@@ -608,7 +608,7 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                     <stat.icon
                       className={`w-6 h-6 ${stat.color} mb-2 group-hover:scale-110 transition-transform`}
                     />
-                    <p className="text-sm font-medium text-vanilla">
+                    <p className="text-sm font-medium text-[#D4A574]">
                       {stat.label}
                     </p>
                   </motion.div>
@@ -633,10 +633,10 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                   >
                     <b.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-semibold text-vanilla text-sm mb-1">
+                  <h3 className="font-semibold text-[#D4A574] text-sm mb-1">
                     {b.title}
                   </h3>
-                  <p className="text-xs text-vanilla">{b.description}</p>
+                  <p className="text-xs text-[#D4A574]">{b.description}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -651,7 +651,7 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cookie-400 to-chocolate-500 flex items-center justify-center shadow-glow">
                   <Clock className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-display font-semibold text-vanilla">
+                <h3 className="text-lg font-display font-semibold text-white">
                   Proceso de{" "}
                   <span className="text-cookie-400">recuperación</span>
                 </h3>
@@ -686,10 +686,10 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-vanilla">
+                      <h4 className="text-sm font-semibold text-white">
                         {s.title}
                       </h4>
-                      <p className="text-xs text-vanilla">{s.desc}</p>
+                      <p className="text-xs text-[#D4A574]">{s.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -697,7 +697,7 @@ export const PasswordRecoveryFlow: React.FC<PasswordRecoveryFlowProps> = ({
               <div className="mt-4 pt-4 border-t border-[#4A2F20]/50">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-cookie-400" />
-                  <span className="text-xs text-vanilla">
+                  <span className="text-xs text-white">
                     Proceso 100% seguro y encriptado
                   </span>
                 </div>
