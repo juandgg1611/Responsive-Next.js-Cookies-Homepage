@@ -1,4 +1,4 @@
-}// app/auth/recover/PasswordRecoveryFlow.tsx
+// app/auth/recover/PasswordRecoveryFlow.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
