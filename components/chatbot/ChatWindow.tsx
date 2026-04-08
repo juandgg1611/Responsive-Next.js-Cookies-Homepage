@@ -88,7 +88,7 @@ export default function ChatWindow() {
                 />
               </div>
               <div>
-                <h3 className="font-display font-semibold text-vanilla dark:text-white flex items-center gap-2">
+                <h3 className="font-display font-semibold text-white dark:text-vanilla flex items-center gap-2">
                   Cookie Assistant
                   <Sparkles className="w-4 h-4 text-cookie-400" />
                 </h3>
@@ -131,9 +131,7 @@ export default function ChatWindow() {
             {messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
             ))}
-          </AnimatePresence>
-
-          {isLoading && <ChatTypingIndicator />}
+          </AnimatePrwhite       {isLoading && <ChatTypingIndicator />}
           <div ref={messagesEndRef} />
         </div>
 
