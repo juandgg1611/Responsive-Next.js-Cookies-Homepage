@@ -88,7 +88,7 @@ export default function ChatWindow() {
                 />
               </div>
               <div>
-                <h3 className="font-display font-semibold text-white dark:text-vanilla flex items-center gap-2">
+                <h3 className="font-display font-semibold text-caramel dark:text-vanilla flex items-center gap-2">
                   Cookie Assistant
                   <Sparkles className="w-4 h-4 text-cookie-400" />
                 </h3>
