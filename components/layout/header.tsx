@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   Cookie,
+  Sparkles,
   User,
   LogOut,
   LogIn,
@@ -29,6 +30,7 @@ const navItems = [
   { label: "Contacto", href: "/contact" },
 ];
 
+// ── Indicador de sesión activa ────────────────────────────────────────────────
 function OnlineBadge() {
   return (
     <span className="relative flex h-3 w-3">
@@ -38,12 +40,14 @@ function OnlineBadge() {
   );
 }
 
+// ── Nombre corto del usuario ──────────────────────────────────────────────────
 function getDisplayName(user: SupabaseUser): string {
   const full =
     user.user_metadata?.full_name ||
     user.user_metadata?.name ||
     user.email?.split("@")[0] ||
     "Usuario";
+  // Solo el primer nombre
   return full.split(" ")[0];
 }
 
@@ -58,41 +62,44 @@ export default function Header() {
   const router = useRouter();
   const supabase = createClient();
 
+  // ── Scroll ────────────────────────────────────────────────────────────────
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ── Sesión de Supabase ────────────────────────────────────────────────────
   useEffect(() => {
+    // Obtener sesión inicial
     supabase.auth.getUser().then(({ data: { user } }) => setUser(user));
+
+    // Escuchar cambios en tiempo real (login / logout / token refresh)
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
+
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [pathname]);
-
+  // ── Cerrar sesión ─────────────────────────────────────────────────────────
   const handleSignOut = async () => {
     setIsSigningOut(true);
     await supabase.auth.signOut();
-    setIsSigningOut(false);
+    setUser(null);
+    setIsMenuOpen(false);
     router.push("/");
+    router.refresh();
+    setIsSigningOut(false);
   };
 
   const displayName = user ? getDisplayName(user) : null;
 
   return (
     <>
-      {/* Search Dialog — rendered at root level */}
-      <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-
-      {/* Main Header */}
+      {/* ── Main Header ── */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
@@ -138,71 +145,95 @@ export default function Header() {
 
             {/* Action Buttons */}
             <div className="flex items-center gap-4">
-              {/* Search — opens SearchDialog */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              {/* Search */}
+              <button
                 onClick={() => setIsSearchOpen(true)}
                 className="p-2 rounded-full hover:bg-background-surface/50 transition-colors group"
                 aria-label="Buscar"
               >
                 <Search className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
-              </motion.button>
+              </button>
 
               <ThemeToggle />
 
-              {/* User Account (Desktop) */}
+              {/* ── User Account (Desktop) ── */}
               <div className="hidden sm:block">
                 {user ? (
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-2">
-                      <OnlineBadge />
-                      <span className="text-sm text-vanilla font-medium">{displayName}</span>
-                    </div>
+                  // Usuario logueado
+                  <div className="flex items-center gap-2">
+                    {/* Avatar + nombre + badge verde */}
+
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background-surface/50 border border-cookie-500/30 hover:border-cookie-500 transition-all cursor-pointer group"
+                    >
+                      <div className="relative">
+                        <div className="w-7 h-7 rounded-full bg-gradient-cookie flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">
+                            {displayName?.charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                        {/* Círculo verde animado */}
+                        <div className="absolute -bottom-0.5 -right-0.5">
+                          <OnlineBadge />
+                        </div>
+                      </div>
+                      <span className="text-sm font-medium text-vanilla group-hover:text-cookie-400 transition-colors max-w-[80px] truncate">
+                        {displayName}
+                      </span>
+                    </motion.div>
+
+                    {/* Botón cerrar sesión */}
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={handleSignOut}
                       disabled={isSigningOut}
-                      className="p-2 rounded-full hover:bg-background-surface/50 transition-colors group"
+                      className="p-2 rounded-full hover:bg-red-500/10 border border-transparent hover:border-red-500/30 transition-all group"
                       aria-label="Cerrar sesión"
+                      title="Cerrar sesión"
                     >
-                      <LogOut className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
+                      {isSigningOut ? (
+                        <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <LogOut className="w-4 h-4 text-vanilla-dark group-hover:text-red-400 transition-colors" />
+                      )}
                     </motion.button>
                   </div>
                 ) : (
-                  <Link href="/auth">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-2 rounded-full hover:bg-background-surface/50 transition-colors group"
-                      aria-label="Iniciar sesión"
-                    >
-                      <LogIn className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
-                    </motion.button>
+                  // Usuario no logueado
+                  <Link href="/auth/login">
+                    <button className="p-2 rounded-full hover:bg-background-surface/50 transition-colors group">
+                      <User className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
+                    </button>
                   </Link>
                 )}
               </div>
 
               {/* Cart */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={toggleCart}
                 className="relative p-2 rounded-full hover:bg-background-surface/50 transition-colors group"
                 aria-label="Carrito"
               >
                 <ShoppingCart className="w-5 h-5 text-vanilla-dark group-hover:text-cookie-400 transition-colors" />
                 {totalItems > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gradient-cookie text-white text-xs font-bold flex items-center justify-center shadow-glow"
-                  >
+                  <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1.5 bg-gradient-chocolate rounded-full text-xs flex items-center justify-center text-white font-bold shadow-glow-chocolate animate-pulse-soft">
                     {totalItems > 9 ? "9+" : totalItems}
-                  </motion.span>
+                  </span>
                 )}
-              </motion.button>
+              </button>
+
+              {/* Order Now */}
+              <a
+                href="https://wa.me/584246801808?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%AA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-cookie text-white font-semibold hover:scale-105 transition-transform shadow-cookie hover:shadow-cookie-lg"
+              >
+                <Cookie className="w-5 h-5" />
+                Ordenar Ahora
+              </a>
 
               {/* Mobile Menu Button */}
               <button
@@ -210,20 +241,17 @@ export default function Header() {
                 className="md:hidden p-2 rounded-full hover:bg-background-surface/50 transition-colors"
                 aria-label="Menú"
               >
-                <AnimatePresence mode="wait">
-                  {isMenuOpen ? (
-                    <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                      <X className="w-6 h-6 text-vanilla-dark" />
-                    </motion.div>
-                  ) : (
-                    <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                      <Menu className="w-6 h-6 text-vanilla-dark" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {isMenuOpen ? (
+                  <X className="w-6 h-6 text-vanilla-dark" />
+                ) : (
+                  <Menu className="w-6 h-6 text-vanilla-dark" />
+                )}
               </button>
             </div>
           </div>
+
+          {/* Search Dialog */}
+          <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </div>
 
         {/* Progress Bar */}
@@ -232,15 +260,17 @@ export default function Header() {
             className="h-full bg-gradient-cookie shadow-glow"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: isScrolled ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
             style={{ originX: 0 }}
           />
         </div>
       </header>
 
-      {/* Mobile Menu (Sidebar) */}
+      {/* ── Mobile Menu (Sidebar) ── */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
+            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -248,6 +278,7 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               className="fixed inset-0 bg-black/50 z-40 md:hidden"
             />
+
             <motion.div
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
@@ -263,7 +294,9 @@ export default function Header() {
                       <Cookie className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <div className="font-bold text-cookie-500">Vian Cookies</div>
+                      <div className="font-bold text-cookie-500">
+                        Vian Cookies
+                      </div>
                       <div className="text-xs text-caramel">Menú</div>
                     </div>
                   </div>
@@ -275,73 +308,170 @@ export default function Header() {
                   </button>
                 </div>
 
-                {/* Search button in mobile menu */}
-                <button
-                  onClick={() => { setIsMenuOpen(false); setIsSearchOpen(true); }}
-                  className="flex items-center gap-3 w-full px-4 py-3 mb-4 rounded-xl bg-background-surface border border-border-light text-caramel hover:text-cookie-400 hover:border-cookie-500/40 transition-colors text-sm"
-                >
-                  <Search className="w-4 h-4" />
-                  Buscar galletas...
-                </button>
-
-                {/* Nav items */}
-                <nav className="flex flex-col gap-1 flex-1">
-                  {navItems.map((item, i) => (
+                {/* ── Estado de sesión en sidebar ── */}
+                <div className="mb-6">
+                  {user ? (
+                    // Logueado: avatar + nombre + badge verde
                     <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 }}
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-cookie-500/10 to-chocolate-500/10 border border-cookie-500/30"
                     >
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          "flex items-center px-4 py-3 rounded-xl text-base font-medium transition-colors",
-                          pathname === item.href
-                            ? "bg-cookie-500/10 text-cookie-400"
-                            : "text-vanilla hover:bg-background-surface hover:text-cookie-400"
-                        )}
-                      >
-                        {item.label}
-                      </Link>
+                      <div className="relative flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-gradient-cookie flex items-center justify-center shadow-glow">
+                          <span className="text-white font-bold text-sm">
+                            {displayName?.charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                        {/* Círculo verde animado */}
+                        <div className="absolute -bottom-0.5 -right-0.5">
+                          <OnlineBadge />
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-vanilla truncate">
+                          {displayName}
+                        </p>
+                        <p className="text-xs text-cookie-400 truncate">
+                          {user.email}
+                        </p>
+                      </div>
                     </motion.div>
+                  ) : (
+                    // No logueado: invitación a iniciar sesión
+                    <Link
+                      href="/auth/login"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        className="flex items-center gap-3 p-4 rounded-xl bg-background-surface/50 border border-border-light hover:border-cookie-500/50 transition-all cursor-pointer"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-background-surface border border-border-light flex items-center justify-center">
+                          <User className="w-5 h-5 text-caramel" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-vanilla">
+                            Iniciar sesión
+                          </p>
+                          <p className="text-xs text-caramel">
+                            Accede a tu cuenta
+                          </p>
+                        </div>
+                        <LogIn className="w-4 h-4 text-cookie-400 ml-auto" />
+                      </motion.div>
+                    </Link>
+                  )}
+                </div>
+
+                {/* Navegación móvil */}
+                <nav className="flex-1 space-y-2">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-4 py-3 rounded-cookie hover:bg-background-surface text-vanilla hover:text-cookie-400 transition-all border border-transparent hover:border-border-light"
+                    >
+                      {item.label}
+                    </Link>
                   ))}
                 </nav>
 
-                {/* User section in mobile */}
-                <div className="border-t border-border-light pt-4">
-                  {user ? (
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 px-4 py-2">
-                        <OnlineBadge />
-                        <span className="text-sm text-vanilla">{displayName}</span>
-                      </div>
-                      <button
-                        onClick={handleSignOut}
-                        className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-caramel hover:bg-background-surface hover:text-cookie-400 transition-colors text-sm"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        Cerrar sesión
-                      </button>
+                {/* Acciones móviles */}
+                <div className="space-y-4 pt-8 border-t border-border-light">
+                  <div className="grid grid-cols-2 gap-3">
+                    {user ? (
+                      // Logueado: Mi cuenta + Cerrar sesión
+                      <>
+                        <Link
+                          href="/dashboard"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          <button className="w-full px-4 py-3 rounded-cookie border border-border-light text-vanilla hover:bg-background-surface hover:border-cookie-500 transition-all text-sm">
+                            Mi Cuenta
+                          </button>
+                        </Link>
+                        <button
+                          onClick={handleSignOut}
+                          disabled={isSigningOut}
+                          className="px-4 py-3 rounded-cookie border border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500/50 transition-all text-sm flex items-center justify-center gap-2"
+                        >
+                          {isSigningOut ? (
+                            <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <>
+                              <LogOut className="w-4 h-4" />
+                              Salir
+                            </>
+                          )}
+                        </button>
+                      </>
+                    ) : (
+                      // No logueado: Login + Registro
+                      <>
+                        <Link
+                          href="/auth/login"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          <button className="w-full px-4 py-3 rounded-cookie border border-border-light text-vanilla hover:bg-background-surface hover:border-cookie-500 transition-all text-sm">
+                            Iniciar sesión
+                          </button>
+                        </Link>
+                        <Link
+                          href="/auth/register"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          <button className="w-full px-4 py-3 rounded-cookie border border-cookie-500/30 text-cookie-400 hover:bg-cookie-500/10 hover:border-cookie-500 transition-all text-sm">
+                            Registrarse
+                          </button>
+                        </Link>
+                      </>
+                    )}
+                  </div>
+
+                  <a
+                    href="https://wa.me/584246801808?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%AA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 rounded-full bg-gradient-cookie text-white font-semibold flex items-center justify-center gap-2 shadow-cookie hover:shadow-cookie-lg hover:scale-105 transition-all"
+                  >
+                    <Cookie className="w-5 h-5" />
+                    Ordenar Ahora
+                  </a>
+
+                  {/* Carrito */}
+                  <button
+                    onClick={() => {
+                      toggleCart();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full py-3 rounded-full bg-[#4A2F20]/40 backdrop-blur-sm border-2 border-cookie-500/30 text-cookie-400 hover:text-cookie-300 font-semibold hover:border-cookie-400 hover:bg-cookie-500/10 transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                    Ver Carrito {totalItems > 0 && `(${totalItems})`}
+                  </button>
+
+                  {/* Promoción */}
+                  <div className="p-4 rounded-cookie bg-gradient-to-r from-cookie-500/10 to-chocolate-500/10 border border-cookie-500/20">
+                    <div className="flex items-center gap-2 text-sm">
+                      <Sparkles className="w-4 h-4 text-cookie-400 animate-pulse-soft" />
+                      <span className="text-cookie-300 font-medium">
+                        20% OFF primera compra
+                      </span>
                     </div>
-                  ) : (
-                    <Link href="/auth">
-                      <button className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-caramel hover:bg-background-surface hover:text-cookie-400 transition-colors text-sm">
-                        <LogIn className="w-4 h-4" />
-                        Iniciar sesión
-                      </button>
-                    </Link>
-                  )}
+                  </div>
                 </div>
               </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
+
+      {/* Spacer para header fijo */}
+      <div
+        className={`transition-all duration-300 ${isScrolled ? "h-20" : "h-24"}`}
+      />
     </>
   );
-}
-
-function cn(...classes: (string | boolean | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
 }
