@@ -869,7 +869,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => sendToWhatsApp("pickup")}
-                      className="flex flex-col items-center gap-4 p-6 rounded-2xl bg-white dark:bg-background-surface border-2 border-cookie-200 dark:border-cookie-500/30 hover:border-cookie-400 transition-all group text-center shadow-sm"
+                      className="flex flex-col items-center justify-between gap-4 p-6 rounded-2xl bg-white dark:bg-background-surface border-2 border-cookie-200 dark:border-cookie-500/30 hover:border-cookie-400 transition-all group text-center shadow-sm"
                     >
                       <div className="w-16 h-16 rounded-2xl bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 flex items-center justify-center group-hover:bg-cookie-200 transition-colors">
                         <Package className="w-7 h-7 text-cookie-500" />
@@ -894,14 +894,8 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                     <motion.button
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        if (isAuthenticated === false) {
-                          setShowLoginModal(true);
-                        } else {
-                          setScreen("delivery-step-0");
-                        }
-                      }}
-                      className="flex flex-col items-center gap-4 p-6 rounded-2xl bg-white dark:bg-background-surface border-2 border-cookie-200 dark:border-cookie-500/30 hover:border-cookie-400 transition-all group text-center shadow-sm"
+                      onClick={() => setScreen("delivery-step-0")}
+                      className="flex flex-col items-center justify-between gap-4 p-6 rounded-2xl bg-white dark:bg-background-surface border-2 border-cookie-200 dark:border-cookie-500/30 hover:border-cookie-400 transition-all group text-center shadow-sm"
                     >
                       <div className="w-16 h-16 rounded-2xl bg-cookie-100 dark:bg-cookie-900/30 border border-cookie-200 dark:border-cookie-500/30 flex items-center justify-center group-hover:bg-cookie-200 transition-colors">
                         <Truck className="w-7 h-7 text-cookie-500" />
@@ -932,7 +926,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                       {/* Botón inferior: cambia según autenticación */}
                       {isAuthenticated === false ? (
                         <div className="w-full py-2.5 rounded-xl bg-gradient-to-r from-cookie-500 to-chocolate-600 text-white font-bold text-sm flex items-center justify-center gap-2">
-                          <LogIn className="w-4 h-4" /> Iniciar sesion
+                          Configurar entrega<ChevronRight className="w-4 h-4" /> 
                         </div>
                       ) : (
                         <div className="w-full py-2.5 rounded-xl border-2 border-cookie-400 text-cookie-600 dark:text-cookie-400 font-bold text-sm flex items-center justify-center gap-2 group-hover:bg-cookie-100 dark:bg-cookie-900/30 transition-colors">
@@ -1086,6 +1080,21 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                           </AnimatePresence>
                         </div>
                       </div>
+                    )}
+
+                    {/* Botón de Login Opcional */}
+                    {isAuthenticated === false && addresses.length === 0 && (
+                      <motion.button
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setShowLoginModal(true)}
+                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-cookie-400 to-cookie-500 text-white font-semibold text-sm hover:shadow-lg transition-all"
+                      >
+                        <LogIn className="w-4 h-4" />
+                        Inicia sesión para ver tus direcciones guardadas
+                      </motion.button>
                     )}
 
                     {/* Separador */}
