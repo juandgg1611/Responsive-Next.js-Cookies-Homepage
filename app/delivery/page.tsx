@@ -724,7 +724,7 @@ export default function DeliveryPage() {
                       </p>
                       <p className="text-xs text-chocolate-600 dark:text-caramel leading-relaxed">
                         Al presionar{" "}
-                        <strong className="text-chocolate-800">
+                        <strong className="text-chocolate-800 dark:text-white">
                           Finalizar pedido
                         </strong>{" "}
                         en el carrito, podras elegir Delivery y seleccionar
