@@ -1,16 +1,9 @@
-// components/chatbot/ChatWindow.tsx - VERSIÓN CORREGIDA
+// components/chatbot/ChatWindow.tsx
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import {
-  Cookie,
-  X,
-  MinusCircle,
-  Maximize2,
-  Minimize2,
-  Sparkles,
-} from "lucide-react";
+import { Cookie, X, Maximize2, Minimize2, Sparkles } from "lucide-react";
 import { useChatbot } from "@/components/providers/chatbot-provider";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
@@ -19,8 +12,15 @@ import ChatTypingIndicator from "./ChatTypingIndicator";
 export default function ChatWindow() {
   const { messages, isOpen, toggleChat, isLoading } = useChatbot();
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [showSuggestions, setShowSuggestions] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -30,21 +30,48 @@ export default function ChatWindow() {
     scrollToBottom();
   }, [messages]);
 
+  // Estilos calculados en JS — sin depender de clases Tailwind condicionales
+  const windowStyle: React.CSSProperties = isMobile
+    ? {
+        // Mobile: ocupa casi toda la pantalla desde abajo
+        bottom: "5rem",
+        left: "0.5rem",
+        right: "0.5rem",
+        height: "82vh",
+        maxHeight: "600px",
+        borderRadius: "1.25rem",
+      }
+    : isFullscreen
+      ? {
+          // Desktop fullscreen: crece desde la esquina, anclado abajo-derecha
+          bottom: "6rem",
+          right: "2rem",
+          width: "900px",
+          height: "75vh",
+          maxHeight: "860px",
+          borderRadius: "1.5rem",
+        }
+      : {
+          // Desktop normal
+          bottom: "6rem",
+          right: "2rem",
+          width: "380px",
+          height: "600px",
+          borderRadius: "1.5rem",
+        };
+
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
       <motion.div
+        key="chat-window"
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.95 }}
         transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
-        className={`fixed bottom-24 right-8 z-47 flex flex-col
-          ${isFullscreen ? "inset-8 w-auto h-auto" : "w-[380px] h-[600px]"}
-          bg-background-surface from-[#3A2318]/95 to-[#2C1810]/95 
-          backdrop-blur-xl rounded-3xl 
-          border border-[#4A2F20]/50 shadow-2xl
-          transition-all duration-300`}
+        style={windowStyle}
+        className="fixed z-50 flex flex-col bg-[#2C1810] backdrop-blur-xl border border-[#4A2F20]/50 shadow-2xl transition-[width,height,top,left,right,bottom,border-radius] duration-300"
       >
         {/* Header */}
         <div className="flex-shrink-0 p-4 border-b border-[#4A2F20]/50">
@@ -73,9 +100,10 @@ export default function ChatWindow() {
             </div>
 
             <div className="flex items-center gap-1">
+              {/* Fullscreen solo en pantallas grandes */}
               <button
                 onClick={() => setIsFullscreen(!isFullscreen)}
-                className="p-2 rounded-lg hover:bg-[#4A2F20]/50 transition-colors group"
+                className="hidden sm:flex p-2 rounded-lg hover:bg-[#4A2F20]/50 transition-colors group"
                 aria-label={
                   isFullscreen ? "Ventana normal" : "Pantalla completa"
                 }
@@ -98,7 +126,7 @@ export default function ChatWindow() {
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-[#4A2F20] scrollbar-track-transparent">
           <AnimatePresence>
             {messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
@@ -109,14 +137,12 @@ export default function ChatWindow() {
           <div ref={messagesEndRef} />
         </div>
 
-
-
         {/* Input Area */}
-        <div className="flex-shrink-0 p-4 border-t border-[#4A2F20]/50 bg-gradient-to-t from-[#2C1810]/50 to-transparent">
+        <div className="flex-shrink-0 p-3 sm:p-4 border-t border-[#4A2F20]/50 bg-gradient-to-t from-[#2C1810]/50 to-transparent">
           <ChatInput />
         </div>
 
-        {/* Footer pequeño */}
+        {/* Footer */}
         <div className="flex-shrink-0 px-4 pb-3 text-center">
           <p className="text-[10px] text-caramel/60">
             Powered by Vian Cookies · Respuestas en tiempo real 🍪
