@@ -131,7 +131,8 @@ export default function ChatWindow() {
             {messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
             ))}
-          </AnimatePrwhite       {isLoading && <ChatTypingIndicator />}
+          </AnimatePresence>
+            {isLoading && <ChatTypingIndicator />}
           <div ref={messagesEndRef} />
         </div>
 
