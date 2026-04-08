@@ -1087,7 +1087,7 @@ function Carousel3D({
         </motion.div>
       </AnimatePresence>
 
-      <p className="relative z-10 text-center text-[10px] text-cookie-900/60 mt-5 font-medium tracking-widest uppercase">
+      <p className="relative z-10 text-center text-[10px] text-cookie-500/60 mt-5 font-medium tracking-widest uppercase">
         ← desliza o arrastra →
       </p>
     </section>
@@ -1804,7 +1804,7 @@ export default function ProductsPage() {
                     initial={{ opacity: 0, y: 5, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 5, scale: 0.96 }}
-                    className="absolute right-0 top-full mt-2 w-44 bg-cookie-950 border border-cookie-900 rounded-xl overflow-hidden shadow-2xl z-50"
+                    className="absolute right-0 top-full mt-2 w-44 bg-[#2a1408] border border-cookie-700 rounded-xl overflow-hidden shadow-2xl z-50"
                   >
                     {SORT_OPTIONS.map((opt) => (
                       <button
@@ -1817,7 +1817,7 @@ export default function ProductsPage() {
                           "w-full text-left px-4 py-2.5 text-xs transition-colors hover:bg-cookie-900 font-medium",
                           sortBy === opt.id
                             ? "text-cookie-400"
-                            : "text-caramel/45",
+                            : "text-vanilla/70",
                         )}
                       >
                         {sortBy === opt.id && <span className="mr-2">✓</span>}
@@ -1845,7 +1845,7 @@ export default function ProductsPage() {
                     "p-1.5 rounded-full transition-all",
                     viewMode === mode
                       ? "bg-gradient-to-r from-cookie-500 to-chocolate-600 text-vanilla"
-                      : "text-cookie-900 hover:text-cookie-500",
+                      : "text-cookie-500 hover:text-cookie-300",
                   )}
                 >
                   <Icon className="w-3.5 h-3.5" />

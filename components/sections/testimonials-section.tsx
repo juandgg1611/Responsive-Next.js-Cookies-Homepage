@@ -353,7 +353,7 @@ export default function TestimonialsSection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-3 rounded-lg bg-gradient-cookie text-white font-semibold shadow-cookie hover:shadow-cookie-lg transition-all duration-300 flex items-center justify-center gap-2 group"
-                  onClick={() => window.open("#review", "_blank")}
+                  onClick={() => window.open("https://www.instagram.com/viancookiess", "_blank")}
                 >
                   <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                   Escribir Reseña
